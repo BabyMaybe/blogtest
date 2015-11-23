@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
 from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 
 # Create your views here.
@@ -44,22 +45,22 @@ class BlogView(ListView):
 
 class PostDetail(DetailView, JsonResponse):
     model = Post
-    #form_class = CommentForm
-    #initial = {'comment':"Enter comment here!"}
+    form_class = CommentForm
+    initial = {'comment':"Enter comment here!"}
     #template_name = 'post.html'
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
 
         context ['comments'] = self.get_object().comment_set.all().filter(active=True)
-        #context ['form'] = self.form_class(initial=self.initial)
+        context ['form'] = self.form_class(initial=self.initial)
 
         return context
 
     def get(self, request, *args, **kwargs):
 
         super(PostDetail, self).get(request, *args, **kwargs)
-        # form = self.form_class(initial=self.initial)
+        form = self.form_class(initial=self.initial)
 
         # context = self.get_context_data()
         # context ['comments'] = Comment.objects.filter(post=kwargs.get('pk')).filter(active=True)
@@ -82,19 +83,19 @@ class PostDetail(DetailView, JsonResponse):
             if request.POST.get('action') == 'edit':
                 self.edit_comment(request)
 
-        # form = self.form_class(request.POST)
-        # if form.is_valid():
+        form = self.form_class(request.POST)
+        if form.is_valid():
 
-        #     author = form.cleaned_data['author']
-        #     content = form.cleaned_data['comment']
-        #     timestamp = datetime.datetime.now()
+            author = form.cleaned_data['author']
+            content = form.cleaned_data['comment']
+            timestamp = datetime.datetime.now()
 
-        #     post = self.get_object()
-        #     post.comment_count += 1
-        #     post.save()
-        #     c = Comment(author=author, content=content, timestamp=timestamp, post=post)
-        #     c.save()
-        #     return HttpResponseRedirect(request.path)
+            post = self.get_object()
+            post.comment_count += 1
+            post.save()
+            c = Comment(author=author, content=content, timestamp=timestamp, post=post)
+            c.save()
+            return HttpResponseRedirect(request.path)
 
     def like_post(self, request):
         post = self.get_object()
