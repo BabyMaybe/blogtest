@@ -22,7 +22,7 @@ class PostAdmin(admin.ModelAdmin):
     actions = [activate, deactivate]
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['author', 'display_author', 'content', 'timestamp', 'post', 'active']
+    list_display = ['author', 'display_author', 'content', 'timestamp', 'parent_post', 'active']
     actions = [activate, deactivate]
 
 # class WYSIWYGAdmin(admin.ModelAdmin):

@@ -17,11 +17,11 @@ from .forms import PostForm, CommentForm
 # Create your views here.
 class BlogView(ListView):
     model = Post
-    #template_name = 'blog.html'
+    template_name = 'content/blog_main.html'
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
-        context = super (GenericList, self).get_context_data(**kwargs)
+        context = super (BlogView, self).get_context_data(**kwargs)
 
         context['post_list'] = Post.objects.filter(active=True)
 
@@ -47,7 +47,7 @@ class PostDetail(DetailView, JsonResponse):
     model = Post
     form_class = CommentForm
     initial = {'comment':"Enter comment here!"}
-    #template_name = 'post.html'
+    template_name = '/content/base.html'
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
@@ -128,7 +128,7 @@ class PostDetail(DetailView, JsonResponse):
 
         post = self.get_object()
 
-        c = Comment(author=author, display_author=display_author, content=content, timestamp=timestamp,
+        c = Comment(display_author=display_author, content=content, timestamp=timestamp,
                     post=post, author=request.user)
         c.save()
 

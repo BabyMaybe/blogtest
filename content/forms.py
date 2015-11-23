@@ -6,9 +6,9 @@ from .models import Post, Comment
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'richpost']
+        fields = ['title', 'content']
 
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ['comment']
+        fields = ['content']
