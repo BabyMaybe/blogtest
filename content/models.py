@@ -16,11 +16,11 @@ class Post(models.Model):
     last_edited = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     comment_count = models.IntegerField(default=0)
     like_count = models.IntegerField(default=0)
-    likes = models.ManyToManyField(User, related_name='post_likes', null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
     active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ["-datePublished"]
+        ordering = ["-date_published"]
 
     def get_absolute_url(self):
         return "/%s" % self.slug
@@ -37,7 +37,7 @@ class Comment(models.Model):
     content = models.TextField()
     parent_post = models.ForeignKey('Post', related_name='parent_post')
     active = models.BooleanField(default=True)
-    likes = models.ManyToManyField(User, related_name='comment_likes', null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='comment_likes', blank=True)
     like_count = models.IntegerField(default=0)
 
     def get_like_count(self):
