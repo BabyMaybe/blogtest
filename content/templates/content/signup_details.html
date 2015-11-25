@@ -1,0 +1,16 @@
+{% extends 'content/base.html' %}
+
+{% block content %}
+
+<h1> User Info Page </h1>
+
+<div class="newpost">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="submit" class="submit" >  </input>
+    </form>
+</div>
+<hr>
+
+{%  endblock %}
