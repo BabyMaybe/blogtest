@@ -39,4 +39,4 @@ Thumbs.db
 
 #Python specific #
 ##################
-.pyc
+*.pyc
