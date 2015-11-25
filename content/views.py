@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
-from .models import Post, Comment
+from .models import Post, Comment, UserProfile
 from .forms import PostForm, CommentForm
 
 
@@ -164,14 +164,22 @@ class PostDetail(DetailView, JsonResponse):
         return JsonResponse({"newContent" : newContent})
         return render(request, self.template_name, self.get_context_data())
 
+class MakeProfile(CreateView):
+    model = UserProfile
+    fields = ['age','birthday','addr_street','addr_city','addr_state','addr_zip','prof_pic']
+    template_name = 'content/signup_details.html'
+    success_url = '/'
+
+    def form_valid(self, form):
+        profile = form.save(commit=False)
+        profile.user = User.objects.get(pk=1) #need to get user from previous page
+        return super(MakeProfile, self).form_valid(form)
+
 class Signup(CreateView):
     model = User
     fields = ['username','password','email','first_name','last_name']
-    template_name = 'signup.html'
-    success_url = '/'
-
-
-
+    template_name = 'content/signup.html'
+    success_url = '/signup_details'
 
 
 
