@@ -23,4 +23,6 @@ from content import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.BlogView.as_view()),
+    url(r'^signup/', views.Signup.as_view()),
+    url(r'^signup_details/', views.MakeProfile.as_view()),
 ]

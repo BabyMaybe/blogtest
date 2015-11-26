@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Comment
+from .models import Post, Comment, Image, UserProfile
 
 ###
 #Admin actions
@@ -30,6 +30,8 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Image)
+admin.site.register(UserProfile)
 # admin.site.register(WYSIWYG, WYSIWYGAdmin)
 
 

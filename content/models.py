@@ -43,6 +43,23 @@ class Comment(models.Model):
     def get_like_count(self):
         return self.like_count
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    age = models.IntegerField()
+    birthday = models.DateField()
+    addr_street = models.CharField(max_length=500)
+    addr_city = models.CharField(max_length=200)
+    addr_state = models.CharField(max_length=2,null=True)
+    addr_zip = models.IntegerField()
+    prof_pic = models.ImageField(upload_to='static/users/prof',height_field='prof_h', width_field='prof_w')
+    prof_h = models.IntegerField(null=True, default=200)
+    prof_w = models.IntegerField(null=True, default=200)
+
+class Image(models.Model):
+    picture = models.ImageField(upload_to='static/pics/%Y/%m/%d')
+    picture_box = models.ImageField(upload_to='static/pics/box/%Y/%m/%d',height_field="box_h", width_field="box_w")
+    box_h = 200
+    box_w = 200
 #####
 # #WYSIWYG Editor class
 # #Do we need both fields?
