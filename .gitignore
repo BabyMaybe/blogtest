@@ -46,3 +46,4 @@ Thumbs.db
 #################
 content/migrations/*
 blog/settings_local.py
+/media/*

@@ -44,7 +44,12 @@ class Comment(models.Model):
         return self.like_count
 
 class UserProfile(models.Model):
+    def __str__(self):
+        return self.user.username
 
+    def generate_image_path(instance, filename):
+        ext = filename.split('.')[-1]
+        return 'users/%s/profile.%s' % (instance.user.username, ext)
 
     user = models.OneToOneField(User)
     age = models.IntegerField()
@@ -53,12 +58,15 @@ class UserProfile(models.Model):
     addr_city = models.CharField(max_length=200)
     addr_state = models.CharField(max_length=2,null=True)
     addr_zip = models.IntegerField()
-    prof_pic = models.ImageField(upload_to='static/users/prof',height_field='prof_h', width_field='prof_w')
+    prof_pic = models.ImageField(upload_to=generate_image_path, height_field='prof_h', width_field='prof_w')
     prof_h = models.IntegerField(null=True, default=200)
     prof_w = models.IntegerField(null=True, default=200)
 
-    def __str__(self):
-        return self.user.username
+
+
+
+
+
 
 class Image(models.Model):
     picture = models.ImageField(upload_to='static/pics/%Y/%m/%d')
