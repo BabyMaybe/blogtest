@@ -44,6 +44,8 @@ class Comment(models.Model):
         return self.like_count
 
 class UserProfile(models.Model):
+
+
     user = models.OneToOneField(User)
     age = models.IntegerField()
     birthday = models.DateField()
