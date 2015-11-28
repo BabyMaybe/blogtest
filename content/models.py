@@ -55,6 +55,9 @@ class UserProfile(models.Model):
     prof_h = models.IntegerField(null=True, default=200)
     prof_w = models.IntegerField(null=True, default=200)
 
+    def __str__(self):
+        return self.user.username
+
 class Image(models.Model):
     picture = models.ImageField(upload_to='static/pics/%Y/%m/%d')
     picture_box = models.ImageField(upload_to='static/pics/box/%Y/%m/%d',height_field="box_h", width_field="box_w")
