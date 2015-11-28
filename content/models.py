@@ -44,6 +44,8 @@ class Comment(models.Model):
         return self.like_count
 
 class UserProfile(models.Model):
+
+
     user = models.OneToOneField(User)
     age = models.IntegerField()
     birthday = models.DateField()
@@ -54,6 +56,9 @@ class UserProfile(models.Model):
     prof_pic = models.ImageField(upload_to='static/users/prof',height_field='prof_h', width_field='prof_w')
     prof_h = models.IntegerField(null=True, default=200)
     prof_w = models.IntegerField(null=True, default=200)
+
+    def __str__(self):
+        return self.user.username
 
 class Image(models.Model):
     picture = models.ImageField(upload_to='static/pics/%Y/%m/%d')

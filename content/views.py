@@ -5,6 +5,10 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormView
 from django.utils.text import slugify
 from django.utils.html import escape, strip_tags
+from django.core.urlresolvers import reverse
+
+
+from django.contrib.auth import authenticate, login
 
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -170,17 +174,38 @@ class MakeProfile(CreateView):
     template_name = 'content/signup_details.html'
     success_url = '/'
 
+
+    def get(self,request, *args, **kwargs):
+
+        return super(MakeProfile, self).get(args, kwargs)
+
     def form_valid(self, form):
+        # print(user_id)
+        print ('this should be the request: ', self.kwargs['user_id'])
         profile = form.save(commit=False)
-        profile.user = User.objects.get(pk=1) #need to get user from previous page
+        profile.user = User.objects.get(pk=int(self.kwargs['user_id'])) #need to get user from previous page
         return super(MakeProfile, self).form_valid(form)
 
 class Signup(CreateView):
     model = User
     fields = ['username','password','email','first_name','last_name']
     template_name = 'content/signup.html'
-    success_url = '/signup_details'
+    # success_url = '/signup_details'
 
+    def form_valid(self, form):
+        form.save()
+        print("before")
+        # print (dir(self.object.pk))
+        print("after")
+        username = self.request.POST['username']
+        password = self.request.POST['password']
+        # user = authenticate(username=username, password=password)
+
+        # login(self.request, user)
+        return super(Signup, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('signup_details',args=(self.object.id,))
 
 
 
