@@ -45,3 +45,4 @@ Thumbs.db
 #Django specific#
 #################
 content/migrations/*
+blog/settings_local.py
