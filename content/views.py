@@ -14,7 +14,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
-from .models import Post, Comment, UserProfile
+from .models import Post, Comment, UserProfile, Image, Colorful
 from .forms import PostForm, CommentForm
 
 
@@ -47,6 +47,7 @@ class BlogView(ListView):
             data = {"likes" : post.like_count, "pk" : post_pk}
             return JsonResponse(data)
 
+
 class PostDetail(DetailView, JsonResponse):
     model = Post
     form_class = CommentForm
@@ -65,9 +66,6 @@ class PostDetail(DetailView, JsonResponse):
 
         super(PostDetail, self).get(request, *args, **kwargs)
         form = self.form_class(initial=self.initial)
-
-        # context = self.get_context_data()
-        # context ['comments'] = Comment.objects.filter(post=kwargs.get('pk')).filter(active=True)
 
         return render(request,self.template_name, context)
 
@@ -168,9 +166,21 @@ class PostDetail(DetailView, JsonResponse):
         return JsonResponse({"newContent" : newContent})
         return render(request, self.template_name, self.get_context_data())
 
+
+class ViewProfile(DetailView):
+    model = UserProfile
+    template_name = 'content/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ViewProfile, self).get_context_data(**kwargs)
+        context ['comments_made'] = Comment.objects.filter(pk=self.object.pk).count()
+        context ['posts_made'] = Post.objects.filter(pk=self.object.pk).count()
+        return context
+
+
 class MakeProfile(CreateView):
     model = UserProfile
-    fields = ['age','birthday','addr_street','addr_city','addr_state','addr_zip','prof_pic']
+    fields = ['age','birthday','addr_street','addr_city','addr_state','addr_zip','color']
     template_name = 'content/signup_details.html'
     success_url = '/'
 
@@ -186,30 +196,20 @@ class MakeProfile(CreateView):
         profile.user = User.objects.get(pk=int(self.kwargs['user_id'])) #need to get user from previous page
         return super(MakeProfile, self).form_valid(form)
 
+
 class Signup(CreateView):
     model = User
     fields = ['username','password','email','first_name','last_name']
     template_name = 'content/signup.html'
-    # success_url = '/signup_details'
 
     def form_valid(self, form):
         form.save()
-        print("before")
-        # print (dir(self.object.pk))
-        print("after")
         username = self.request.POST['username']
         password = self.request.POST['password']
         # user = authenticate(username=username, password=password)
-
         # login(self.request, user)
         return super(Signup, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('signup_details',args=(self.object.id,))
-
-
-
-
-
-
 

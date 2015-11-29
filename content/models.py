@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+
+import random
+##Third Party
 #from ckeditor_uploader.fields import RichTextUploadingField
+from colorful.fields import RGBColorField
+
 
 #Blog Post Class
 class Post(models.Model):
@@ -43,13 +48,17 @@ class Comment(models.Model):
     def get_like_count(self):
         return self.like_count
 
-class UserProfile(models.Model):
-    def __str__(self):
-        return self.user.username
-
-    def generate_image_path(instance, filename):
+def generate_image_path(instance, filename):
         ext = filename.split('.')[-1]
         return 'users/%s/profile.%s' % (instance.user.username, ext)
+
+def random_color():
+    return "#%06x".upper() % random.randint(0, 0xFFFFFF)
+
+class UserProfile(models.Model):
+
+    def __str__(self):
+        return self.user.username
 
     user = models.OneToOneField(User)
     age = models.IntegerField()
@@ -58,21 +67,14 @@ class UserProfile(models.Model):
     addr_city = models.CharField(max_length=200)
     addr_state = models.CharField(max_length=2,null=True)
     addr_zip = models.IntegerField()
-    prof_pic = models.ImageField(upload_to=generate_image_path, height_field='prof_h', width_field='prof_w')
+    prof_pic = models.ImageField(upload_to=generate_image_path, height_field='prof_h', width_field='prof_w', blank=True, null=True)
     prof_h = models.IntegerField(null=True, default=200)
     prof_w = models.IntegerField(null=True, default=200)
+    color = RGBColorField(default=random_color, null=True, blank=True)
 
+    def get_letter(self):
+        return self.user.username[0].upper()
 
-
-
-
-
-
-class Image(models.Model):
-    picture = models.ImageField(upload_to='static/pics/%Y/%m/%d')
-    picture_box = models.ImageField(upload_to='static/pics/box/%Y/%m/%d',height_field="box_h", width_field="box_w")
-    box_h = 200
-    box_w = 200
 #####
 # #WYSIWYG Editor class
 # #Do we need both fields?

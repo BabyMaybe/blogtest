@@ -1,0 +1,84 @@
+{% extends 'content/base.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+
+ {# <link rel="stylesheet" type="text/css" href="{% static 'content/css/profile.css' %}" /> #}
+<link rel="stylesheet" type="text/css" href={% static 'content/css/profile.css' %} />
+
+<style type="text/css">
+    #letterbox {
+        background-color: {{ userprofile.color }};
+    }
+
+    .usercolor {
+        color: {{ userprofile.color }};
+    }
+
+</style>
+{%  endblock %}
+
+{% block content %}
+
+<div id="profile">
+
+    <div id="combinedinfo">
+
+
+
+    <div id="basicinfo">
+        <div id="letterbox">
+            <div id="letter">{{ userprofile.get_letter }}</div>
+        </div>
+        <div id="infosection">
+            <h4 id="userinfo">User Info</h4>
+            <hr>
+            <ul>
+                <li>
+                    <span class="infolabel usercolor">Username: </span> <span class="infodetail"> {{userprofile.user}} </span>
+                </li>
+                <li>
+                    <span class="infolabel usercolor">First Name: </span> <span class="infodetail"> {{userprofile.user.first_name}} </span>
+                </li>
+                <li>
+                    <span class="infolabel usercolor">Last Name: </span> <span class="infodetail"> {{userprofile.user.last_name}} </span>
+                </li>
+                <li>
+                    <span class="infolabel usercolor">Age: </span> <span class="infodetail"> {{userprofile.age}} </span>
+                </li>
+                <li>
+                    <span class="infolabel usercolor">Birthday: </span> <span class="infodetail"> {{userprofile.birthday}}</span>
+                </li>
+            </ul>
+        <hr>
+            <div id="addrsection">
+                <ul>
+                    <li>
+                        <span class="infolabel usercolor">Address: </span> <span class="infodetail"> {{userprofile.addr_street}} </span>
+                    </li>
+                    <li>
+                        <span class="infolabel usercolor">City: </span> <span class="infodetail"> {{userprofile.addr_city}}, {{userprofile.addr_state}}  </span>
+                    </li>
+                    <li>
+                        <span class="infolabel usercolor">Zip Code: </span> <span class="infodetail"> {{userprofile.addr_zip}}  </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="activityinfo">
+        <div id="username">
+            <h1 class="usercolor"> {{ userprofile.user.username }} </h1>
+        </div>
+        <ul>
+            <li>Hearts given: <span class="usercolor">{{ userprofile.user.post_likes.all.count }}</span></li>
+            <li>Comments made: <span class="usercolor">{{ comments_made }}</span></li>
+            <li>Posts written: <span class="usercolor">{{ posts_made }}</span></li>
+        </ul>
+</div>
+<div></div>
+</div>
+
+{%  endblock %}
+

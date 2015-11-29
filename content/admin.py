@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Comment, Image, UserProfile
+from .models import Post, Comment, UserProfile
 
 ###
 #Admin actions
@@ -25,12 +25,14 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ['author', 'display_author', 'content', 'timestamp', 'parent_post', 'active']
     actions = [activate, deactivate]
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['age','birthday','color']
+
 # class WYSIWYGAdmin(admin.ModelAdmin):
 #     form = WYSYWIGForm
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Image)
 admin.site.register(UserProfile)
 # admin.site.register(WYSIWYG, WYSIWYGAdmin)
 
