@@ -42,8 +42,7 @@ Thumbs.db
 ##################
 *.pyc
 
-#Django specific#
-#################
-content/migrations/*
+#Django specific #
+##################
 blog/settings_local.py
 /media/*
