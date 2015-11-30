@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
+#username {
+  border-bottom: 2px solid white;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 15px;
+  padding-bottom: 1px; }
+  #username h1 {
+    font-family: "Josefin Slab";
+    text-align: right; }
+
+#profile {
+  width: 80%;
+  font-family: "Josefin Slab";
+  margin: 0 auto; }
+
+#letterbox {
+  width: 200px;
+  height: 200px;
+  border: 6px solid white;
+  position: relative; }
+
+#letter {
+  font-family: "Josefin Slab";
+  font-size: 7em;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  line-height: .7;
+  padding-right: 7px; }
+
+#combinedinfo {
+  border: 2px solid white; }
+
+#basicinfo {
+  padding: 20px;
+  width: 212px;
+  border-right: 2px solid white;
+  display: inline-block; }
+
+#infosection {
+  line-height: 1.25; }
+  #infosection hr {
+    margin: 5px; }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  ul li {
+    font-size: 1.2em;
+    text-align: right;
+    padding: 2px; }
+
+#addrsection li {
+  text-align: left; }
+
+#userinfo {
+  margin-left: 0;
+  margin-top: 20px;
+  margin-bottom: 0px; }
+
+h4 {
+  font-size: 1.5em;
+  margin: 0; }
+
+#activityinfo {
+  float: right;
+  margin-top: 20%;
+  width: 76%;
+  text-align: center;
+  padding: 5px; }
+  #activityinfo ul {
+    display: inline-block; }
+
+/*# sourceMappingURL=profile.css.map */
