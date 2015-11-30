@@ -14,7 +14,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
-from .models import Post, Comment, UserProfile, Image, Colorful
+from .models import Post, Comment, UserProfile
 from .forms import PostForm, CommentForm
 
 

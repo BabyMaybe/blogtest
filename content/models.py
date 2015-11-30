@@ -48,6 +48,7 @@ class Comment(models.Model):
     def get_like_count(self):
         return self.like_count
 
+#helper funcitons
 def generate_image_path(instance, filename):
         ext = filename.split('.')[-1]
         return 'users/%s/profile.%s' % (instance.user.username, ext)
@@ -55,6 +56,7 @@ def generate_image_path(instance, filename):
 def random_color():
     return "#%06x".upper() % random.randint(0, 0xFFFFFF)
 
+#User Profile Class
 class UserProfile(models.Model):
 
     def __str__(self):
@@ -70,7 +72,7 @@ class UserProfile(models.Model):
     prof_pic = models.ImageField(upload_to=generate_image_path, height_field='prof_h', width_field='prof_w', blank=True, null=True)
     prof_h = models.IntegerField(null=True, default=200)
     prof_w = models.IntegerField(null=True, default=200)
-    color = RGBColorField(default=random_color, null=True, blank=True)
+    color = RGBColorField(null=True, blank=True)
 
     def get_letter(self):
         return self.user.username[0].upper()
