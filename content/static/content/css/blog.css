@@ -38,6 +38,34 @@ h1, h2, h3 {
   float: right; }
 
 .heart {
-  background-color: #920; }
+  background-image: url("heart_87.png");
+  width: 87px;
+  height: 87px;
+  margin: 0 auto;
+  text-align: center; }
+
+.like_count {
+  font-family: "Josefin Slab";
+  font-size: 2em;
+  padding-top: 25px; }
+
+.letterbox {
+  width: 50px;
+  height: 50px;
+  border: 2px solid white;
+  margin: 0 auto;
+  margin-top: 15px;
+  position: relative; }
+
+.letter_link {
+  height: 50px;
+  width: 50px;
+  color: white; }
+
+.letter {
+  font-family: "Josefin Slab";
+  font-size: 2em;
+  text-align: center;
+  margin-top: 13px; }
 
 /*# sourceMappingURL=blog.css.map */

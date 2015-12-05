@@ -12,6 +12,7 @@
         border-bottom: {{ user.userprofile.color }} dotted 3px;
         border-top: {{ user.userprofile.color }} dotted 3px;
     }
+
     .nothing {
 
     }
@@ -21,29 +22,39 @@
 {% block content %}
 <h1 class='blog_title'> Recent Posts </h1>
 {% for post in post_list %}
-<div class='post userborder' pid={{post.pk}}>
-    <h2 class="post_title"> <a href="/post/{{post.pk}}/{{post.slug}}">{{post.title}}</a> </h1>
-    <h3 class="slug_title"> {{post.slug}} </h2>
+<div class='post' pid={{post.pk}}>
+    <h2 class="post_title"> <a href="/post/{{post.pk}}/{{post.slug}}">{{post.title}}</a> </h2>
+    <h3 class="slug_title"> {{post.slug}} </h3>
+    <div class="letterbox" style="background-color:{{ post.author.userprofile.color }};">
+        <a href="/{{ post.author.userprofile.pk }}/profile">
+            <div class="letter_link">
+                <div class="letter">{{ post.author.userprofile.get_letter }}</div>
+            </div>
+        </a>
+    </div>
+
     <br>
     {% if user == post.author %}
     <span>
-        <a class="edit" href="/post/{{post.pk}}/{{post.slug}}/edit" data-pid={{post.pk}}> Edit </a>
+        <a class="edit" href="/post/{{post.pk}}/{{post.slug}}/edit" data-pid={{ post.pk }}> Edit </a>
     </span>
     <br>
     {% endif %}
-    <div class="post_content" data-pid={{post.pk}}>
-        {{post.content|safe}}
+    <div class="post_content" data-pid={{ post.pk }}>
+        {{ post.content|safe }}
     </div>
     <br>
     <div class="post_footer">
-        <div class='timestamp'>
-            {{post.date_published}}
+        <div class="footer_text">
+            <div class='timestamp'>
+                {{ post.date_published }}
+            </div>
+            <div class="comment_link">
+                <a href="/post/{{post.pk}}/{{ post.slug }}"> {{ post.comment_count }} Comments</a>
+            </div>
         </div>
-        <div class="comment_link">
-            <a href="/post/{{post.pk}}/{{post.slug}}"> {{post.comment_count}} Comments</a>
-        </div>
-        <div class="heart" data-pk="{{post.pk}}">
-            {{post.like_count}}
+        <div class="heart">
+            <div class="like_count" data-pk="{{ post.pk }}">{{ post.like_count }}</div>
         </div>
     </div>
     <br>
@@ -61,7 +72,7 @@
                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
             </span>
             {% if page_obj.has_next %}
-                <a href="/generic_list?page={{page_obj.next_page_number }}"> Older </a>
+                <a href="/generic_list?page={{ page_obj.next_page_number }}"> Older </a>
             {% endif %}
         </span>
     </div>
@@ -108,7 +119,7 @@
                   },
 
             success : function(json) {
-                $("div .heart[data-pk=" + json['pk'] + "]").text(json['likes']);
+                $("div .like_count[data-pk=" + json['pk'] + "]").text(json['likes']);
             },
 
             error : function (xhr, errmsg, err) {

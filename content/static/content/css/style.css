@@ -438,20 +438,7 @@ h3 {
     margin-right: auto;
     color: #86edb4; }
 
-.heart {
-  background: transparent;
-  background-image: url("images/heart.png");
-  width: 128px;
-  height: 128px;
-  text-align: center;
-  vertical-align: center;
-  line-height: 2.1em;
-  font-size: 3em;
-  font-family: "Squada One";
-  color: white;
-  margin-right: auto;
-  margin-left: auto;
-  border-style: none; }
+
 
 .likes {
   background: transparent;
