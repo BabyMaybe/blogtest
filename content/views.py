@@ -135,7 +135,7 @@ class PostDetail(DetailView, JsonResponse):
                     post=post, author=request.user)
         c.save()
 
-        post.commentCount = post.comment_set.count()
+        post.commentCount = post.comment_set.count().filter(active=True)
         post.save()
 
         data = {"author" : author,

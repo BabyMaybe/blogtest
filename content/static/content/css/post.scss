@@ -30,7 +30,17 @@
 
 }
 
+.heart {
+    background-image: url('heart_87.png');
+    width: 87px;
+    height: 87px;
+    margin: 0 auto;
+    text-align: center;
+}
+
 .likes {
+    font-family: $postfont;
+    font-size: 2em;
 
 }
 
