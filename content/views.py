@@ -7,7 +7,6 @@ from django.utils.text import slugify
 from django.utils.html import escape, strip_tags
 from django.core.urlresolvers import reverse
 
-
 from django.contrib.auth import authenticate, login
 
 from django.shortcuts import render
@@ -46,6 +45,21 @@ class BlogView(ListView):
                     post.save()
             data = {"likes" : post.like_count, "pk" : post_pk}
             return JsonResponse(data)
+
+class NewPost(CreateView):
+    model = Post
+    fields = ['title', 'rich_content']
+    template_name = 'content/newpost.html'
+
+    def form_valid(self, form):
+       f = form.cleaned_data
+       title = f['title'].title()
+       post = f['rich_content']
+       timestamp = datetime.datetime.now()
+       slug = slugify(title)
+       p = Post(title=title, content=post, rich_content=post, date_published=timestamp, slug=slug, author=self.request.user)
+       p.save()
+       return HttpResponseRedirect('/')
 
 
 class PostDetail(DetailView, JsonResponse):

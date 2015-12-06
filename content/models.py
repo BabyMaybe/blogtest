@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 import random
 ##Third Party
-#from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor_uploader.fields import RichTextUploadingField
 from colorful.fields import RGBColorField
 
 
@@ -15,7 +15,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     content = models.TextField()
-    # rich_content = RichTextUploadingField(config_name='toolbar_Eric', blank=True)
+    rich_content = RichTextUploadingField(config_name='toolbar_Eric', blank=True)
     author = models.ForeignKey(User, related_name='post_author')
     date_published = models.DateTimeField(auto_now_add=True)
     last_edited = models.DateTimeField(auto_now_add=True, null=True, blank=True)

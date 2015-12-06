@@ -1,0 +1,112 @@
+@import "variables";
+
+.blogentry {
+    font-family: $postfont;
+}
+
+#posttitle {
+    font-family: $headfont;
+    margin-top: 20px;
+}
+
+.edit {
+
+}
+
+#postcontent {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#timecode {
+
+}
+
+#datepublished {
+    color:pink;
+}
+
+#timepublished {
+
+}
+
+.heart {
+    background-image: url('heart_87.png');
+    width: 87px;
+    height: 87px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.likes {
+    font-family: $postfont;
+    font-size: 2em;
+
+}
+
+#error_msg {
+
+}
+
+.comments {
+
+}
+
+#commenthead {
+    font-family: $headfont;
+}
+
+.ctitle {
+    font-family: $headfont;
+}
+
+.author {
+    font-family: $headfont;
+}
+
+.divider {
+    font-family: $headfont;
+}
+
+.timestamp {
+    font-family: $headfont;
+}
+
+.delete {
+
+}
+
+.c_letterbox {
+    width: 75px;
+    height: 75px;
+    border: 3px solid white;
+    margin: 15px;
+    float:left;
+}
+
+.c_letter_link {
+    height: 75px;
+    width: 75px;
+    color: white;
+}
+
+.c_letter {
+    font-family: "Josefin Slab";
+    font-size: 3em;
+    text-align: right;
+    margin-top: 30px;
+    margin-right: 3px;
+}
+
+.ctext {
+    font-family: $postfont;
+    padding: 15px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.newpost {
+
+}

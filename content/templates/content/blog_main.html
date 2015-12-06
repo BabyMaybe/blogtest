@@ -21,6 +21,11 @@
 
 {% block content %}
 <h1 class='blog_title'> Recent Posts </h1>
+<a href="/newpost">
+    <h3 id="newpost">
+        New Post
+    </h3>
+</a>
 {% for post in post_list %}
 <div class='post' pid={{post.pk}}>
     <h2 class="post_title"> <a href="/post/{{post.pk}}/{{post.slug}}">{{post.title}}</a> </h2>

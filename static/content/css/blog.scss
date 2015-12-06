@@ -1,0 +1,87 @@
+@import "variables"
+
+h1,h2,h3 {
+    font-family: $headfont;
+    margin-top: 20px;
+}
+
+.post {
+    width: 80%;
+}
+
+.blog_title {
+    font-size: 4em;
+
+}
+
+.post_title {
+    font-size: 3em;
+}
+
+.slug_title {
+    font-size: 1.5em;
+    margin-top: 0px;
+}
+
+.edit {
+    font-family: $postfont;
+    float: right;
+    margin-right: 110px;
+}
+
+.post_content {
+    font-family: $postfont;
+    font-size: 1.25em;
+    text-align: center;
+    color: #C8FAFD;
+    margin:20px auto;
+    width: 80%;
+    line-height: 1.5;
+}
+
+.post_footer {
+    font-family: $postfont;
+
+}
+
+.comment_link {
+    float: right;
+}
+
+.heart {
+    background-image: url('heart_87.png');
+    width: 87px;
+    height: 87px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.like_count {
+    font-family: $postfont;
+    font-size: 2em;
+    padding-top: 25px;
+}
+
+.letterbox {
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    margin: 0 auto;
+    margin-top: 15px;
+    position: relative;
+}
+
+.letter_link {
+    height:50px;
+    width:50px;
+    color:white;
+}
+
+.letter {
+    font-family: "Josefin Slab";
+    font-size: 2em;
+    text-align: center;
+    margin-top: 13px;
+}
+
+
