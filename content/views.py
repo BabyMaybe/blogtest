@@ -52,13 +52,13 @@ class PostDetail(DetailView, JsonResponse):
     model = Post
     form_class = CommentForm
     initial = {'comment':"Enter comment here!"}
-    template_name = '/content/base.html'
+    template_name = 'content/post.html'
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
 
-        context ['comments'] = self.get_object().comment_set.all().filter(active=True)
-        context ['form'] = self.form_class(initial=self.initial)
+        context['comments'] = self.get_object().post_comments.all().filter(active=True)
+        context['form'] = self.form_class(initial=self.initial)
 
         return context
 
@@ -66,6 +66,7 @@ class PostDetail(DetailView, JsonResponse):
 
         super(PostDetail, self).get(request, *args, **kwargs)
         form = self.form_class(initial=self.initial)
+        context = self.get_context_data()
 
         return render(request,self.template_name, context)
 
@@ -87,15 +88,15 @@ class PostDetail(DetailView, JsonResponse):
 
         form = self.form_class(request.POST)
         if form.is_valid():
-
-            author = form.cleaned_data['author']
-            content = form.cleaned_data['comment']
+            print (form.cleaned_data['content'])
+            author = request.user
+            content = form.cleaned_data['content']
             timestamp = datetime.datetime.now()
 
             post = self.get_object()
             post.comment_count += 1
             post.save()
-            c = Comment(author=author, content=content, timestamp=timestamp, post=post)
+            c = Comment(author=author, content=content, timestamp=timestamp, parent_post=post)
             c.save()
             return HttpResponseRedirect(request.path)
 
@@ -173,8 +174,8 @@ class ViewProfile(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ViewProfile, self).get_context_data(**kwargs)
-        context ['comments_made'] = Comment.objects.filter(pk=self.object.pk).count()
-        context ['posts_made'] = Post.objects.filter(pk=self.object.pk).count()
+        context ['comments_made'] = Comment.objects.filter(author=self.object.user).count()
+        context ['posts_made'] = Post.objects.filter(author=self.object.user).count()
         return context
 
 

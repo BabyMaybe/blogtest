@@ -1,7 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
-@import url(https://fonts.googleapis.com/css?family=Quicksand);
-$postfont: "Josefin Slab";
-$headfont: "Quicksand";
+@import "variables"
 
 h1,h2,h3 {
     font-family: $headfont;

@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^signup/', views.Signup.as_view()),
     url(r'^(?P<user_id>[0-9]+)/signup_details/', views.MakeProfile.as_view(), name='signup_details'),
     url(r'^(?P<pk>[0-9]+)/profile/', views.ViewProfile.as_view()),
+    url(r'^post/(?P<pk>\d+)/', views.PostDetail.as_view()),
 ]

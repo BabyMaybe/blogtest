@@ -1,0 +1,263 @@
+{% extends 'content/base.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'content/css/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'content/css/post.css' %}" />
+
+{% endblock %}
+
+{% block content %}
+<div class="blogentry">
+    <h1 id="posttitle"> <a href='/'>{{ post.title }}</a> </h1>
+    {% if user == post.author %}
+    <h3>
+        <a class="edit" href="/post/{{ post.pk }}/{{ post.slug }}/edit" data-pid={{post.pk}}> Edit </a>
+    </h3>
+    <br>
+    {% endif %}
+    <hr>
+    <p id="postcontent"> {{ post.content|safe }} </p>
+    <br>
+    <div id="timecode">
+        <p id="datepublished"> {{ post.date_published |  date:"d F Y"}} </p>
+        <p id="timepublished"> {{ post.date_published |  date:"h:i A"}} </p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+    <div class="heart">
+        <div class="likes">{{ post.like_count }}</div>
+    </div>
+    <div id="error_msg">
+        <a href='/accounts/login'>
+
+        </a>
+    </div>
+    </form>
+</div>
+
+<hr>
+
+<div class="comments">
+    <h3 id="commenthead"> Comments Section </h3>
+    <ul id="commentStack">
+        {% for c in comments %}
+            <li>
+                <div class="comment" data-cid={{c.pk}}>
+
+                    <div class="ctitle">
+                        <h2>
+                            <span class="author"> {{ c.author }} </span>
+                            <span class="divider"> | </span>
+                            <span class="timestamp"> {{ c.timestamp | date:"d F Y | h:i A"}} </span>
+                            {% if user == c.realAuthor %}
+                                <span> : </span>
+                                <a class="edit" data-cid={{c.pk}}> Edit </a>
+                                <span> : </span>
+                                <a class="delete" data-cid={{c.pk}}> Delete </a>
+                                <span> : </span>
+                            {% endif %}
+                        </h2>
+                    </div>
+                    <div class="c_letterbox" style="background-color:{{ c.author.userprofile.color }};">
+                        <a href="/{{ c.author.userprofile.pk }}/profile">
+                            <div class="c_letter_link">
+                                <div class="c_letter">{{ c.author.userprofile.get_letter }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ctext" data-cid={{c.pk}}>
+                        <p> {{ c.content|safe }} </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <form  method="post" class='newpost'>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit Comment" class="submit"/>
+    </form>
+</div>
+<hr>
+{% endblock %}
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!--<script src="{% static 'blog/js/post.js' %}">-->
+<script type="text/javascript">
+    $(function() {
+        $(".heart").click(function(e) {
+
+        console.log("this was liked");
+
+        $.ajax({
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'), "action" : "like" },
+
+            success : function(json) {
+                console.log("success");
+                $(".likes").text(json['likecount']);
+                $("#error_msg a").text(json['error'])
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error");
+                console.log(xhr.status);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+    });
+
+        $(".newpost").on('submit', (function(e) {
+            e.preventDefault()
+            consele.log({{user.pk}});
+            console.log({{user}});
+            console.log("anything");
+            $.ajax({
+                url : window.location.href,
+                type : "POST",
+                data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                        "action" : "comment",
+                        "author" : $("{{user.pk}}").val(),
+                        "comment" : $("#id_comment").val()
+                       },
+
+                success : function(json) {
+                    console.log("successful comment post");
+
+                    $("#commentStack").append(makeComment(json["author"],
+                                                                 json["timestamp"],
+                                                                 json["comment"],
+                                                                 json["id"]));
+                    $("#id_author").val("");
+                    $("#id_comment").val("");
+                    $(".delete").click(deleteComment);
+                    $(".edit").click(editComment);
+                    // $(".likes").text(json['likecount']);
+                    // $("#error_msg").text(json['error'])
+                },
+
+                error : function(xhr, errmsg, err) {
+                    console.log("error");
+                    console.log(xhr.status);
+                // console.log(xhr.responseText);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+        }));
+
+        $(".delete").click(deleteComment);
+        $(".edit").click(editComment);
+    })
+
+    function makeComment(author,timestamp,comment,id) {
+        return '<li><div class="comment" data-cid='
+        + id + '><div class="ctitle"><h2><span class="author"> "'
+        + author + '" </span><span class="divider"> | </span><span class="timestamp"> "'
+        + timestamp + '" </span><span> : </span><a class="edit" data-cid='
+        + id + '>  Edit </a><span> : </span><a class="delete" data-cid='
+        + id + '>Delete </a><span> : </span></h2></div><div class="bullet"></div><div class="ctext" data-cid='
+        + id + '><p>"'
+        + comment + '"</p></div></div></li>';
+
+    }
+
+    function editComment(id) {
+        cid = $(id.target).data("cid");
+        comment =  $(".ctext[data-cid=" + cid + "]");
+        console.log("Editing comment!" + cid );
+        console.log(comment.text().trim().slice(1,-1));
+        comment.replaceWith("<textarea rows='4' cols='100' id='replacement'>" + comment.text().trim().slice(1,-1) + "</textarea>");
+        $("#replacement").parent().append("<input type=submit value='Update' class='submit' id='update'/>");
+        $("#update").css("color", "#000");
+        $("#update").click(updateComment)
+    }
+
+    function updateComment(id) {
+        $.ajax({
+
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                    "action" : "edit",
+                    "id" :  $(id.target).parent().data("cid"),
+                    "newContent" : $("#replacement").val(),
+                    },
+
+            success : function(json) {
+                console.log("gurl. you edited you some comments.");
+                $("#update").remove();
+                replacement = $("#replacement");
+                replacement.css("background-color","#fd3");
+                newContent = json["newContent"];
+                console.log(newContent);
+                replacement.replaceWith("<div class='ctext'><p>" + newContent + "</p></div>");
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error");
+                console.log(xhr.status);
+                // console.log(xhr.responseText);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+    }
+
+    function deleteComment(id) {
+        console.log("deleting comment");
+
+        $.ajax({
+
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                    "action" : "delete",
+                    "id" :  $(id.target).data("cid")
+                    },
+
+            success : function(json) {
+                console.log(json);
+                if (json["deleted"] == true) {
+                    console.log("deleted comment");
+                    console.log(json["deleted"]);
+                    console.log(json["cid"]);
+                    $(".comment [data-cid=" + json["cid"] + "]").parentsUntil("li").hide();
+                }
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error");
+                console.log(xhr.status);
+                // console.log(xhr.responseText);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+    }
+
+    function getCookie(name) {
+       var cookieValue = null;
+       if (document.cookie && document.cookie != '') {
+         var cookies = document.cookie.split(';');
+         for (var i = 0; i < cookies.length; i++) {
+             var cookie = jQuery.trim(cookies[i]);
+             // Does this cookie string begin with the name we want?
+             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                 break;
+                }
+            }
+        }
+        console.log(cookieValue);
+        return cookieValue;
+    }
+</script>
+

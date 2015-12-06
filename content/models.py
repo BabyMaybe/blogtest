@@ -40,7 +40,7 @@ class Comment(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     last_edited = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     content = models.TextField()
-    parent_post = models.ForeignKey('Post', related_name='parent_post')
+    parent_post = models.ForeignKey('Post', related_name='post_comments')
     active = models.BooleanField(default=True)
     likes = models.ManyToManyField(User, related_name='comment_likes', blank=True)
     like_count = models.IntegerField(default=0)

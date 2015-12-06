@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
-$jslab:  "Josefin Slab";
+@import "variables"
 
 #username {
     border-bottom: 2px solid white;
@@ -8,7 +7,7 @@ $jslab:  "Josefin Slab";
     margin-bottom: 15px;
     padding-bottom: 1px;
     h1 {
-        font-family: $jslab;
+        font-family: $postfont;
         text-align: right;
     }
 
@@ -16,7 +15,7 @@ $jslab:  "Josefin Slab";
 
 #profile {
     width: 80%;
-    font-family: "Josefin Slab";
+    font-family: $postfont;
     margin: 0 auto;
     margin-top: 50px;
 }
@@ -29,7 +28,7 @@ $jslab:  "Josefin Slab";
 }
 
 #letter {
-    font-family: "Josefin Slab";
+    font-family: $postfont;
     font-size: 7em;
     position: absolute;
     bottom: 0;
