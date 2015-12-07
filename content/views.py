@@ -14,7 +14,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
 from .models import Post, Comment, UserProfile
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, LoginForm, SignupForm
 
 
 # Create your views here.
@@ -214,7 +214,8 @@ class MakeProfile(CreateView):
 
 class Signup(CreateView):
     model = User
-    fields = ['username','password','email','first_name','last_name']
+    # fields = ['username','password','email','first_name','last_name']
+    form_class = SignupForm
     template_name = 'content/signup.html'
 
     def form_valid(self, form):
@@ -227,4 +228,23 @@ class Signup(CreateView):
 
     def get_success_url(self):
         return reverse('signup_details',args=(self.object.id,))
+
+class Login(FormView):
+    form_class = LoginForm
+    template_name = 'content/login.html'
+
+    def form_valid(self, form):
+        f = form.cleaned_data
+        user = authenticate(username = f['username'], password = f['password'])
+        if user is not None:
+        # the password verified for the user
+            if user.is_active:
+                print("User is valid, active and authenticated")
+            else:
+                print("The password is valid, but the account has been disabled!")
+        else:
+            # the authentication system was unable to verify the username and password
+            print("The username and password were incorrect.")
+
+        return super (Login, self).form_valid(form)
 
