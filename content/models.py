@@ -72,7 +72,7 @@ class UserProfile(models.Model):
     prof_pic = models.ImageField(upload_to=generate_image_path, height_field='prof_h', width_field='prof_w', blank=True, null=True)
     prof_h = models.IntegerField(null=True, default=200)
     prof_w = models.IntegerField(null=True, default=200)
-    color = RGBColorField(null=True, blank=True)
+    color = RGBColorField(default=random_color(), null=True, blank=True)
 
     def get_letter(self):
         return self.user.username[0].upper()

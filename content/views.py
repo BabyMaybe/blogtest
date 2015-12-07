@@ -9,12 +9,12 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.auth import authenticate, login
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
 from .models import Post, Comment, UserProfile
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, LoginForm, SignupForm
 
 
 # Create your views here.
@@ -205,26 +205,79 @@ class MakeProfile(CreateView):
         return super(MakeProfile, self).get(args, kwargs)
 
     def form_valid(self, form):
-        # print(user_id)
-        print ('this should be the request: ', self.kwargs['user_id'])
         profile = form.save(commit=False)
-        profile.user = User.objects.get(pk=int(self.kwargs['user_id'])) #need to get user from previous page
+        profile.user = User.objects.get(pk=int(self.kwargs['user_id']))
         return super(MakeProfile, self).form_valid(form)
 
 
-class Signup(CreateView):
+class Signup(FormView):
     model = User
-    fields = ['username','password','email','first_name','last_name']
+    form_class = SignupForm
     template_name = 'content/signup.html'
 
-    def form_valid(self, form):
-        form.save()
-        username = self.request.POST['username']
-        password = self.request.POST['password']
-        # user = authenticate(username=username, password=password)
-        # login(self.request, user)
-        return super(Signup, self).form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        form = SignupForm(request.POST)
+        if (form.is_valid()):
+            f = form.cleaned_data
+
+            username = f['username']
+            email = f['email']
+            password = f['password']
+            first = f['first_name']
+            last = f['last_name']
+
+            User.objects.create_user(username, email, password, first_name=first, last_name=last )
+
+            user = authenticate(username=username, password=password)
+            login (self.request, user)
+
+            return redirect('signup_details', user_id=user.id)
+
+        return redirect('/signup/')
 
     def get_success_url(self):
         return reverse('signup_details',args=(self.object.id,))
+
+
+class Login(FormView):
+    form_class = LoginForm
+    template_name = 'content/login.html'
+    success_url = '/'
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST['username']
+        password = request.POST['password']
+        print(username)
+        print(password)
+        user = authenticate(username=username, password=password)
+        print(user)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('/')
+            else:
+                # Return a 'disabled account' error message
+                return ('disabled account')
+        else:
+            # Return an 'invalid login' error message.
+            return redirect('/login/')
+
+
+
+    def form_valid(self, form):
+        f = form.cleaned_data
+        print (f)
+        user = authenticate(username = f['username'], password = f['password'])
+        if user is not None:
+        # the password verified for the user
+            if user.is_active:
+                print("User is valid, active and authenticated")
+            else:
+                print("The password is valid, but the account has been disabled!")
+        else:
+            # the authentication system was unable to verify the username and password
+            print("The username and password were incorrect.")
+
+        return super (Login, self).form_valid(form)
 
