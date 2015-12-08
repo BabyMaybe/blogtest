@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAAA,EAAE;EACE,KAAK,EAAC,MAAM",
-"sources": ["newpost.scss"],
+"mappings": "AAAQ,iEAAyD;AACzD,8DAAsD;ACC9D,EAAE;EACE,KAAK,EAAC,OAAO;EACb,WAAW,EDDH,cAAc;ECEtB,UAAU,EAAE,IAAI",
+"sources": ["variables.scss","newpost.scss"],
 "names": [],
 "file": "newpost.css"
 }

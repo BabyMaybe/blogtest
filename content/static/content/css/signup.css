@@ -1,0 +1,55 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+.newpost {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  color: #c8fafd;
+  width: 80%;
+  font-family: "Josefin Slab"; }
+
+h1 {
+  color: #c8fafd;
+  font-family: "Josefin Slab";
+  margin-top: 30px;
+  font-size: 3em; }
+
+input {
+  display: block;
+  margin: auto;
+  width: 30%;
+  background-color: #333;
+  padding: 5px;
+  border: solid 3px white;
+  text-align: center;
+  color: #c8fafd;
+  font-size: 1em;
+  font-family: "Josefin Slab"; }
+
+textarea {
+  width: 60%;
+  height: 200px;
+  border: 3px dotted #86edb4;
+  padding: 10 px;
+  background-color: #4d4d4d; }
+
+label {
+  display: block;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  color: #c8fafd;
+  font-family: "Josefin Slab"; }
+
+.submit {
+  margin-top: 20px;
+  width: 32%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Josefin Slab";
+  font-size: 2em;
+  background-color: #c8fafd;
+  color: #333;
+  border: 3px solid #5DBCFA; }
+
+/*# sourceMappingURL=signup.css.map */

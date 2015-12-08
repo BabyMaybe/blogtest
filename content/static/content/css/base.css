@@ -1,0 +1,50 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+html {
+  font-family: "Josefin Slab";
+  font-size: 100%;
+  color: #c8fafd; }
+
+body {
+  background-color: #333;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  color: #c8fafd; }
+
+a {
+  text-decoration: none; }
+  a:link {
+    color: #e04273; }
+  a:visited {
+    color: #e04273; }
+  a:hover {
+    color: #eb84a4; }
+  a:active {
+    color: #f2b0c4; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Quicksand";
+  color: #5DBCFA;
+  margin: 0;
+  text-align: center; }
+
+h1 {
+  font-size: 3em; }
+
+.django-ckeditor-widget {
+  width: 100%;
+  display: block; }
+  .django-ckeditor-widget div {
+    width: 100%;
+    margin: auto;
+    display: block;
+    background-color: #333; }
+  .django-ckeditor-widget #cke_id_richpost {
+    margin: auto;
+    display: block; }
+
+.cke_wysiwyg_div {
+  background-color: #333; }
+
+/*# sourceMappingURL=base.css.map */

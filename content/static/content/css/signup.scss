@@ -1,0 +1,93 @@
+@import "variables";
+
+.newpost {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  color: $body-color;
+  width: 80%;
+  font-family: $post-font;
+}
+  h1 {
+    color: $body-color;
+    font-family: $post-font;
+    margin-top: 30px;
+    font-size: 3em;
+     }
+  input {
+    display: block;
+    margin: auto;
+    width: 30%;
+    background-color: $bg-color;
+    padding: 5px;
+    border: solid 3px white;
+    text-align: center;
+    color: $body-color;
+    font-size: 1em;
+    font-family: $post-font;
+  }
+  textarea {
+    width: 60%;
+    height: 200px;
+    border: 3px dotted #86edb4;
+    padding: 10 px;
+    background-color: #4d4d4d;
+    }
+  label {
+    display: block;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+    color: $body-color;
+    font-family: $post-font;
+  }
+  .submit {
+    margin-top: 20px;
+    width: 32%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: $post-font;
+    font-size: 2em;
+    background-color: $body-color;
+    color: $bg-color;
+    border: 3px solid $head-color;
+}
+
+// .newpost {
+//   display: block;
+//   margin: auto;
+//   margin-top: 20px;
+//   color: white;
+//   width: 80%; }
+//   .newpost h1 {
+//     color: #86edb4; }
+//   .newpost input {
+//     display: block;
+//     margin: auto;
+//     width: 30%;
+//     background-color: #333333;
+//     padding: 5px;
+//     color: white;
+//     border: solid 3px #666;
+//     text-align: center; }
+//   .newpost textarea {
+//     display: block;
+//     margin: auto;
+//     width: 60%;
+//     height: 200px;
+//     border: 3px dotted #86edb4;
+//     padding: 10 px;
+//     background-color: #4d4d4d;
+//     color: white; }
+//   .newpost label {
+//     display: block;
+//     margin: auto;
+//     padding: 5px;
+//     text-align: center;
+//     color: #86edb4; }
+//   .newpost .submit {
+//     width: 20%;
+//     margin-top: 20px;
+//     margin-left: auto;
+//     margin-right: auto;
+//     color: #86edb4; }

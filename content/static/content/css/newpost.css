@@ -1,4 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
 h1 {
-  color: yellow; }
+  color: inherit;
+  font-family: "Josefin Slab";
+  margin-top: 30px; }
 
 /*# sourceMappingURL=newpost.css.map */

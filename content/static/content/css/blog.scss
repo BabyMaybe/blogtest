@@ -1,12 +1,17 @@
-@import "variables"
+@import "variables";
 
 h1,h2,h3 {
-    font-family: $headfont;
+    font-family: $head-font;
     margin-top: 20px;
 }
 
 .post {
     width: 80%;
+    border-bottom: 2px solid $body-color;
+    border-top: 2px solid $body-color;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .blog_title {
@@ -24,13 +29,13 @@ h1,h2,h3 {
 }
 
 .edit {
-    font-family: $postfont;
+    font-family: $post-font;
     float: right;
     margin-right: 110px;
 }
 
 .post_content {
-    font-family: $postfont;
+    font-family: $post-font;
     font-size: 1.25em;
     text-align: center;
     color: #C8FAFD;
@@ -40,7 +45,7 @@ h1,h2,h3 {
 }
 
 .post_footer {
-    font-family: $postfont;
+    font-family: $post-font;
 
 }
 
@@ -54,10 +59,11 @@ h1,h2,h3 {
     height: 87px;
     margin: 0 auto;
     text-align: center;
+    padding-top: 7px;
 }
 
 .like_count {
-    font-family: $postfont;
+    font-family: $post-font;
     font-size: 2em;
     padding-top: 25px;
 }
@@ -78,7 +84,7 @@ h1,h2,h3 {
 }
 
 .letter {
-    font-family: "Josefin Slab";
+    font-family: $post-font;
     font-size: 2em;
     text-align: center;
     margin-top: 13px;

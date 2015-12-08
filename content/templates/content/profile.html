@@ -4,7 +4,6 @@
 
 {% block head %}
 
- {# <link rel="stylesheet" type="text/css" href="{% static 'content/css/profile.css' %}" /> #}
 <link rel="stylesheet" type="text/css" href={% static 'content/css/profile.css' %} />
 
 <style type="text/css">
@@ -20,6 +19,8 @@
 {%  endblock %}
 
 {% block content %}
+
+<a href="/"><h1> Back To Main Blog </h1></a>
 
 <div id="profile">
 
@@ -70,7 +71,7 @@
     </div>
     <div id="activityinfo">
         <div id="username">
-            <h1 class="usercolor"> {{ userprofile.user.username }} </h1>
+            <h2 class="usercolor"> {{ userprofile.user.username }} </h2>
         </div>
         <ul>
             <li>Hearts given: <span class="usercolor">{{ userprofile.user.post_likes.all.count }}</span></li>

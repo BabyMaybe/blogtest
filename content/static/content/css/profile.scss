@@ -1,4 +1,11 @@
-@import "variables"
+@import "variables";
+
+h1 {
+    font-family: $post-font;
+    color: $body-color;
+    margin-top: 30px;
+
+}
 
 #username {
     border-bottom: 2px solid white;
@@ -6,18 +13,19 @@
     margin:auto;
     margin-bottom: 15px;
     padding-bottom: 1px;
-    h1 {
-        font-family: $postfont;
+    h2 {
+        font-family: $post-font;
         text-align: right;
+        font-size: 3em;
     }
 
 }
 
 #profile {
     width: 80%;
-    font-family: $postfont;
+    font-family: $post-font;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 #letterbox {
@@ -28,7 +36,7 @@
 }
 
 #letter {
-    font-family: $postfont;
+    font-family: $post-font;
     font-size: 7em;
     position: absolute;
     bottom: 0;
@@ -46,6 +54,12 @@
     width: 212px;
     border-right: 2px solid white;
     float: left;
+
+    h4 {
+        font-family: $post-font;
+        text-align: left;
+        color: inherit;
+    }
 }
 
 #infosection {
