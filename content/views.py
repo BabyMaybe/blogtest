@@ -212,6 +212,10 @@ class MakeProfile(CreateView):
 
 class Signup(FormView):
     model = User
+<<<<<<< HEAD
+=======
+    # fields = ['username','password','email','first_name','last_name']
+>>>>>>> 67174ebf7a8303d217880887cbe1280befc456e1
     form_class = SignupForm
     template_name = 'content/signup.html'
 
@@ -239,6 +243,7 @@ class Signup(FormView):
     def get_success_url(self):
         return reverse('signup_details',args=(self.object.id,))
 
+<<<<<<< HEAD
 
 class Login(FormView):
     form_class = LoginForm
@@ -268,6 +273,14 @@ class Login(FormView):
     def form_valid(self, form):
         f = form.cleaned_data
         print (f)
+=======
+class Login(FormView):
+    form_class = LoginForm
+    template_name = 'content/login.html'
+
+    def form_valid(self, form):
+        f = form.cleaned_data
+>>>>>>> 67174ebf7a8303d217880887cbe1280befc456e1
         user = authenticate(username = f['username'], password = f['password'])
         if user is not None:
         # the password verified for the user
