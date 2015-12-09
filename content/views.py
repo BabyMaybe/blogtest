@@ -78,7 +78,7 @@ class PostDetail(DetailView, JsonResponse):
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
 
-        context['comments'] = self.get_object().post_comments.all().filter(active=True)
+        context['comments'] = self.get_object().post_comments.all().filter(active=True).order_by('timestamp')
         context['form'] = self.form_class(initial=self.initial)
 
         return context
