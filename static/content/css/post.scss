@@ -1,11 +1,12 @@
 @import "variables";
 
 .blogentry {
-    font-family: $postfont;
+    font-family: $post-font;
+    font-color: $body-color;
 }
 
 #posttitle {
-    font-family: $headfont;
+    font-family: $head-font;
     margin-top: 20px;
 }
 
@@ -39,7 +40,7 @@
 }
 
 .likes {
-    font-family: $postfont;
+    font-family: $post-font;
     font-size: 2em;
 
 }
@@ -53,23 +54,23 @@
 }
 
 #commenthead {
-    font-family: $headfont;
+    font-family: $head-font;
 }
 
 .ctitle {
-    font-family: $headfont;
+    font-family: $head-font;
 }
 
 .author {
-    font-family: $headfont;
+    font-family: $head-font;
 }
 
 .divider {
-    font-family: $headfont;
+    font-family: $head-font;
 }
 
 .timestamp {
-    font-family: $headfont;
+    font-family: $head-font;
 }
 
 .delete {
@@ -99,7 +100,7 @@
 }
 
 .ctext {
-    font-family: $postfont;
+    font-family: $post-font;
     padding: 15px;
 }
 

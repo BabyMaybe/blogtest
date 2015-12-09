@@ -5,7 +5,12 @@ h1, h2, h3 {
   margin-top: 20px; }
 
 .post {
-  width: 80%; }
+  width: 80%;
+  border-bottom: 2px solid #c8fafd;
+  border-top: 2px solid #c8fafd;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto; }
 
 .blog_title {
   font-size: 4em; }
@@ -42,7 +47,8 @@ h1, h2, h3 {
   width: 87px;
   height: 87px;
   margin: 0 auto;
-  text-align: center; }
+  text-align: center;
+  padding-top: 7px; }
 
 .like_count {
   font-family: "Josefin Slab";

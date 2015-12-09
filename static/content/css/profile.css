@@ -1,18 +1,28 @@
 @import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+h1 {
+  font-family: "Josefin Slab";
+  color: #c8fafd;
+  margin-top: 30px; }
+  h1 a {
+    color: inherit; }
+
 #username {
   border-bottom: 2px solid white;
   width: 60%;
   margin: auto;
   margin-bottom: 15px;
   padding-bottom: 1px; }
-  #username h1 {
+  #username h2 {
     font-family: "Josefin Slab";
-    text-align: right; }
+    text-align: right;
+    font-size: 3em; }
 
 #profile {
   width: 80%;
   font-family: "Josefin Slab";
-  margin: 0 auto; }
+  margin: 0 auto;
+  margin-top: 30px; }
 
 #letterbox {
   width: 200px;
@@ -36,7 +46,11 @@
   padding: 20px;
   width: 212px;
   border-right: 2px solid white;
-  display: inline-block; }
+  float: left; }
+  #basicinfo h4 {
+    font-family: "Josefin Slab";
+    text-align: left;
+    color: inherit; }
 
 #infosection {
   line-height: 1.25; }
@@ -65,12 +79,14 @@ h4 {
   margin: 0; }
 
 #activityinfo {
-  float: right;
-  margin-top: 20%;
-  width: 76%;
+  margin-left: 212px;
+  margin-top: 18%;
   text-align: center;
   padding: 5px; }
   #activityinfo ul {
     display: inline-block; }
+
+.clearfix {
+  clear: both; }
 
 /*# sourceMappingURL=profile.css.map */

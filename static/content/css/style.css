@@ -450,22 +450,8 @@ h3 {
   line-height: 2.75em; }
 
 .post {
-  border-bottom: 3px dotted #E04273;
-  border-top: 3px dotted #E04273;
-  margin-top: 10px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto; }
-  .post p {
-    color: #86edb4;
-    font-size: 1.25em;
-    width: 80%;
-    padding: 20px;
-    text-align: justify;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    margin-bottom: 0; }
+   }
+
     .post p a {
       text-align: right; }
   .post .post_footer {
