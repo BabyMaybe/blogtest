@@ -26,6 +26,11 @@
         New Post
     </h3>
 </a>
+<a href='/logout'>
+    <h3 id="newpost">
+        Logout
+    </h3>
+</a>
 {% for post in post_list %}
 <div class='post' pid={{post.pk}}>
     <h2 class="post_title"> <a href="/post/{{post.pk}}/{{post.slug}}">{{post.title}}</a> </h2>

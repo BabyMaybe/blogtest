@@ -7,7 +7,7 @@ from django.utils.text import slugify
 from django.utils.html import escape, strip_tags
 from django.core.urlresolvers import reverse
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
@@ -78,7 +78,7 @@ class PostDetail(DetailView, JsonResponse):
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
 
-        context['comments'] = self.get_object().post_comments.all().filter(active=True)
+        context['comments'] = self.get_object().post_comments.all().filter(active=True).order_by('timestamp')
         context['form'] = self.form_class(initial=self.initial)
 
         return context
@@ -287,4 +287,7 @@ class Login(FormView):
             print("The username and password were incorrect.")
 
         return super (Login, self).form_valid(form)
+
+def logout_view(request):
+    logout(request)
 
