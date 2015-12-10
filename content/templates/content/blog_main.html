@@ -57,7 +57,9 @@
     <div class="post_footer">
         <div class="footer_text">
             <div class='timestamp'>
-                {{ post.date_published }}
+                {{ post.date_published |  date:"h:i A" }}
+                <br>
+                {{ post.date_published |  date:" d F Y" }}
             </div>
             <div class="comment_link">
                 <a href="/post/{{post.pk}}/{{ post.slug }}"> {{ post.comment_count }} Comments</a>
