@@ -33,9 +33,12 @@ class Post(models.Model):
     def get_like_count(self):
         return self.like_count
 
+    def get_comment_count(self):
+        return self.post_comments.filter(active=True).count()
+
 #Comment Class
 class Comment(models.Model):
-    display_author = models.CharField(max_length=200)
+    display_author = models.CharField(max_length=200, default="anonymous coward")
     author = models.ForeignKey(User, related_name='comment_author')
     timestamp = models.DateTimeField(auto_now_add=True)
     last_edited = models.DateTimeField(auto_now_add=True, null=True, blank=True)

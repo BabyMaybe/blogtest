@@ -50,9 +50,15 @@
         {% for c in comments %}
             <li>
                 <div class="comment" data-cid={{c.pk}}>
-
                     <div class="ctitle">
                         <h2>
+                            {% if user == c.author %}
+                            <div class="edit_delete">
+                                <a data-cid={{c.pk}} class="edit"> Edit </a>
+                                <span class="divider"> | </span>
+                                <a data-cid={{c.pk}} class="delete"> Delete </a>
+                            </div>
+                            {% endif %}
                             <span class="author">
                                 <a href="/{{ c.author.userprofile.pk }}/profile">
                                     {{ c.author }}
@@ -60,13 +66,6 @@
                             </span>
                             <span class="divider"> | </span>
                             <span class="timestamp"> {{ c.timestamp | date:"d F Y | h:i A"}} </span>
-                            {% if user == c.realAuthor %}
-                                <span> : </span>
-                                <a class="edit" data-cid={{c.pk}}> Edit </a>
-                                <span> : </span>
-                                <a class="delete" data-cid={{c.pk}}> Delete </a>
-                                <span> : </span>
-                            {% endif %}
                         </h2>
                     </div>
                     <div class="c_letterbox" style="background-color:{{ c.author.userprofile.color }};">
@@ -100,11 +99,9 @@
     $(".newpost").on('submit', newComment);
     $(".delete").click(deleteComment);
     $(".edit").click(editComment);
-    $(".heart").click(function(e) {
-        like_post(e);
-    });
+    $(".heart").click(likePost);
 
-    function like_post(e) {
+    function likePost(e) {
         $.ajax(
         {
             url : window.location.href,
@@ -127,29 +124,66 @@
     });
     }
 
-    function makeComment(author,timestamp,comment,id) {
+    function newComment(e) {
+        e.preventDefault()
+        $.ajax(
+        {
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                    "action" : "comment",
+                    "author" : $("{{ user.pk }}").val(),
+                    "content" : $("#id_content").val()
+                   },
+
+            success : function(json) {
+                console.log("successful comment post");
+                $("#commentStack").append(makeComment(json["author"],
+                  json["timestamp"],
+                  json["content"],
+                  json["id"],
+                  json["color"],
+                  json["uid"],
+                  json["letter"]));
+                $("#id_author").val("");
+                $("#id_content").val("");
+                $(".delete").click(deleteComment);
+                $(".edit").click(editComment);
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error");
+                console.log(xhr.status);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+    }
+    function makeComment(author,timestamp,comment,id,color,uid,letter) {
         return '<li><div class="comment" data-cid='
-        + id + '><div class="ctitle"><h2><span class="author"> "'
-        + author + '" </span><span class="divider"> | </span><span class="timestamp"> "'
-        + timestamp + '" </span><span> : </span><a class="edit" data-cid='
-        + id + '>  Edit </a><span> : </span><a class="delete" data-cid='
-        + id + '>Delete </a><span> : </span></h2></div><div class="bullet"></div><div class="ctext" data-cid='
-        + id + '><p>"'
-        + comment + '"</p></div></div></li>';
+        + id + '><div class="ctitle"><h2><div class="edit_delete"><a data-cid='
+        + id + ' class="edit"> Edit </a><span class="divider"> | </span><a data-cid='
+        + id + ' class="delete">Delete </a></div><span class="author"> '
+        + author + ' </span><span class="divider"> | </span><span class="timestamp"> '
+        + timestamp + ' </span></h2></div><div class="c_letterbox" style="background-color:'
+        + color + ';"><a href="/'
+        + uid + '/profile"><div="c_letter_link"><div class="c_letter">'
+        + letter + '</div></div></a><div class="ctext" data-cid='
+        + id + '><p>'
+        + comment + '</p></div><div class="clearfix"></div></div></li>';
     }
 
     function editComment(id) {
         cid = $(id.target).data("cid");
         comment =  $(".ctext[data-cid=" + cid + "]");
-        console.log("Editing comment!" + cid );
-        console.log(comment.text().trim().slice(1,-1));
-        comment.replaceWith("<textarea rows='4' cols='100' id='replacement'>" + comment.text().trim().slice(1,-1) + "</textarea>");
+        comment.replaceWith("<textarea rows='4' cols='100' id='replacement'>" + comment.text().trim() + "</textarea>");
         $("#replacement").parent().append("<input type=submit value='Update' class='submit' id='update'/>");
         $("#update").css("color", "#000");
         $("#update").click(updateComment)
     }
 
     function updateComment(id) {
+        console.log("yup thats working at least");
         $.ajax({
 
             url : window.location.href,
@@ -229,38 +263,7 @@
        return cookieValue;
     }
 
-    function newComment(e) {
-        e.preventDefault()
-        $.ajax(
-        {
-            url : window.location.href,
-            type : "POST",
-            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
-                    "action" : "comment",
-                    "author" : $("{{ user.pk }}").val(),
-                    "comment" : $("#id_comment").val()
-                   },
 
-            success : function(json) {
-                console.log("successful comment post");
-                $("#commentStack").append(makeComment(json["author"],
-                  json["timestamp"],
-                  json["comment"],
-                  json["id"]));
-                $("#id_author").val("");
-                $("#id_comment").val("");
-                $(".delete").click(deleteComment);
-                $(".edit").click(editComment);
-            },
-
-            error : function(xhr, errmsg, err) {
-                console.log("error");
-                console.log(xhr.status);
-                console.log(errmsg);
-                console.log(err);
-            }
-        });
-    }
     </script>
 
 {% endblock %}

@@ -68,7 +68,6 @@ class NewPost(CreateView):
        p.save()
        return HttpResponseRedirect('/')
 
-
 class PostDetail(DetailView, JsonResponse):
     model = Post
     form_class = CommentForm
@@ -96,19 +95,20 @@ class PostDetail(DetailView, JsonResponse):
         if request.is_ajax():
 
             if request.POST.get('action') == 'like':
-                response = self.like_post(request)
+                response = self.like_post(request, *args, **kwargs)
 
             if request.POST.get('action') == 'comment':
-                response = self.add_comment(request)
+                response = self.add_comment(request, *args, **kwargs)
 
             if request.POST.get('action') == 'delete':
-                response = self.delete_comment(request)
+                response = self.delete_comment(request, *args, **kwargs)
 
             if request.POST.get('action') == 'edit':
-                response = self.edit_comment(request)
+                response = self.edit_comment(request, *args, **kwargs)
             return response
 
         form = self.form_class(request.POST)
+
         if form.is_valid():
             print (form.cleaned_data['content'])
             author = request.user
@@ -122,7 +122,7 @@ class PostDetail(DetailView, JsonResponse):
             c.save()
             return HttpResponseRedirect(request.path)
 
-    def like_post(self, request):
+    def like_post(self, request, *args, **kwargs):
         post = self.get_object()
         if not request.user.is_anonymous():
             if (request.user in post.likes.all()):
@@ -137,35 +137,36 @@ class PostDetail(DetailView, JsonResponse):
             data["error"] = "please log in to comment"
         return JsonResponse(data)
 
-    def add_comment(self, request):
+    def add_comment(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-
-        display_author = "anonymous coward"
-
         if request.user.is_authenticated():
             author = request.user.username
+            display_author = author
+            prof = UserProfile.objects.get(user = request.user)
+            color = prof.color
+            uid = prof.pk
+            letter = prof.get_letter()
+        if form.is_valid():
+            content = escape(form.cleaned_data['content'])
+            timestamp = datetime.datetime.now()
+            post = self.get_object()
+            c = Comment(display_author=display_author, author=request.user, content=content, timestamp=timestamp,
+                        parent_post=post )
+            c.save()
+            post.comment_count = post.get_comment_count()
+            post.save()
 
-        content = escape(form.cleaned_data['content'])
-        timestamp = datetime.datetime.now()
+            data = {"author" : author,
+                    "content" : content,
+                    "timestamp" : timestamp.strftime("%d %B %Y | %I:%M %p"),
+                    "id" : c.pk,
+                    "color" : color,
+                    "uid" : uid,
+                    "letter" : letter
+                    }
+            return JsonResponse(data)
 
-        post = self.get_object()
-
-        c = Comment(display_author=display_author, content=content, timestamp=timestamp,
-                    post=post, author=request.user)
-        c.save()
-
-        post.commentCount = post.comment_set.count().filter(active=True)
-        post.save()
-
-        data = {"author" : author,
-                "comment" : comment,
-                "timestamp" : timestamp,
-                "id" : c.pk
-                }
-
-        return JsonResponse(data)
-
-    def delete_comment(self, request):
+    def delete_comment(self, request, *args, **kwargs):
         cid = request.POST.get('id')
         c = Comment.objects.get(pk=cid)
         deleted = False
@@ -175,17 +176,14 @@ class PostDetail(DetailView, JsonResponse):
             deleted = True
         return JsonResponse({"deleted" : deleted, "cid" : cid})
 
-    def edit_comment(self, request):
+    def edit_comment(self, request, *args, **kwargs):
         cid = request.POST.get('id')
         new_content = escape(request.POST.get('newContent'))
-
         c = Comment.objects.get(pk=cid)
         c.content = new_content
         c.save()
 
-        return JsonResponse({"newContent" : newContent})
-        return render(request, self.template_name, self.get_context_data())
-
+        return JsonResponse({"newContent" : new_content})
 
 class ViewProfile(DetailView):
     model = UserProfile
@@ -196,7 +194,6 @@ class ViewProfile(DetailView):
         context ['comments_made'] = Comment.objects.filter(author=self.object.user).count()
         context ['posts_made'] = Post.objects.filter(author=self.object.user).count()
         return context
-
 
 class MakeProfile(CreateView):
     model = UserProfile
@@ -213,7 +210,6 @@ class MakeProfile(CreateView):
         profile = form.save(commit=False)
         profile.user = User.objects.get(pk=int(self.kwargs['user_id']))
         return super(MakeProfile, self).form_valid(form)
-
 
 class Signup(FormView):
     model = User

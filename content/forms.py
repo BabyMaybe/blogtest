@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from django.forms import PasswordInput, DateInput, NumberInput
+from django.forms import PasswordInput, DateInput, NumberInput, HiddenInput
 from django.contrib.auth.models import User
 
 from .models import Post, Comment, UserProfile
