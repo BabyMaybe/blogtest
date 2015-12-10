@@ -32,21 +32,18 @@
         <span id="timepublished"> {{ post.date_published |  date:"h:i A"}} </span>
         <span id="datepublished"> {{ post.date_published |  date:"d F Y"}} </span>
     </div>
-    <form method="POST">
-        {% csrf_token %}
     <div class="heart">
+        {% csrf_token %}
         <div class="likes">{{ post.like_count }}</div>
     </div>
     <div id="error_msg">
         <a href='/accounts/login'>
-
         </a>
     </div>
-    </form>
+
 </div>
 
 <hr>
-
 <div class="comments">
     <h3 id="commenthead"> Comments Section | {{ post.comment_count }}</h3>
     <ul id="commentStack">
@@ -97,76 +94,38 @@
 <hr>
 {% endblock %}
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<!--<script src="{% static 'blog/js/post.js' %}">-->
+{% block javascript %}
 <script type="text/javascript">
-    $(function() {
-        $(".heart").click(function(e) {
 
-        console.log("this was liked");
-
-        $.ajax({
-            url : window.location.href,
-            type : "POST",
-            data : { csrfmiddlewaretoken : getCookie('csrftoken'), "action" : "like" },
-
-            success : function(json) {
-                console.log("success");
-                $(".likes").text(json['likecount']);
-                $("#error_msg a").text(json['error'])
-            },
-
-            error : function(xhr, errmsg, err) {
-                console.log("error");
-                console.log(xhr.status);
-                console.log(errmsg);
-                console.log(err);
-            }
-        });
+    $(".newpost").on('submit', newComment);
+    $(".delete").click(deleteComment);
+    $(".edit").click(editComment);
+    $(".heart").click(function(e) {
+        like_post(e);
     });
 
-        $(".newpost").on('submit', (function(e) {
-            e.preventDefault()
-            consele.log({{user.pk}});
-            console.log({{user}});
-            console.log("anything");
-            $.ajax({
-                url : window.location.href,
-                type : "POST",
-                data : { csrfmiddlewaretoken : getCookie('csrftoken'),
-                        "action" : "comment",
-                        "author" : $("{{user.pk}}").val(),
-                        "comment" : $("#id_comment").val()
-                       },
+    function like_post(e) {
+        $.ajax(
+        {
+            url : window.location.href,
+            type : "POST",
+            data :{csrfmiddlewaretoken : getCookie('csrftoken'),
+            'action' : 'like'
+        },
 
-                success : function(json) {
-                    console.log("successful comment post");
+        success : function(json) {
+            // console.log(json['likecount']);
+            $("div .likes").text(json['likecount']);
+        },
 
-                    $("#commentStack").append(makeComment(json["author"],
-                                                                 json["timestamp"],
-                                                                 json["comment"],
-                                                                 json["id"]));
-                    $("#id_author").val("");
-                    $("#id_comment").val("");
-                    $(".delete").click(deleteComment);
-                    $(".edit").click(editComment);
-                    // $(".likes").text(json['likecount']);
-                    // $("#error_msg").text(json['error'])
-                },
-
-                error : function(xhr, errmsg, err) {
-                    console.log("error");
-                    console.log(xhr.status);
-                // console.log(xhr.responseText);
-                console.log(errmsg);
-                console.log(err);
-            }
-        });
-        }));
-
-        $(".delete").click(deleteComment);
-        $(".edit").click(editComment);
-    })
+        error : function (xhr, errmsg, err) {
+            console.log(err);
+            console.log(errmsg);
+            console.log(xhr);
+            console.log("you don goofed");
+        }
+    });
+    }
 
     function makeComment(author,timestamp,comment,id) {
         return '<li><div class="comment" data-cid='
@@ -177,7 +136,6 @@
         + id + '>Delete </a><span> : </span></h2></div><div class="bullet"></div><div class="ctext" data-cid='
         + id + '><p>"'
         + comment + '"</p></div></div></li>';
-
     }
 
     function editComment(id) {
@@ -197,10 +155,10 @@
             url : window.location.href,
             type : "POST",
             data : { csrfmiddlewaretoken : getCookie('csrftoken'),
-                    "action" : "edit",
-                    "id" :  $(id.target).parent().data("cid"),
-                    "newContent" : $("#replacement").val(),
-                    },
+            "action" : "edit",
+            "id" :  $(id.target).parent().data("cid"),
+            "newContent" : $("#replacement").val(),
+            },
 
             success : function(json) {
                 console.log("gurl. you edited you some comments.");
@@ -215,10 +173,11 @@
             error : function(xhr, errmsg, err) {
                 console.log("error");
                 console.log(xhr.status);
-                // console.log(xhr.responseText);
-                console.log(errmsg);
-                console.log(err);
+                        // console.log(xhr.responseText);
+                        console.log(errmsg);
+                        console.log(err);
             }
+
         });
     }
 
@@ -230,45 +189,78 @@
             url : window.location.href,
             type : "POST",
             data : { csrfmiddlewaretoken : getCookie('csrftoken'),
-                    "action" : "delete",
-                    "id" :  $(id.target).data("cid")
-                    },
+                "action" : "delete",
+                "id" :  $(id.target).data("cid")
+                },
 
-            success : function(json) {
-                console.log(json);
-                if (json["deleted"] == true) {
-                    console.log("deleted comment");
-                    console.log(json["deleted"]);
-                    console.log(json["cid"]);
-                    $(".comment [data-cid=" + json["cid"] + "]").parentsUntil("li").hide();
-                }
-            },
+        success : function(json) {
+            console.log(json);
+            if (json["deleted"] == true) {
+                console.log("deleted comment");
+                console.log(json["deleted"]);
+                console.log(json["cid"]);
+                $(".comment [data-cid=" + json["cid"] + "]").parentsUntil("li").hide();
+            }
+        },
 
-            error : function(xhr, errmsg, err) {
-                console.log("error");
-                console.log(xhr.status);
-                // console.log(xhr.responseText);
-                console.log(errmsg);
-                console.log(err);
+        error : function(xhr, errmsg, err) {
+            console.log("error");
+            console.log(xhr.status);
+            // console.log(xhr.responseText);
+            console.log(errmsg);
+            console.log(err);
             }
         });
     }
 
     function getCookie(name) {
-       var cookieValue = null;
-       if (document.cookie && document.cookie != '') {
-         var cookies = document.cookie.split(';');
-         for (var i = 0; i < cookies.length; i++) {
-             var cookie = jQuery.trim(cookies[i]);
-             // Does this cookie string begin with the name we want?
-             if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                 break;
-                }
-            }
-        }
-        console.log(cookieValue);
-        return cookieValue;
+     var cookieValue = null;
+     if (document.cookie && document.cookie != '') {
+       var cookies = document.cookie.split(';');
+       for (var i = 0; i < cookies.length; i++) {
+           var cookie = jQuery.trim(cookies[i]);
+                 // Does this cookie string begin with the name we want?
+                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                   cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                   break;
+               }
+           }
+       }
+       return cookieValue;
     }
-</script>
 
+    function newComment(e) {
+        e.preventDefault()
+        $.ajax(
+        {
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                    "action" : "comment",
+                    "author" : $("{{ user.pk }}").val(),
+                    "comment" : $("#id_comment").val()
+                   },
+
+            success : function(json) {
+                console.log("successful comment post");
+                $("#commentStack").append(makeComment(json["author"],
+                  json["timestamp"],
+                  json["comment"],
+                  json["id"]));
+                $("#id_author").val("");
+                $("#id_comment").val("");
+                $(".delete").click(deleteComment);
+                $(".edit").click(editComment);
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error");
+                console.log(xhr.status);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+    }
+    </script>
+
+{% endblock %}

@@ -96,16 +96,17 @@ class PostDetail(DetailView, JsonResponse):
         if request.is_ajax():
 
             if request.POST.get('action') == 'like':
-                self.like_post(request)
+                response = self.like_post(request)
 
             if request.POST.get('action') == 'comment':
-                self.add_comment(request)
+                response = self.add_comment(request)
 
             if request.POST.get('action') == 'delete':
-                self.delete_comment(request)
+                response = self.delete_comment(request)
 
             if request.POST.get('action') == 'edit':
-                self.edit_comment(request)
+                response = self.edit_comment(request)
+            return response
 
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -128,15 +129,12 @@ class PostDetail(DetailView, JsonResponse):
                 post.likes.remove(request.user)
             else:
                 post.likes.add(request.user)
-
             post.like_count = post.likes.count()
             post.save()
-
         data = {"likecount" : post.like_count, "error" : ""}
 
         if request.user.is_anonymous():
             data["error"] = "please log in to comment"
-
         return JsonResponse(data)
 
     def add_comment(self, request):
