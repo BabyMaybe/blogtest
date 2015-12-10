@@ -14,21 +14,46 @@
 
 }
 
-#postcontent {
+.letterbox {
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.letter_link {
+    height:50px;
+    width:50px;
+    color:white;
+}
+
+.letter {
+    font-family: $post-font;
+    font-size: 2em;
     text-align: center;
+    margin-top: 13px;
+}
+
+#postcontent {
+    p {
+        text-align: center;
+    }
     margin-top: 20px;
 }
 
 #timecode {
-
+    width: 80%;
+    margin: auto;
 }
 
 #datepublished {
-    color:pink;
 }
 
 #timepublished {
-
+    float: right;
 }
 
 .heart {

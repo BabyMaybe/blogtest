@@ -12,6 +12,13 @@
 {% block content %}
 <div class="blogentry">
     <h1 id="posttitle"> <a href='/'>{{ post.title }}</a> </h1>
+    <div class="letterbox" style="background-color:{{ post.author.userprofile.color }};">
+        <a href="/{{ post.author.userprofile.pk }}/profile">
+            <div class="letter_link">
+                <div class="letter">{{ post.author.userprofile.get_letter }}</div>
+            </div>
+        </a>
+    </div>
     {% if user == post.author %}
     <h3>
         <a class="edit" href="/post/{{ post.pk }}/{{ post.slug }}/edit" data-pid={{post.pk}}> Edit </a>
@@ -19,11 +26,11 @@
     <br>
     {% endif %}
     <hr>
-    <p id="postcontent"> {{ post.content|safe }} </p>
+    <div id="postcontent"> {{ post.content|safe }} </div>
     <br>
     <div id="timecode">
-        <p id="datepublished"> {{ post.date_published |  date:"d F Y"}} </p>
-        <p id="timepublished"> {{ post.date_published |  date:"h:i A"}} </p>
+        <span id="timepublished"> {{ post.date_published |  date:"h:i A"}} </span>
+        <span id="datepublished"> {{ post.date_published |  date:"d F Y"}} </span>
     </div>
     <form method="POST">
         {% csrf_token %}
