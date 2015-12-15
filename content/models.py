@@ -66,16 +66,17 @@ class UserProfile(models.Model):
         return self.user.username
 
     user = models.OneToOneField(User)
-    age = models.IntegerField()
-    birthday = models.DateField()
-    addr_street = models.CharField(max_length=500)
-    addr_city = models.CharField(max_length=200)
-    addr_state = models.CharField(max_length=2,null=True)
-    addr_zip = models.IntegerField()
+    age = models.IntegerField(null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
+    addr_street = models.CharField(max_length=500, null=True, blank=True, default='None')
+    addr_city = models.CharField(max_length=200, null=True, blank=True, default='None')
+    addr_state = models.CharField(max_length=2, null=True, blank=True, default='NA')
+    addr_zip = models.IntegerField(null=True, blank=True)
     prof_pic = models.ImageField(upload_to=generate_image_path, height_field='prof_h', width_field='prof_w', blank=True, null=True)
-    prof_h = models.IntegerField(null=True, default=200)
-    prof_w = models.IntegerField(null=True, default=200)
+    prof_h = models.IntegerField(null=True, blank=True, default=200)
+    prof_w = models.IntegerField(null=True, blank=True, default=200)
     color = RGBColorField(default=random_color(), null=True, blank=True)
+    join_date = models.DateTimeField(auto_now_add=True)
 
     def get_letter(self):
         return self.user.username[0].upper()

@@ -2,7 +2,7 @@ import datetime
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, FormView
+from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.utils.text import slugify
 from django.utils.html import escape, strip_tags
 from django.core.urlresolvers import reverse
@@ -15,7 +15,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
 from .models import Post, Comment, UserProfile
-from .forms import PostForm, CommentForm, LoginForm, SignupForm
+from .forms import PostForm, CommentForm, LoginForm, SignupForm, ProfileForm
 
 
 # Create your views here.
@@ -210,6 +210,16 @@ class MakeProfile(CreateView):
         profile = form.save(commit=False)
         profile.user = User.objects.get(pk=int(self.kwargs['user_id']))
         return super(MakeProfile, self).form_valid(form)
+
+class EditProfile(UpdateView):
+    model = UserProfile
+    form_class = ProfileForm
+    template_name = 'content/signup_details.html'
+
+    def get_success_url(self):
+        return reverse('profile', args = (self.object.id,))
+
+
 
 class Signup(FormView):
     model = User

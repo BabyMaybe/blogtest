@@ -34,6 +34,9 @@
         </div>
         <div id="infosection">
             <h4 id="userinfo">User Info</h4>
+                {% if user = userprofile.user %}
+                <span class="usercolor edit"><a href="/{{userprofile.pk}}/edit_profile/" >Edit </a></span>
+                {% endif %}
             <hr>
             <ul>
                 <li>

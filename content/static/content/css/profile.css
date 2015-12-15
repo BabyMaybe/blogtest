@@ -51,6 +51,17 @@ h1 {
     text-align: left;
     color: inherit; }
 
+.edit a {
+  text-decoration: none; }
+  .edit a:link {
+    color: inherit; }
+  .edit a:visited {
+    color: inherit; }
+  .edit a:hover {
+    color: inherit; }
+  .edit a:active {
+    color: inherit; }
+
 #infosection {
   line-height: 1.25; }
   #infosection hr {

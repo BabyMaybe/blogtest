@@ -35,6 +35,9 @@ class ProfileForm(ModelForm):
             'age' : NumberInput(),
 
         }
+        labels = {
+            'color' : 'Favourite Colour'
+        }
 
 class LoginForm(ModelForm):
     class Meta:
