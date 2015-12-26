@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/profile/', views.ViewProfile.as_view(), name='profile'),
     url(r'^post/(?P<pk>\d+)/', views.PostDetail.as_view()),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^xmas/', views.XmasForm.as_view()),
 ]

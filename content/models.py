@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+# from django.contrib.postgres.fields import ArrayField
 
 import random
 ##Third Party
@@ -80,6 +81,32 @@ class UserProfile(models.Model):
 
     def get_letter(self):
         return self.user.username[0].upper()
+
+class Xmas(models.Model):
+    giftee = models.OneToOneField(User)
+    snitch_on = models.OneToOneField(User, related_name='snitch')
+    age = models.IntegerField(null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
+    addr_street = models.CharField(max_length=500, null=True, blank=True, default='None')
+    addr_city = models.CharField(max_length=200, null=True, blank=True, default='None')
+    addr_state = models.CharField(max_length=2, null=True, blank=True, default='NA')
+    addr_zip = models.IntegerField(null=True, blank=True)
+    movies = models.TextField(null=True, blank=True)
+    books = models.TextField(null=True, blank=True)
+    authors = models.TextField(null=True, blank=True)
+    games = models.TextField(null=True, blank=True)
+    systems = models.TextField(null=True, blank=True)
+    color1 = RGBColorField(default='#000000', null=True, blank=True)
+    color2 = RGBColorField(default='#000000', null=True, blank=True)
+    color3 = RGBColorField(default='#000000', null=True, blank=True)
+    color4 = RGBColorField(default='#000000', null=True, blank=True)
+    color5 = RGBColorField(default='#000000', null=True, blank=True)
+    candy = models.CharField(max_length=300, null=True, blank=True)
+    animal = models.CharField(max_length=200, null=True, blank=True)
+    drink = models.CharField(max_length=200, null=True, blank=True)
+
+    # colors = ArrayField(RGBColorField(blank=True, null=True))
+
 
 #####
 # #WYSIWYG Editor class
