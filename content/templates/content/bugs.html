@@ -1,0 +1,21 @@
+{% extends 'content/base.html' %}
+{% load staticfiles %}
+
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'content/css/forms.css' %}" />
+{%  endblock %}
+
+
+{% block content %}
+<h1>Bug Reports</h1>
+
+<div class="bugreport">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="submit" class="submit" >  </input>
+    </form>
+</div>
+
+{%  endblock %}

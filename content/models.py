@@ -82,9 +82,34 @@ class UserProfile(models.Model):
     def get_letter(self):
         return self.user.username[0].upper()
 
+#Bug Report Class
+class BugReport(models.Model):
+    OS_CHOICES = (
+        ('OSX', 'Mac OSX'),
+        ('WINDOWS', 'Windows'),
+        ('LINUX', 'Linux'),
+        ('OTHER', 'Something Else')
+        )
+    os = models.CharField(max_length=200, choices=OS_CHOICES)
+    BROWSER_CHOICES = (
+        ('CHROME', 'Google Chrome'),
+        ('FIREFOX', 'Mozilla Firefox'),
+        ('SAFARI', 'Apple Safari'),
+        ('IE', 'Internet Explorer'),
+        ('EDGE', 'Microsoft Edge'),
+        ('OTHER', 'Something Else')
+        )
+    browser = models.CharField(max_length=200, choices=BROWSER_CHOICES)
+    bug = models.TextField()
+    steps = models.TextField(null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    feature = models.BooleanField(default=False)
+
+
+#Xmas gifts class never got used
 class Xmas(models.Model):
     giftee = models.OneToOneField(User)
-    snitch_on = models.OneToOneField(User, related_name='snitch')
+    snitch_on = models.OneToOneField(User, related_name='snitch', default=False)
     age = models.IntegerField(null=True, blank=True)
     birthday = models.DateField(null=True, blank=True)
     addr_street = models.CharField(max_length=500, null=True, blank=True, default='None')

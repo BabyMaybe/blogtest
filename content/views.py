@@ -14,8 +14,8 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
-from .models import Post, Comment, UserProfile, Xmas
-from .forms import PostForm, CommentForm, LoginForm, SignupForm, ProfileForm
+from .models import Post, Comment, UserProfile, Xmas, BugReport
+from .forms import PostForm, CommentForm, LoginForm, SignupForm, ProfileForm, BugForm
 
 
 # Create your views here.
@@ -229,6 +229,11 @@ class XmasForm(CreateView):
     model = Xmas
     fields = '__all__'
     template_name = 'content/xmas.html'
+
+class BugForm(CreateView):
+    model = BugReport
+    form_class = BugForm
+    template_name='content/bugs.html'
 
 class Signup(FormView):
     model = User

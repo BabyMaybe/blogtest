@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.forms import PasswordInput, DateInput, NumberInput, HiddenInput
 from django.contrib.auth.models import User
 
-from .models import Post, Comment, UserProfile
+from .models import Post, Comment, UserProfile, BugReport
 
 class PostForm(ModelForm):
     class Meta:
@@ -53,3 +53,16 @@ class LoginForm(ModelForm):
         widgets = {
             'password' : PasswordInput(),
         }
+
+class BugForm(forms.ModelForm):
+    class Meta:
+        model = BugReport
+        fields = ['os', 'browser', 'feature', 'bug', 'steps']
+        labels = {
+            'os' : 'Operating System',
+            'browser' : 'Web Browser',
+            'feature' : 'Feature Request?',
+            'bug' : 'What did you break/What feature is missing?',
+            'steps' : 'What steps are needed to reproduce this issue?'
+        }
+
