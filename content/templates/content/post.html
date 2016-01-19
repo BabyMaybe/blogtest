@@ -202,7 +202,7 @@
                 replacement.css("background-color","#fd3");
                 newContent = json["newContent"];
                 console.log(newContent);
-                replacement.replaceWith("<div class='ctext'><p>" + newContent + "</p></div>");
+                replacement.replaceWith("<div class='ctext' data-cid=" + json["cid"] + "><p>" + newContent + "</p></div>");
 
             },
 

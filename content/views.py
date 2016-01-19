@@ -189,7 +189,7 @@ class PostDetail(DetailView, JsonResponse):
         c.content = new_content
         c.save()
 
-        return JsonResponse({"newContent" : new_content})
+        return JsonResponse({"newContent" : new_content, "cid" : cid})
 
 class ViewProfile(DetailView):
     model = UserProfile
