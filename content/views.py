@@ -155,14 +155,15 @@ class PostDetail(DetailView, JsonResponse):
             c.save()
             post.comment_count = post.get_comment_count()
             post.save()
-
+            count = post.get_comment_count()
             data = {"author" : author,
                     "content" : content,
                     "timestamp" : timestamp.strftime("%d %B %Y | %I:%M %p"),
                     "id" : c.pk,
                     "color" : color,
                     "uid" : uid,
-                    "letter" : letter
+                    "letter" : letter,
+                    "count" : count
                     }
             return JsonResponse(data)
 
@@ -174,7 +175,12 @@ class PostDetail(DetailView, JsonResponse):
             c.active = False
             c.save()
             deleted = True
-        return JsonResponse({"deleted" : deleted, "cid" : cid})
+            post = self.get_object()
+            post.comment_count = post.get_comment_count()
+            count = post.comment_count
+            post.save()
+
+        return JsonResponse({"deleted" : deleted, "cid" : cid, "count" : count})
 
     def edit_comment(self, request, *args, **kwargs):
         cid = request.POST.get('id')

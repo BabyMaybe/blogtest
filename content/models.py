@@ -104,7 +104,12 @@ class Xmas(models.Model):
     candy = models.CharField(max_length=300, null=True, blank=True)
     animal = models.CharField(max_length=200, null=True, blank=True)
     drink = models.CharField(max_length=200, null=True, blank=True)
-
+    learning = models.TextField(null=True, blank=True)
+    shirt = models.CharField(max_length=200, null=True, blank=True)
+    pants = models.CharField(max_length=200, null=True, blank=True)
+    hat = models.CharField(max_length=200, null=True, blank=True)
+    dress = models.CharField(max_length=200, null=True, blank=True)
+    shoe = models.CharField(max_length=200, null=True, blank=True)
     # colors = ArrayField(RGBColorField(blank=True, null=True))
 
 

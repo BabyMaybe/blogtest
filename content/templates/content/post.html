@@ -45,7 +45,7 @@
 
 <hr>
 <div class="comments">
-    <h3 id="commenthead"> Comments Section | {{ post.comment_count }}</h3>
+    <h3 id="commenthead"> Comments Section | <span id="commentcount"> {{ post.comment_count }}</span></h3>
     <ul id="commentStack">
         {% for c in comments %}
             <li>
@@ -149,6 +149,7 @@
                 $("#id_content").val("");
                 $(".delete").click(deleteComment);
                 $(".edit").click(editComment);
+                $("#commentcount").text(json["count"]);
             },
 
             error : function(xhr, errmsg, err) {
@@ -202,6 +203,7 @@
                 newContent = json["newContent"];
                 console.log(newContent);
                 replacement.replaceWith("<div class='ctext'><p>" + newContent + "</p></div>");
+
             },
 
             error : function(xhr, errmsg, err) {
@@ -234,6 +236,7 @@
                 console.log(json["deleted"]);
                 console.log(json["cid"]);
                 $(".comment [data-cid=" + json["cid"] + "]").parentsUntil("li").hide();
+                $("#commentcount").text(json["count"]);
             }
         },
 
