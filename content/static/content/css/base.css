@@ -47,4 +47,10 @@ h1 {
 .cke_wysiwyg_div {
   background-color: #333; }
 
+.bug {
+  padding: 10px;
+  display: block;
+  font-size: 1em;
+  font-family: "Josefin Slab"; }
+
 /*# sourceMappingURL=base.css.map */

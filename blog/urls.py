@@ -33,5 +33,5 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/', views.PostDetail.as_view()),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^xmas/', views.XmasForm.as_view()),
-    url(r'^bugs/', views.BugForm.as_view()),
+    url(r'^bugs/', views.BugForm.as_view( success_url="/")),
 ]

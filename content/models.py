@@ -104,6 +104,8 @@ class BugReport(models.Model):
     steps = models.TextField(null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     feature = models.BooleanField(default=False)
+    fixed = models.BooleanField(default=False)
+
 
 
 #Xmas gifts class never got used
