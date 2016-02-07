@@ -43,6 +43,7 @@ h1 {
     right: 0;
     line-height: .7;
     padding-right: 7px;
+    color: white;
 }
 
 #combinedinfo {
@@ -60,6 +61,25 @@ h1 {
         text-align: left;
         color: inherit;
     }
+}
+
+.edit {
+    a {
+    text-decoration: none;
+
+    &:link {
+        color: inherit;
+    }
+    &:visited {
+        color: inherit;
+    }
+    &:hover {
+        color: inherit;
+    }
+    &:active {
+        color: inherit;
+    }
+}
 }
 
 #infosection {

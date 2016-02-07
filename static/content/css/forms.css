@@ -1,0 +1,68 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab);
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+input {
+  display: block;
+  margin: 0 auto;
+  background-color: #333;
+  padding: 5px;
+  border: solid 3px white;
+  text-align: center;
+  color: #c8fafd;
+  font-size: 1em;
+  font-family: "Josefin Slab"; }
+
+textarea {
+  width: 60%;
+  height: 200px;
+  border: 3px solid white;
+  padding: 10px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: #4d4d4d;
+  color: #c8fafd;
+  font-size: 1em;
+  font-family: "Josefin Slab"; }
+  textarea:focus {
+    outline: none;
+    border-color: #c8fafd; }
+
+label {
+  display: block;
+  margin: auto;
+  padding: 10px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 1.1em;
+  color: #c8fafd;
+  font-family: "Josefin Slab"; }
+
+select {
+  display: block;
+  margin: auto; }
+
+input {
+  margin: 0 auto; }
+
+.titlelink {
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit; }
+  .titlelink:link {
+    color: inherit; }
+  .titlelink:visited {
+    color: inherit; }
+  .titlelink:hover {
+    color: white; }
+  .titlelink:active {
+    color: white; }
+
+.submit {
+  margin: 40px auto;
+  width: 10%; }
+
+.bug {
+  padding: 0px;
+  display: none; }
+
+/*# sourceMappingURL=forms.css.map */

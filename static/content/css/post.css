@@ -8,12 +8,37 @@
   font-family: "Quicksand";
   margin-top: 20px; }
 
-#postcontent {
-  text-align: center;
-  margin-top: 20px; }
+.letterbox {
+  width: 50px;
+  height: 50px;
+  border: 2px solid white;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  position: relative; }
 
-#datepublished {
-  color: pink; }
+.letter_link {
+  height: 50px;
+  width: 50px;
+  color: white; }
+
+.letter {
+  font-family: "Josefin Slab";
+  font-size: 2em;
+  text-align: center;
+  margin-top: 13px; }
+
+#postcontent {
+  margin-top: 20px; }
+  #postcontent p {
+    text-align: center; }
+
+#timecode {
+  width: 80%;
+  margin: auto; }
+
+#timepublished {
+  float: right; }
 
 .heart {
   background-image: url("heart_87.png");
@@ -41,6 +66,11 @@
 .timestamp {
   font-family: "Quicksand"; }
 
+.edit_delete {
+  display: inline-block;
+  font-family: "Quicksand";
+  font-size: .6em; }
+
 .c_letterbox {
   width: 75px;
   height: 75px;
@@ -58,7 +88,8 @@
   font-size: 3em;
   text-align: right;
   margin-top: 30px;
-  margin-right: 3px; }
+  margin-right: 3px;
+  color: white; }
 
 .ctext {
   font-family: "Josefin Slab";

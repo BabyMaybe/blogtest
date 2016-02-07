@@ -78,13 +78,13 @@
     <div class ="pagination">
         <span class="page-links">
             {% if page_obj.has_previous %}
-                <a href="/generic_list?page={{ page_obj.previous_page_number }}"> Newer </a>
+                <a href="/?page={{ page_obj.previous_page_number }}"> Newer </a>
             {% endif %}
             <span class="page-current">
                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
             </span>
             {% if page_obj.has_next %}
-                <a href="/generic_list?page={{ page_obj.next_page_number }}"> Older </a>
+                <a href="/?page={{ page_obj.next_page_number }}"> Older </a>
             {% endif %}
         </span>
     </div>

@@ -4,8 +4,6 @@ h1 {
   font-family: "Josefin Slab";
   color: #c8fafd;
   margin-top: 30px; }
-  h1 a {
-    color: inherit; }
 
 #username {
   border-bottom: 2px solid white;
@@ -37,7 +35,8 @@ h1 {
   bottom: 0;
   right: 0;
   line-height: .7;
-  padding-right: 7px; }
+  padding-right: 7px;
+  color: white; }
 
 #combinedinfo {
   border: 2px solid white; }
@@ -50,6 +49,17 @@ h1 {
   #basicinfo h4 {
     font-family: "Josefin Slab";
     text-align: left;
+    color: inherit; }
+
+.edit a {
+  text-decoration: none; }
+  .edit a:link {
+    color: inherit; }
+  .edit a:visited {
+    color: inherit; }
+  .edit a:hover {
+    color: inherit; }
+  .edit a:active {
     color: inherit; }
 
 #infosection {
