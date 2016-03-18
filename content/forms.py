@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from django.forms import PasswordInput, DateInput, NumberInput, HiddenInput
+from django.forms import PasswordInput, DateInput, NumberInput, HiddenInput, TextInput
 from django.contrib.auth.models import User
 
 from .models import Post, Comment, UserProfile, BugReport
@@ -66,3 +66,10 @@ class BugForm(forms.ModelForm):
             'steps' : 'What steps are needed to reproduce this issue?'
         }
 
+class EmailTestForm(forms.Form):
+    name = forms.CharField(label="name", max_length=100)
+    # class Meta:
+    #     fields ['name']
+    #     widgets = {
+    #         'name' : TextInput(),
+    #     }

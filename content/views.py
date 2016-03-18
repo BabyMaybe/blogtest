@@ -15,8 +15,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
 from .models import Post, Comment, UserProfile, Xmas, BugReport
-from .forms import PostForm, CommentForm, LoginForm, SignupForm, ProfileForm, BugForm
+from .forms import PostForm, CommentForm, LoginForm, SignupForm, ProfileForm, BugForm, EmailTestForm
 
+from django.core.mail import send_mail
 
 # Create your views here.
 # @login_required
@@ -234,6 +235,17 @@ class BugForm(CreateView):
     model = BugReport
     form_class = BugForm
     template_name='content/bugs.html'
+
+class EmailTest(FormView):
+    form_class = EmailTestForm
+    success_url = '/'
+
+    def form_valid(self, form):
+
+        send_mail('Test email', 'super snazy message', 'eric@ericvarela.com',
+            ['eric_varela@mac.com'], fail_silently=False)
+
+        return super(EmailTest, self).form_valid(form)
 
 class Signup(FormView):
     model = User
