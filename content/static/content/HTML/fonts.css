@@ -1,0 +1,151 @@
+@import 'https://fonts.googleapis.com/css?family=\a Abel|\a Alegreya+Sans|\a Andada|\a Archivo+Narrow|\a Arvo|\a Athiti|\a Bentham|\a Crimson+Text|\a David+Libre|\a Dosis|\a Droid+Serif|\a Farsan|\a Fjord+One|\a Gentium+Basic|\a Inconsolata|\a Josefin+Sans|\a Josefin+Slab|\a Kameron|\a Muli|\a Old+Standard+TT|\a Open+Sans+Condensed:300|\a PT+Sans+Narrow|\a PT+Serif|\a Pragati+Narrow|\a Rasa|\a Roboto+Slab|\a Rokkitt|\a Slabo+27px|\a Timmana|\a Yanone+Kaffeesatz:300|\a Yrsa';
+/* line 35, /Users/eric_varela/Desktop/HTML/fonts.scss */
+#top {
+  text-align: center;
+  background-color: #EEE;
+  margin-bottom: 80px; }
+  /* line 38, /Users/eric_varela/Desktop/HTML/fonts.scss */
+  #top h1 {
+    margin: auto;
+    padding-top: 50px;
+    font-size: 85px;
+    color: #333;
+    font-family: Josefin Sans; }
+  /* line 47, /Users/eric_varela/Desktop/HTML/fonts.scss */
+  #top h2 {
+    font-family: Inconsolata;
+    font-size: 24px;
+    margin: auto;
+    text-align: center;
+    color: #AAA;
+    padding-bottom: 15px; }
+
+/* line 58, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.gifText {
+  font-family: Josefin Sans;
+  margin: auto;
+  text-align: center; }
+
+/* line 67, /Users/eric_varela/Desktop/HTML/fonts.scss */
+h1, h2 {
+  font-size: 32pt;
+  font-family: Josefin Sans;
+  color: paleturquoise; }
+
+/* line 73, /Users/eric_varela/Desktop/HTML/fonts.scss */
+h2 {
+  text-align: left;
+  margin: 1em auto;
+  font-size: 30pt;
+  color: hotpink;
+  padding-bottom: 10px; }
+
+/* line 81, /Users/eric_varela/Desktop/HTML/fonts.scss */
+p {
+  padding-bottom: 25px;
+  margin: auto;
+  line-height: 1.4em; }
+
+/* line 88, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.img {
+  width: 80%;
+  margin: auto; }
+
+/* line 94, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.imgimg {
+  width: 100%; }
+
+/* line 98, /Users/eric_varela/Desktop/HTML/fonts.scss */
+body {
+  background-color: #333;
+  color: white;
+  margin: auto; }
+
+/* line 104, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.title {
+  font-size: 42px;
+  margin-bottom: 0px; }
+
+/* line 108, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.author {
+  font-family: Arvo;
+  color: lightsteelblue;
+  font-size: 18px;
+  margin: auto;
+  width: 100%;
+  text-align: right; }
+
+/* line 123, /Users/eric_varela/Desktop/HTML/fonts.scss */
+#content {
+  font-family: Abel;
+  color: lightsteelblue;
+  margin: auto; }
+
+/* line 129, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.first {
+  font-size: 30px;
+  font-family: Old Standard TT;
+  margin: 0px;
+  margin-top: 40px; }
+
+/* line 147, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.title {
+  margin-left: 40px; }
+
+/* line 151, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.article_text {
+  width: 60%;
+  margin: auto; }
+
+/* line 156, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.date {
+  float: left;
+  margin: auto;
+  margin-left: 50px;
+  margin-top: -5px; }
+
+/* line 163, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.comments {
+  text-align: right;
+  margin: auto; }
+
+/* line 178, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.heart {
+  background-image: url("heart.png");
+  height: 32px;
+  width: 32px;
+  text-align: center;
+  padding-top: 7px;
+  background-repeat: no-repeat;
+  font-size: 12px;
+  color: white;
+  margin: 0;
+  margin-top: 5px;
+  float: right; }
+
+/* line 193, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.line {
+  padding-top: 20px;
+  border-bottom: 2px solid lightsteelblue;
+  border-bottom-style: solid;
+  width: 70%;
+  margin: auto; }
+
+/* line 202, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.gif {
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  padding-bottom: 0px;
+  margin-bottom: 20px; }
+  /* line 210, /Users/eric_varela/Desktop/HTML/fonts.scss */
+  .gif p {
+    padding-bottom: 10px;
+    width: 90%; }
+
+/* line 215, /Users/eric_varela/Desktop/HTML/fonts.scss */
+.gifImg {
+  width: 100%;
+  padding: 0; }
+
+/*# sourceMappingURL=fonts.css.map */

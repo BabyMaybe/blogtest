@@ -13,10 +13,12 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView
+
 
 from content import views
 
@@ -34,4 +36,5 @@ urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^xmas/', views.XmasForm.as_view()),
     url(r'^bugs/', views.BugForm.as_view( success_url="/")),
+    url(r'^mockup/', TemplateView.as_view(template_name="content/HTML/index.html")),
 ]
