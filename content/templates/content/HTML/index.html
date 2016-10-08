@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
     {% load staticfiles %}
+<head>
+
 <title>Font Test</title>
 <link rel="stylesheet" type="text/css" href='{% static 'content/HTML/fonts.css' %}' />
 </head>
@@ -58,7 +59,7 @@
         </p>
 
         <figure class="image-container">
-            <img class="image" src="/mario.gif"></img>
+            <img class="image" src={% static 'content/HTML/mario.png' %}></img>
             <figcaption class="caption">Est mucius postulant hendrerit te, est falli civibus no, alia reprimique scriptorem vim ea.</figcaption>
         </figure>
 
