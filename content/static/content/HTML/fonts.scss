@@ -29,153 +29,169 @@ Rokkitt|
 Slabo+27px|
 Timmana|
 Yanone+Kaffeesatz:300|
-Yrsa';
-    
+Yrsa' 
+    ;
 
-#top {
-    text-align: center;
-    background-color: #EEE;
-    h1{
-        margin: auto;
-        padding-top: 50px;
-        //line-height: 2em;
-        font-size: 85px;
-        color: #333;
-        font-family: Josefin Sans;
-        
-    }
-    h2 {
-        font-family: Inconsolata;
-        font-size: 24px;
-        margin: auto;
-        text-align: center;
-        color: #AAA;
-        padding-bottom: 15px;
-    }
-    margin-bottom: 80px;
+@import 'https://fonts.googleapis.com/css?family=Sree+Krushnadevaray';
+
+//COLOR VARS
+$body-text-color: lightsteelblue;
+$body-bg-color: #333;
+$header-bg-color: #EEE;
+$nav-bg-color: darken(white,17%);
+$accent-color: lightgreen;
+
+
+//FONT VARS
+$title-font: Josefin Sans;
+$subtitle-font: Inconsolata;
+$body-font: Abel; //Abel
+
+
+
+//PAGE STYLING
+html { 
+    height: 100%;
 }
-
-.gifText {
-//    font-family: Josefin Sans;
-    font-family: Josefin Sans;
-//    font-style: italic;
-    margin: auto;
-    text-align: center;
-
-}
-
-h1, h2 {
-    font-size: 32pt;
-    font-family: Josefin Sans;
-    color: paleturquoise;
-}
-
-h2{
-    text-align: left;
-    margin: 1em auto;
-    font-size: 30pt;
-    color: hotpink;
-    padding-bottom: 10px;
-}
-
-p {
-    padding-bottom: 25px;
-    margin: auto;
-    line-height: 1.4em;
-
-}
-
-.img {
-    width: 80%;
-    margin: auto;
-    
-}
-
-.imgimg {
-    width: 100%;
-}
-
 body {
-    background-color:#333;
-    color: white;
+    margin: 0;   
+    height: 100%;
+}
+
+
+//HEADER STYLES
+#site-header {
+    text-align: center;
+    background-color: $accent-color;
+//    border-top: 10px solid $nav-bg-color;
+}
+
+#main-title {
     margin: auto;
-        
+    padding-top: 50px;
+    font-size: 200px;
+    color: $body-bg-color;
+    font-family: $title-font;
 }
-.title{
-    font-size: 42px;
-    margin-bottom: 0px;
+
+#sub-title {
+    font-family: $subtitle-font;
+    font-size: 20px;
+    font-style: italic;
+    margin: auto;
+    text-align: center;
+    color: lighten($body-bg-color, 20%);
+//    color: darken(white, 61%);
+//    border-top: solid 3px darken(white, 15%);    
+    padding-bottom: 15px;
+    white-space: nowrap;
+    position: relative;
+    left: -50%;
 }
-.author {
-    font-family: Arvo;
-    color: lightsteelblue;
-    font-size: 18px;
+
+nav {
+    background-color: $nav-bg-color;
+    border-top: solid 6px $body-bg-color;
+    border-bottom: solid 6px $accent-color;
     
-//    margin-right: -40px;
-//    background-color: red;
-    margin: auto;
-    width: 100%;
-    text-align: right;
-}
+    ul { 
+        margin: 0;
+        padding: 0;
+        font-family: $body-font;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-between;
 
+        
+        li {
+            display: inline-block;
+            height: 40px;
+            width: 100%;
+            padding-top: 20px;
+            text-align: center;
+        }
+    }
+}  
 
-
-
+//ARTICLE STYLES
 #content {
-        font-family: Abel;
-    color:lightsteelblue;
-//    width: 80%;
-    margin: auto;
+    background-color: $body-bg-color;
+    font-family: $body-font;
+    color: $body-text-color;
+//    font-size: 110%;
+    padding-top: 50px;
+//    height: 100%;
+    
 }
-.first {
-    font-size: 30px;
-    font-family: Old Standard TT;
-//    background-color: #EEE;
-//    color: #333;
-//    height: 40px;
-//    width: 40px;
-//    border: solid red 5px;
-//    display: inline-block;
-//    text-align: center;
-//    margin: 5px;
-    margin: 0px;
-//    background-color: red;
-//    padding-bottom: 0px;
-    margin-top: 40px;
+
+.blog-title {
+    font-family: $title-font;
+    font-size: 65px;
+    color: $accent-color;
+    margin: 0;
+    padding: 40px;
+    padding-bottom: 30px;
 
 
 }
-.title {
-//    width: 60%;
-    margin-left: 40px;
-}
-.article_text {
-    width: 60%;
-    margin: auto;
+
+.blog-entry {
+//    height: 100%;
 }
 
-.date {
-    //font-family: Rokkitt;
-    float: left;
-    margin: auto;
-    margin-left: 50px;
+
+.blog-info {
+    display: inline-block;
+//    position: relative;
+//    top: 20px;
+    
+    vertical-align: bottom;
+    width: 16%;
+    color: $nav-bg-color;
     margin-top: -5px;
+    padding-right: 10px;
+//    height: 100%;
+
+    
+    span {
+        display: inline-block;
+        text-align: right;
+        margin: 0;
+        font-family: $subtitle-font;
+    }
 }
-.comments {
-//    font-family: Timmana;
-//    color: skyblue;
-//    font-size: 20px;
-    text-align: right;
-//    margin-right: 40px;
-//    width: 60%;
-    margin: auto;
+.blog-info2 {
+    @extend .blog-info;
 
-
-
-
-//    background-color: red;
+    vertical-align: top;
+}
+.blog-timecode {
+    display: inline-block;
+    vertical-align: top;
+    background-color: red;
 }
 
-.heart {
+.blog-stats {
+    display: inline-block;
+    vertical-align: bottom;
+    background-color: green;
+}
+
+.blog-date {
+    font-size: 21px;
+//    vertical-align: top
+}
+
+.blog-time {
+    font-size: 14px;
+}
+
+.blog-comments {
+//    text-align: right;
+//    margin: 0;
+}
+
+.blog-heart {
     background-image: url("/heart.png");
     height: 32px;
     width: 32px;
@@ -183,36 +199,128 @@ body {
     padding-top: 7px;
     background-repeat: no-repeat;
     font-size: 12px;
-    color: white;
     margin: 0;
     margin-top: 5px;
     float: right;
+}
+
+
+.blog-text {
+    width: 60%;
+    margin: auto;
+    display: inline-block;
+    border-left: solid $body-text-color 2px;
+//    border-right: solid $body-text-color 2px;
+    padding-left: 30px;
+    padding-right: 30px;
 
 }
+
+
+
+footer {
+    width: 16%;
+    padding-top: 20px;
+    border-bottom: 2px solid $nav-bg-color;
+//    border-bottom-style: solid;
+    
+//    margin: auto;
+    float: right;
+}
+
+.blog-author {
+    font-family: Arvo;
+//    color: $nav-bg-color;
+    font-size: 18px;
+//    margin: auto;
+//    width: 100%;
+//    text-align: right;
+}
+
+
+.right-col {
+    width: 16%;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+.caption {
+    font-family: Josefin Sans;
+    margin: auto;
+    text-align: center;
+}
+
+
+p {
+    padding-bottom: 25px;
+    margin: auto;
+    line-height: 1.4em;
+}
+
+.img {
+    width: 80%;
+    margin: auto;
+}
+
+.imgimg {
+    width: 100%;
+}
+
+
+
+.title{
+    font-size: 42px;
+    margin-bottom: 0px;
+}
+
+
+
+
+.dropcap {
+    font-size: 30px;
+    font-family: Old Standard TT;
+
+    margin: 0px;
+    margin-top: 40px;
+}
+
+
+
+
 
 .line {
-    padding-top: 20px;
-    border-bottom: 2px solid lightsteelblue;
-    border-bottom-style: solid;
-    width: 70%;
-    margin: auto;
-    
+
 }
 
-.gif {
+.image-container {
     width: 80%;
     margin: auto;
     padding: 10px;
     padding-bottom: 0px;
     margin-bottom: 20px;
-//    border: 5px lightsteelblue double;
-//    border-bottom: 2px lightsteelblue solid;
-    p{
+
+    figcaption {
         padding-bottom: 10px;
         width: 90%;
     }
 }
-.gifImg {
+
+.image {
     width: 100%;
     padding: 0;
 }
+
+
+
+////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
