@@ -1,38 +1,5 @@
-@import 'https://fonts.googleapis.com/css?family=
-Abel|
-Alegreya+Sans|
-Andada|
-Archivo+Narrow|
-Arvo|
-Athiti|
-Bentham|
-Crimson+Text|
-David+Libre|
-Dosis|
-Droid+Serif|
-Farsan|
-Fjord+One|
-Gentium+Basic|
-Inconsolata|
-Josefin+Sans|
-Josefin+Slab|
-Kameron|
-Muli|
-Old+Standard+TT|
-Open+Sans+Condensed:300|
-PT+Sans+Narrow|
-PT+Serif|
-Pragati+Narrow|
-Rasa|
-Roboto+Slab|
-Rokkitt|
-Slabo+27px|
-Timmana|
-Yanone+Kaffeesatz:300|
-Yrsa' 
-    ;
+@import 'https://fonts.googleapis.com/css?family=Abel|Arvo|Inconsolata|Josefin+Sans|Old+Standard+TT';
 
-@import 'https://fonts.googleapis.com/css?family=Sree+Krushnadevaray';
 
 //COLOR VARS
 $body-text-color: lightsteelblue;
@@ -41,29 +8,24 @@ $header-bg-color: #EEE;
 $nav-bg-color: darken(white,17%);
 $accent-color: lightgreen;
 
-
 //FONT VARS
 $title-font: Josefin Sans;
 $subtitle-font: Inconsolata;
-$body-font: Abel; //Abel
-
+$body-font: Abel;
+$accent-font: Arvo;
+$dropcap-font: Old Standard TT;
 
 
 //PAGE STYLING
-html { 
-    height: 100%;
-}
 body {
     margin: 0;   
-    height: 100%;
+    background-color: $body-bg-color;
 }
-
 
 //HEADER STYLES
 #site-header {
     text-align: center;
     background-color: $accent-color;
-//    border-top: 10px solid $nav-bg-color;
 }
 
 #main-title {
@@ -78,15 +40,15 @@ body {
     font-family: $subtitle-font;
     font-size: 20px;
     font-style: italic;
-    margin: auto;
-    text-align: center;
     color: lighten($body-bg-color, 20%);
-//    color: darken(white, 61%);
-//    border-top: solid 3px darken(white, 15%);    
-    padding-bottom: 15px;
+    text-align: center;
     white-space: nowrap;
     position: relative;
+    width: 200%;
     left: -50%;
+    margin: auto;
+    padding-bottom: 15px;
+    overflow: hidden;
 }
 
 nav {
@@ -101,8 +63,7 @@ nav {
         font-size: 20px;
         display: flex;
         justify-content: space-between;
-
-        
+  
         li {
             display: inline-block;
             height: 40px;
@@ -118,10 +79,7 @@ nav {
     background-color: $body-bg-color;
     font-family: $body-font;
     color: $body-text-color;
-//    font-size: 110%;
-    padding-top: 50px;
-//    height: 100%;
-    
+    padding-top: 50px; 
 }
 
 .blog-title {
@@ -130,56 +88,60 @@ nav {
     color: $accent-color;
     margin: 0;
     padding: 40px;
-    padding-bottom: 30px;
-
-
+    padding-bottom: 20px;
 }
 
 .blog-entry {
-//    height: 100%;
-}
-
-
-.blog-info {
-    display: inline-block;
-//    position: relative;
-//    top: 20px;
+    border-bottom: solid $nav-bg-color 3px;
+    position: relative;
     
-    vertical-align: bottom;
-    width: 16%;
-    color: $nav-bg-color;
-    margin-top: -5px;
-    padding-right: 10px;
-//    height: 100%;
-
-    
-    span {
-        display: inline-block;
-        text-align: right;
-        margin: 0;
-        font-family: $subtitle-font;
+    footer {
+        width: 16%;
+        padding-left: 10px;
+        margin-bottom: 50px;
+        border-bottom: 2px solid $accent-color;
+        float: right;
+        
+        .blog-author {
+            font-family: $accent-font;
+            font-size: 18px;
+            color: $nav-bg-color;
+        }
     }
 }
-.blog-info2 {
-    @extend .blog-info;
 
-    vertical-align: top;
+.blog-content {
+    position: relative;
 }
-.blog-timecode {
+
+.clearfix {
+    clear: both;
+}
+
+.blog-info {
+    padding-top: 10px;
+    position: absolute;
     display: inline-block;
-    vertical-align: top;
-    background-color: red;
+    top: 0;
+    bottom: 0;
+    width: 16%;
+    color: $nav-bg-color;
+    
+    span{
+        display: block;
+        text-align: right;
+        font-family: $accent-font;
+    }
 }
 
 .blog-stats {
-    display: inline-block;
-    vertical-align: bottom;
-    background-color: green;
+    position: absolute;
+    bottom: 45px;
+    right: 5px;
 }
 
 .blog-date {
     font-size: 21px;
-//    vertical-align: top
 }
 
 .blog-time {
@@ -187,8 +149,7 @@ nav {
 }
 
 .blog-comments {
-//    text-align: right;
-//    margin: 0;
+    margin-bottom: 6px;
 }
 
 .blog-heart {
@@ -202,108 +163,38 @@ nav {
     margin: 0;
     margin-top: 5px;
     float: right;
+    color: $accent-color;
 }
 
 
 .blog-text {
     width: 60%;
     margin: auto;
-    display: inline-block;
-    border-left: solid $body-text-color 2px;
-//    border-right: solid $body-text-color 2px;
-    padding-left: 30px;
-    padding-right: 30px;
-
-}
-
-
-
-footer {
-    width: 16%;
-    padding-top: 20px;
-    border-bottom: 2px solid $nav-bg-color;
-//    border-bottom-style: solid;
+    border-left: solid $accent-color 2px;
+    padding: 30px;
     
-//    margin: auto;
-    float: right;
+    p {
+        padding-bottom: 25px;
+        margin: auto;
+        line-height: 1.4em;
+    }
+    
+    .dropcap {
+        font-size: 30px;
+        font-family: $dropcap-font;
+        margin: 0px;
+        margin-right: 2px;
+        margin-top: 40px;
+    }
 }
 
-.blog-author {
-    font-family: Arvo;
-//    color: $nav-bg-color;
-    font-size: 18px;
-//    margin: auto;
-//    width: 100%;
-//    text-align: right;
-}
-
-
-.right-col {
-    width: 16%;
-    display: inline-block;
-    vertical-align: top;
-
-}
-
-.caption {
-    font-family: Josefin Sans;
-    margin: auto;
-    text-align: center;
-}
-
-
-p {
-    padding-bottom: 25px;
-    margin: auto;
-    line-height: 1.4em;
-}
-
-.img {
-    width: 80%;
-    margin: auto;
-}
-
-.imgimg {
-    width: 100%;
-}
-
-
-
-.title{
-    font-size: 42px;
-    margin-bottom: 0px;
-}
-
-
-
-
-.dropcap {
-    font-size: 30px;
-    font-family: Old Standard TT;
-
-    margin: 0px;
-    margin-top: 40px;
-}
-
-
-
-
-
-.line {
-
-}
 
 .image-container {
-    width: 80%;
+    width: 85%;
     margin: auto;
     padding: 10px;
     padding-bottom: 0px;
     margin-bottom: 20px;
-
-    figcaption {
-        padding-bottom: 10px;
-        width: 90%;
-    }
 }
 
 .image {
@@ -312,15 +203,16 @@ p {
 }
 
 
-
-////////////////////////////////////
-
-
-
-
-
-
-
-
+.caption {
+    font-family: $title-font;
+    font-size: 90%;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    width: 90%;
+    padding-top: 5px;
+    margin-top: 10px;
+//    border-top: solid $body-text-color 1px;
+}
 
 
