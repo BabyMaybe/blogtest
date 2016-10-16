@@ -1,0 +1,218 @@
+@import 'https://fonts.googleapis.com/css?family=Abel|Arvo|Inconsolata|Josefin+Sans|Old+Standard+TT';
+
+
+//COLOR VARS
+$body-text-color: lightsteelblue;
+$body-bg-color: #333;
+$header-bg-color: #EEE;
+$nav-bg-color: darken(white,17%);
+$accent-color: lightgreen;
+
+//FONT VARS
+$title-font: Josefin Sans;
+$subtitle-font: Inconsolata;
+$body-font: Abel;
+$accent-font: Arvo;
+$dropcap-font: Old Standard TT;
+
+
+//PAGE STYLING
+body {
+    margin: 0;   
+    background-color: $body-bg-color;
+}
+
+//HEADER STYLES
+#site-header {
+    text-align: center;
+    background-color: $accent-color;
+}
+
+#main-title {
+    margin: auto;
+    padding-top: 50px;
+    font-size: 200px;
+    color: $body-bg-color;
+    font-family: $title-font;
+}
+
+#sub-title {
+    font-family: $subtitle-font;
+    font-size: 20px;
+    font-style: italic;
+    color: lighten($body-bg-color, 20%);
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    width: 200%;
+    left: -50%;
+    margin: auto;
+    padding-bottom: 15px;
+    overflow: hidden;
+}
+
+nav {
+    background-color: $nav-bg-color;
+    border-top: solid 6px $body-bg-color;
+    border-bottom: solid 6px $accent-color;
+    
+    ul { 
+        margin: 0;
+        padding: 0;
+        font-family: $body-font;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-between;
+  
+        li {
+            display: inline-block;
+            height: 40px;
+            width: 100%;
+            padding-top: 20px;
+            text-align: center;
+        }
+    }
+}  
+
+//ARTICLE STYLES
+#content {
+    background-color: $body-bg-color;
+    font-family: $body-font;
+    color: $body-text-color;
+    padding-top: 50px; 
+}
+
+.blog-title {
+    font-family: $title-font;
+    font-size: 65px;
+    color: $accent-color;
+    margin: 0;
+    padding: 40px;
+    padding-bottom: 20px;
+}
+
+.blog-entry {
+    border-bottom: solid $nav-bg-color 3px;
+    position: relative;
+    
+    footer {
+        width: 16%;
+        padding-left: 10px;
+        margin-bottom: 50px;
+        border-bottom: 2px solid $accent-color;
+        float: right;
+        
+        .blog-author {
+            font-family: $accent-font;
+            font-size: 18px;
+            color: $nav-bg-color;
+        }
+    }
+}
+
+.blog-content {
+    position: relative;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.blog-info {
+    padding-top: 10px;
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    bottom: 0;
+    width: 16%;
+    color: $nav-bg-color;
+    
+    span{
+        display: block;
+        text-align: right;
+        font-family: $accent-font;
+    }
+}
+
+.blog-stats {
+    position: absolute;
+    bottom: 45px;
+    right: 5px;
+}
+
+.blog-date {
+    font-size: 21px;
+}
+
+.blog-time {
+    font-size: 14px;
+}
+
+.blog-comments {
+    margin-bottom: 6px;
+}
+
+.blog-heart {
+    background-image: url("/heart.png");
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    padding-top: 7px;
+    background-repeat: no-repeat;
+    font-size: 12px;
+    margin: 0;
+    margin-top: 5px;
+    float: right;
+    color: $accent-color;
+}
+
+
+.blog-text {
+    width: 60%;
+    margin: auto;
+    border-left: solid $accent-color 2px;
+    padding: 30px;
+    
+    p {
+        padding-bottom: 25px;
+        margin: auto;
+        line-height: 1.4em;
+    }
+    
+    .dropcap {
+        font-size: 30px;
+        font-family: $dropcap-font;
+        margin: 0px;
+        margin-right: 2px;
+        margin-top: 40px;
+    }
+}
+
+
+.image-container {
+    width: 85%;
+    margin: auto;
+    padding: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+}
+
+.image {
+    width: 100%;
+    padding: 0;
+}
+
+
+.caption {
+    font-family: $title-font;
+    font-size: 90%;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    width: 90%;
+    padding-top: 5px;
+    margin-top: 10px;
+//    border-top: solid $body-text-color 1px;
+}
+
+

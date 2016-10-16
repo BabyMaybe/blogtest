@@ -36,5 +36,7 @@ urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^xmas/', views.XmasForm.as_view()),
     url(r'^bugs/', views.BugForm.as_view( success_url="/")),
+    url(r'^mockup/post', TemplateView.as_view(template_name="content/HTML/post-v2.html")),
     url(r'^mockup/', TemplateView.as_view(template_name="content/HTML/index.html")),
+    
 ]

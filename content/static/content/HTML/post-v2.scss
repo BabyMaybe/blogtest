@@ -1,0 +1,261 @@
+@import "base";
+
+//$accent-color: dodgerblue;
+
+
+//TWEAKS
+//Added extraneous $accent-colors for quick preview on updates
+
+//HEADER SECTION
+#site-header {
+    background-color: $accent-color;
+}
+
+#main-title {
+    background-color: $accent-color;
+    font-size: 110px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+}
+
+.sub-title {
+    background-color: $accent-color;
+}
+
+
+//NAV SECTION
+nav {
+    border-bottom-color: $accent-color;
+}
+
+
+//POST SECTION
+.blog-text {
+    width: 70%;
+    border-left-width: 2px;
+    border-color: $accent-color;
+}
+
+.blog-entry {
+    border-bottom: none;   
+}
+
+
+//AUTHOR INFO SECTION
+#info-pop {
+    background-color: $accent-color;
+    width: 215px;
+    margin: 0;
+    margin-top: 40px;
+    border-color: $accent-color;
+    color: $body-bg-color;
+}
+
+.post-author-date {
+    display: inline-block;
+}
+
+.post-blog-date {
+}
+
+.post-blog-time {
+}
+
+.post-blog-author {
+    font-family: $accent-font;
+    font-size: 18px;
+    margin-top: 7px;
+}
+
+.blog-heart {
+    margin: 5px;    
+    margin-left: 15px;
+    padding: 0;
+    float: initial;
+    display: inline-block;
+    color: $body-bg-color;
+    vertical-align: top;
+    height: 50px;
+    width: 50px;
+    background-size:contain;
+}
+
+.heart-count {
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    position: relative;
+    top: 22%;
+    font-size: 17px;
+}
+
+
+//COMMENTS SECTION
+//COMMENTS HEADER
+#comment-bar {
+    font-family: $accent-font;
+    color: $nav-bg-color;
+    width: 100%;
+    border-top: solid $nav-bg-color 1px;
+    border-bottom: solid $nav-bg-color 1px;
+    margin: 0px;
+    margin-top: 30px;    
+}
+
+.comment-container:first-child {
+    border-top: none;
+}
+
+#comment-title {
+    padding: 10px;
+    margin: 0px;
+    font-size: 25px;
+    background-color: $nav-bg-color;
+    color: $body-bg-color;
+    display: inline-block;
+}
+
+#add-new-comment {
+    float: right;
+    margin-right: 0px;
+    padding: 20px;
+    padding-top: 16px;
+    padding-bottom: 14px;
+    font-size: 18px;
+    border-left: solid $nav-bg-color 1px;
+    
+    &:hover {
+        background-color: $nav-bg-color;
+        color: $body-bg-color;
+    }
+}
+
+//COMMENTS
+.comments-section {
+}
+
+.comment-container {
+    margin-bottom: 10px;
+    white-space: nowrap;
+    border-top: solid $accent-color 1px;
+}
+
+//COMMENT AUTHOR/INFO
+.comment-info {
+    margin: 0;
+    width: 15%;
+    padding: 5px;
+    padding-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+    font-family: $accent-font;
+    font-size: 18px;
+    color: $accent-color;
+}
+
+.comment-author {
+    display: block;
+}
+
+.comment-date {
+    display: inline-block;
+    font-size: 21px;
+}
+
+.comment-time {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.author-comment {
+    background-color: $accent-color;
+    color: $body-bg-color;
+}
+
+//ACTUAL COMMENTS
+.comment-text {
+    display: inline-block;
+    padding: 10px;
+    padding-right: 0;
+    padding-left: 0;
+    width: 65%;
+    margin-left: 8px;
+    padding-top: 0;
+    
+    p {
+        white-space: normal;
+        width: 90%;
+        margin: 10px auto;
+        text-align: justify;
+    }
+}
+
+//EDIT/DELETE TOOLS
+.comment-tools {
+    font-family: $accent-font;
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    color: $body-bg-color;
+    background-color: $accent-color;
+    span {
+        padding: 2px;
+    }
+}
+
+
+//NEW COMMENT
+.entry-container {
+    width: 65%;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+    white-space: normal;
+}
+
+.name{
+    font-family: $accent-font;
+    color: $accent-color;
+    margin: 7px;
+}
+
+.new-comment-author {
+    width: 150px;
+    padding: 5px;
+    margin-top: 2px;
+    margin-bottom: 12px;
+    background-color: $nav-bg-color;
+    color: $body-bg-color;
+    font-family: $accent-font;
+    text-align: center;
+}
+
+#new-comment {
+    width: 85%;
+    height: 75px;
+    padding: 0;
+    background-color: $nav-bg-color;
+    color: $body-bg-color;
+    font-family: $body-font;
+    font-size: 16px;
+    resize: vertical;
+    outline: none;
+    padding: 15px;
+    border: solid $accent-color 2px;
+
+}
+
+.comment-post {
+    background-color: $accent-color;
+    width: 150px;
+    padding: 5px;
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 200px;
+    display: block;
+    font-size: 17px;
+    font-family: $accent-font;
+}
