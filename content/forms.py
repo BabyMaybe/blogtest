@@ -15,6 +15,11 @@ class CommentForm(ModelForm):
         model = Comment
         fields = ['content']
 
+        widgets = {
+        'content' : forms.Textarea(attrs={'id' : 'new-comment',
+                                            'placeholder': 'THIS SOME WILD SHIT'})
+        }
+
 class SignupForm(ModelForm):
     class Meta:
         model = User

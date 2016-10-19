@@ -214,6 +214,7 @@ nav {
 .comment-tools {
     font-family: $accent-font;
     display: inline-block;
+    float: right;
     vertical-align: top;
     // padding: 5px;
     color: $body-bg-color;
@@ -243,7 +244,8 @@ nav {
 .entry-container {
     width: 65%;
     padding: 10px;
-    display: inline-block;
+    display: block;
+    margin: auto;
     text-align: center;
     white-space: normal;
 }

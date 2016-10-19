@@ -68,14 +68,14 @@
 </div>
 <!--<div class="clearfix"></div>-->
 
-<section class="comments-section">
+<section class="comments-section" id="comment-stack">
 
 {% for c in comments %}
     <div class="comment-container" data-cid={{c.pk}}>
         <div class="comment-info">
             <span class="comment-author"> <a href="/{{ c.author.userprofile.pk }}/profile">{{ c.author.username }} </a> </span>
             <span class="comment-date"> {{ c.timestamp |  date:" m/d/y" }} </span>
-            <span class="comment-time"> {{ post.date_published |  date:"h:i A" }}  </span>
+            <span class="comment-time"> {{ c.timestamp |  date:"h:i A" }}  </span>
         </div>
         <div class="comment-text">
             <p>{{ c.content|safe }}</p>
@@ -89,7 +89,11 @@
     </div>
 {% endfor %}
 
-    <div class="comment-container">
+    </div>
+
+
+</section>
+   <div class="comment-container">
         <div class="comment-info ">
             <span>New Comment</span>
 
@@ -98,26 +102,201 @@
             <span class="comment-time">10:53 PM</span>
 -->
         </div>
-        <div class="entry-container">
-            <span class="name"> [ Name ] </span>
+    <form  method="post" class='entry-container'>
+        {% csrf_token %}
+        <span class="name"> [ Name ] </span>
             <input type="text" class="new-comment-author" name="author">
             <span class="name">[ Name ] </span>
-            <textarea type="text" id="new-comment" name="new comment" placeholder="THIS IS SOME WILD SHIT">
-            </textarea>
-        <button type="submit" class="comment-post">
-            ++ Post ++
-        </button>
-        </div>
+        {{form.content}}
+        <input type="submit" value="++ Post ++" class="comment-post"/>
+    </form>
 
-    </div>
+<script type="text/javascript">
 
-</section>
+    $(".entry-container").on('submit', newComment);
+    $(".delete").click(deleteComment);
+    $(".edit").click(editComment);
+    $(".heart").click(likePost);
+
+    function likePost(e) {
+        $.ajax(
+        {
+            url : window.location.href,
+            type : "POST",
+            data :{csrfmiddlewaretoken : getCookie('csrftoken'),
+            'action' : 'like'
+        },
+
+        success : function(json) {
+            // console.log(json['likecount']);
+            $("div .likes").text(json['likecount']);
+        },
+
+        error : function (xhr, errmsg, err) {
+            console.log(err);
+            console.log(errmsg);
+            console.log(xhr);
+            console.log("you don goofed");
+        }
+    });
+    }
+
+    function newComment(e) {
+        e.preventDefault()
+        $.ajax(
+        {
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                    "action" : "comment",
+                    "author" : $("{{ user.pk }}").val(),
+                    "content" : $("#new-comment").val()
+                   },
+
+            success : function(json) {
+                console.log("successful comment post");
+                console.log($("#comment-stack").html());
+                $("#comment-stack").append(makeComment(json["author"],
+                  json["timestamp"],
+                  json["content"],
+                  json["id"],
+                  json["color"],
+                  json["uid"],
+                  json["letter"]));
+                $("#id_author").val("");
+                $("#id_content").val("");
+                $(".delete").click(deleteComment);
+                $(".edit").click(editComment);
+                $("#commentcount").text(json["count"]);
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error comment not posted");
+                console.log(xhr.status);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+    }
+    // function makeComment(author,timestamp,comment,id,color,uid,letter) {
+    //     console.log("making comment");
+    //     return '<li><div class="comment" data-cid='
+    //     + id + '><div class="ctitle"><h2><div class="edit_delete"><a data-cid='
+    //     + id + ' class="edit"> Edit </a><span class="divider"> | </span><a data-cid='
+    //     + id + ' class="delete">Delete </a></div><span class="author"> '
+    //     + author + ' </span><span class="divider"> | </span><span class="timestamp"> '
+    //     + timestamp + ' </span></h2></div><div class="c_letterbox" style="background-color:'
+    //     + color + ';"><a href="/'
+    //     + uid + '/profile"><div="c_letter_link"><div class="c_letter">'
+    //     + letter + '</div></div></a><div class="ctext" data-cid='
+    //     + id + '><p>'
+    //     + comment + '</p></div><div class="clearfix"></div></div></li>';
+    // }
+
+    function makeComment(author, timestamp, comment, id, color, uid, letter) {
+        return '<div class="comment-container" data-cid='
+        + id + '><div class="comment-info"><span class="comment-author"> <a href="/'
+        + uid + '/profile">'
+        + author + '</a> </span><span class="comment-date">'
+        + timestamp + '</span><span class="comment-time">'
+        + timestamp +  '</span></div><div class="comment-text"><p>'
+        + comment + '</p></div><div class="comment-tools"><div class="comment-edit">&#92;&#92;&#92; Edit &#92;&#92;&#92; </div><div class="comment-del"> : : Delete : :</div></div></div></div>';
+    }
+
+    function editComment(id) {
+        cid = $(id.target).data("cid");
+        comment =  $(".ctext[data-cid=" + cid + "]");
+        comment.replaceWith("<textarea rows='4' cols='100' id='replacement'>" + comment.text().trim() + "</textarea>");
+        $("#replacement").parent().append("<input type=submit value='Update' class='submit' id='update'/>");
+        $("#update").css("color", "#000");
+        $("#update").click(updateComment)
+    }
+
+    function updateComment(id) {
+        console.log("yup thats working at least");
+        $.ajax({
+
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+            "action" : "edit",
+            "id" :  $(id.target).parent().data("cid"),
+            "newContent" : $("#replacement").val(),
+            },
+
+            success : function(json) {
+                console.log("gurl. you edited you some comments.");
+                $("#update").remove();
+                replacement = $("#replacement");
+                replacement.css("background-color","#fd3");
+                newContent = json["newContent"];
+                console.log(newContent);
+                replacement.replaceWith("<div class='ctext' data-cid=" + json["cid"] + "><p>" + newContent + "</p></div>");
+
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error");
+                console.log(xhr.status);
+                        // console.log(xhr.responseText);
+                        console.log(errmsg);
+                        console.log(err);
+            }
+
+        });
+    }
+
+    function deleteComment(id) {
+        console.log("deleting comment");
+
+        $.ajax({
+
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                "action" : "delete",
+                "id" :  $(id.target).data("cid")
+                },
+
+        success : function(json) {
+            console.log(json);
+            if (json["deleted"] == true) {
+                console.log("deleted comment");
+                console.log(json["deleted"]);
+                console.log(json["cid"]);
+                $(".comment [data-cid=" + json["cid"] + "]").parentsUntil("li").hide();
+                $("#commentcount").text(json["count"]);
+            }
+        },
+
+        error : function(xhr, errmsg, err) {
+            console.log("error");
+            console.log(xhr.status);
+            // console.log(xhr.responseText);
+            console.log(errmsg);
+            console.log(err);
+            }
+        });
+    }
+
+    function getCookie(name) {
+     var cookieValue = null;
+     if (document.cookie && document.cookie != '') {
+       var cookies = document.cookie.split(';');
+       for (var i = 0; i < cookies.length; i++) {
+           var cookie = jQuery.trim(cookies[i]);
+                 // Does this cookie string begin with the name we want?
+                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                   cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                   break;
+               }
+           }
+       }
+       return cookieValue;
+    }
+
+
+    </script>
+
 {% endblock %}
-<!--
-<footer>
-Something
-</footer>
--->
 
-</body>
-</html>
