@@ -1,0 +1,144 @@
+{% extends 'content/HTML/Reskin/base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+
+<title>Blog Mockup</title>
+{# <link rel="stylesheet" type="text/css" href='{% static 'content/HTML/hex.css' %}' /> #}
+
+{% endblock %}
+
+{% block content %}
+
+<header id="site-header">
+    <h2 class="sub-title">Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and  </h2>
+    <h1 id="main-title">:Silicon: <br> \Unicorn\</h1>
+    <h2 class="sub-title">Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and  </h2>
+</header>
+
+<nav>
+    <ul>
+        <a href=""><li>I^I Home I^I</li></a>
+        <a href="/newpost"><li>++ Add Post ++</li></a>
+        <a href=""><li> &lt;&lt; Older Posts</li></a>
+        <a href=""><li> Newer Posts &gt;&gt; </li></a>
+        <a href=""><li> * * All Posts * *</li></a>
+        <a href=""><li> % % Logout % %</li></a>
+    </ul>
+</nav>
+
+<section id="content">
+{% for post in post_list %}
+<article class="blog-entry">
+
+    <header>
+        <h2 > <a class="blog-title" href="/post/{{post.pk}}/{{post.slug}}">{{post.title}}</a></h2>
+        {% if user == post.author %}
+        <div class="edit">
+            <a href="/post/{{post.pk}}/{{post.slug}}/edit" data-pid={{ post.pk }}> Edit </a>
+        </div>
+        {% endif %}
+    </header>
+
+    <section class="blog-content">
+
+        <section class="blog-info">
+
+            <span class="blog-date"> {{ post.date_published |  date:" m/d/y" }} </span>
+            <span class="blog-time"> {{ post.date_published |  date:"h:i A" }} </span>
+
+            <section class="blog-stats">
+                <span class="blog-comments"> <a href="/post/{{post.pk}}/{{ post.slug }}">
+                    {{ post.comment_count }} Comments </a> </span>
+                <div class="blog-heart">
+                    <div class="heart-count" data-pk="{{ post.pk }}"> {{ post.like_count }} </div></div>
+            </section>
+
+        </section>
+
+        <section class="blog-text">
+            {{ post.content|safe }}
+        </section>
+    </section>
+
+    <footer>
+        <div class="blog-author"><a href="/{{ post.author.userprofile.pk }}/profile">{{ post.author.username }} </a></div>
+    </footer>
+    <div class="clearfix"></div>
+
+</article>
+{% endfor %}
+
+</section>
+
+
+<footer>
+{% if is_paginated %}
+    <div class ="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="/?page={{ page_obj.previous_page_number }}">  &lt; &lt; &lt; Newer </a>
+            {% endif %}
+
+            <span class="page-current">
+                 {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+            {% if page_obj.has_next %}
+                <a href="/?page={{ page_obj.next_page_number }}"> Older &gt; &gt; &gt; </a>
+            {% endif %}
+
+        </span>
+    </div>
+{% endif %}
+</footer>
+
+<script type="text/javascript">
+
+    function getCookie(name) {
+       var cookieValue = null;
+       if (document.cookie && document.cookie != '') {
+         var cookies = document.cookie.split(';');
+         for (var i = 0; i < cookies.length; i++) {
+             var cookie = jQuery.trim(cookies[i]);
+             // Does this cookie string begin with the name we want?
+             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                 break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    $(".blog-heart").click(function(e) {
+        like_post(e);
+    });
+
+
+    function like_post(e) {
+        $.ajax({
+            url : window.location.href,
+            type : "POST",
+            data :{csrfmiddlewaretoken : getCookie('csrftoken'),
+                    'pk' : $(e.target).data('pk'),
+                    'action' : 'like'
+                  },
+
+            success : function(json) {
+                $("div .heart-count[data-pk=" + json['pk'] + "]").text(json['likes']);
+            },
+
+            error : function (xhr, errmsg, err) {
+                console.log(err);
+                console.log(errmsg);
+                console.log(xhr);
+                console.log("you don goofed");
+            }
+        })
+    }
+
+</script>
+{% endblock %}
+
+
+

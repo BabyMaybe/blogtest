@@ -1,0 +1,21 @@
+<!doctype html>
+
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="{% static 'content/HTML/base.css' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  {% block head %}
+  {%  endblock %}
+</head>
+
+<body>
+    {# <a href="/bugs" class='bug'>bug report/feature request</a> #}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
+{% block javascript %}
+{% endblock %}

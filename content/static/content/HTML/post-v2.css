@@ -1,17 +1,14 @@
-@import 'https://fonts.googleapis.com/css?family=Abel|Arvo|Inconsolata|Josefin+Sans|Old+Standard+TT';
-/* line 26, /Users/eric_varela/Desktop/HTML/base.scss */
+@import "https://fonts.googleapis.com/css?family=Abel|Arvo|Inconsolata|Josefin+Sans|Old+Standard+TT";
 body {
   margin: 0;
   background-color: #2d2d2d;
   font-family: Abel;
   color: #b6cee6; }
 
-/* line 34, /Users/eric_varela/Desktop/HTML/base.scss */
 #site-header {
   text-align: center;
-  background-color: #89f0c8; }
+  background-color: #7cedfc; }
 
-/* line 40, /Users/eric_varela/Desktop/HTML/base.scss */
 #main-title {
   margin: auto;
   padding-top: 50px;
@@ -19,7 +16,6 @@ body {
   color: #2d2d2d;
   font-family: Josefin Sans; }
 
-/* line 48, /Users/eric_varela/Desktop/HTML/base.scss */
 .sub-title {
   font-family: Inconsolata;
   font-size: 20px;
@@ -34,79 +30,91 @@ body {
   padding-bottom: 15px;
   overflow: hidden; }
 
-/* line 63, /Users/eric_varela/Desktop/HTML/base.scss */
 nav {
   background-color: #d9d9d9;
   border-top: solid 6px #2d2d2d;
-  border-bottom: solid 6px #89f0c8; }
-  /* line 68, /Users/eric_varela/Desktop/HTML/base.scss */
+  border-bottom: solid 6px #7cedfc; }
   nav ul {
     margin: 0;
     padding: 0;
     font-size: 20px;
     display: flex;
     justify-content: space-between; }
-    /* line 76, /Users/eric_varela/Desktop/HTML/base.scss */
     nav ul li {
       display: inline-block; }
-  /* line 81, /Users/eric_varela/Desktop/HTML/base.scss */
   nav a {
     height: 40px;
     width: 100%;
     padding-top: 20px;
-    text-align: center; }
-    /* line 88, /Users/eric_varela/Desktop/HTML/base.scss */
+    text-align: center;
+    color: #2d2d2d; }
     nav a:visited {
       color: #2d2d2d; }
-    /* line 91, /Users/eric_varela/Desktop/HTML/base.scss */
     nav a:hover {
-      background-color: #89f0c8;
+      background-color: #7cedfc;
       color: #2d2d2d; }
-    /* line 95, /Users/eric_varela/Desktop/HTML/base.scss */
     nav a:active {
       background-color: #2d2d2d;
-      color: #89f0c8; }
+      color: #7cedfc; }
 
-/* line 103, /Users/eric_varela/Desktop/HTML/base.scss */
 #content {
   background-color: #2d2d2d;
   padding-top: 50px; }
 
-/* line 110, /Users/eric_varela/Desktop/HTML/base.scss */
+a {
+  text-decoration: none;
+  color: #d9d9d9; }
+  a:hover {
+    color: #7cedfc; }
+
 .blog-title {
   font-family: Josefin Sans;
   font-size: 65px;
-  color: #89f0c8;
+  color: #7cedfc;
   margin: 0;
   padding: 40px;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  text-decoration: none; }
+  .blog-title:hover {
+    color: #d9d9d9; }
 
-/* line 119, /Users/eric_varela/Desktop/HTML/base.scss */
+.edit {
+  background-color: #7cedfc;
+  color: #2d2d2d;
+  font-family: Arvo;
+  font-size: 18px;
+  display: inline-block;
+  text-align: right;
+  padding: 10px;
+  float: right;
+  margin-top: 37px; }
+  .edit a {
+    color: #2d2d2d; }
+  .edit:hover {
+    background-color: #d9d9d9; }
+
 .blog-entry {
   border-bottom: solid #d9d9d9 3px;
   position: relative; }
-  /* line 123, /Users/eric_varela/Desktop/HTML/base.scss */
+  .blog-entry header h2 {
+    display: inline-block; }
   .blog-entry footer {
     width: 16%;
     padding-left: 10px;
     margin-bottom: 50px;
-    border-bottom: 2px solid #89f0c8;
+    border-bottom: 2px solid #7cedfc;
     float: right; }
-    /* line 130, /Users/eric_varela/Desktop/HTML/base.scss */
     .blog-entry footer .blog-author {
       font-family: Arvo;
       font-size: 18px;
       color: #d9d9d9; }
 
-/* line 138, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-content {
   position: relative; }
 
-/* line 142, /Users/eric_varela/Desktop/HTML/base.scss */
 .clearfix {
   clear: both; }
 
-/* line 146, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-info {
   padding-top: 10px;
   position: absolute;
@@ -115,65 +123,83 @@ nav {
   bottom: 0;
   width: 16%;
   color: #d9d9d9; }
-  /* line 155, /Users/eric_varela/Desktop/HTML/base.scss */
   .blog-info span {
     display: block;
     text-align: right;
     font-family: Arvo; }
 
-/* line 162, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-stats {
   position: absolute;
-  bottom: 45px;
+  bottom: 10px;
   right: 5px; }
 
-/* line 168, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-date {
   font-size: 21px; }
 
-/* line 172, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-time {
   font-size: 14px; }
 
-/* line 176, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-comments {
   margin-bottom: 6px; }
+  .blog-comments a {
+    padding: 10px 0; }
+  .blog-comments:hover {
+    color: #d9d9d9; }
 
-/* line 180, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-heart {
-  background-image: url("/heart.png");
-  height: 32px;
-  width: 32px;
+  background-image: url("/static/content/HTML/heart.svg");
+  height: 38px;
+  width: 38px;
+  background-size: contain;
   text-align: center;
   padding-top: 7px;
   background-repeat: no-repeat;
-  font-size: 12px;
+  font-size: 13px;
   margin: 0;
-  margin-top: 5px;
   float: right;
-  color: #89f0c8; }
+  color: #7cedfc; }
+  .blog-heart:hover {
+    color: #d9d9d9; }
+  .blog-heart .heart-count {
+    text-align: center;
+    margin-top: 3px; }
 
-/* line 195, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-text {
   width: 60%;
+  min-height: 200px;
   margin: auto;
-  border-left: solid #89f0c8 2px;
+  border-left: solid #7cedfc 2px;
   padding: 30px;
   text-align: justify; }
-  /* line 202, /Users/eric_varela/Desktop/HTML/base.scss */
   .blog-text p {
     padding-bottom: 25px;
     margin: auto;
     line-height: 1.4em; }
-  /* line 208, /Users/eric_varela/Desktop/HTML/base.scss */
-  .blog-text .dropcap {
-    font-size: 30px;
-    font-family: Old Standard TT;
-    margin: 0px;
-    margin-right: 2px;
-    margin-top: 40px; }
+    .blog-text p:first-letter {
+      font-size: 30px;
+      font-family: Old Standard TT;
+      margin: 0px;
+      margin-right: 2px;
+      margin-top: 40px;
+      text-transform: capitalize; }
+  .blog-text h3 {
+    font-size: 24px;
+    margin-bottom: 0px;
+    border-bottom: #7cedfc 2px solid; }
+    .blog-text h3:first-child {
+      margin-top: 0; }
+  .blog-text ul {
+    list-style-type: none;
+    margin: 5px 0; }
+  .blog-text li {
+    margin-bottom: 1px; }
+    .blog-text li strike {
+      color: rgba(182, 206, 230, 0.5); }
+  .blog-text li:before {
+    content: "> ";
+    color: #7cedfc;
+    margin-right: 1px; }
 
-/* line 218, /Users/eric_varela/Desktop/HTML/base.scss */
 .image-container {
   width: 85%;
   margin: auto;
@@ -181,12 +207,10 @@ nav {
   padding-bottom: 0px;
   margin-bottom: 20px; }
 
-/* line 226, /Users/eric_varela/Desktop/HTML/base.scss */
 .image {
   width: 100%;
   padding: 0; }
 
-/* line 232, /Users/eric_varela/Desktop/HTML/base.scss */
 .caption {
   font-family: Josefin Sans;
   font-size: 90%;
@@ -197,56 +221,45 @@ nav {
   padding-top: 5px;
   margin-top: 10px; }
 
-/* line 10, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 #site-header {
-  background-color: #89f0c8; }
+  background-color: #7cedfc; }
 
-/* line 14, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 #main-title {
-  background-color: #89f0c8;
+  background-color: #7cedfc;
   font-size: 110px;
   padding-top: 40px;
   padding-bottom: 20px;
   margin-top: 10px; }
 
-/* line 22, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .sub-title {
-  background-color: #89f0c8; }
+  background-color: #7cedfc; }
 
-/* line 28, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 nav {
-  border-bottom-color: #89f0c8; }
+  border-bottom-color: #7cedfc; }
 
-/* line 34, /Users/eric_varela/Desktop/HTML/post-v2.scss */
-.blog-text {
-  width: 70%;
-  border-left-width: 2px;
-  border-color: #89f0c8; }
-
-/* line 40, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .blog-entry {
   border-bottom: none; }
 
-/* line 46, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 #info-pop {
-  background-color: #89f0c8;
+  background-color: #7cedfc;
   width: 215px;
   margin: 0;
   margin-top: 40px;
-  border-color: #89f0c8;
+  border-color: #7cedfc;
   color: #2d2d2d; }
 
-/* line 55, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .post-author-date {
   display: inline-block; }
 
-/* line 65, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .post-blog-author {
   font-family: Arvo;
   font-size: 18px;
   margin-top: 7px; }
+  .post-blog-author a {
+    color: #2d2d2d; }
+    .post-blog-author a:hover {
+      color: #d9d9d9; }
 
-/* line 71, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .blog-heart {
   margin: 5px;
   margin-left: 15px;
@@ -257,9 +270,11 @@ nav {
   vertical-align: top;
   height: 50px;
   width: 50px;
-  background-size: contain; }
+  background-size: contain;
+  background-image: url("/static/content/HTML/heart_dark.svg"); }
+  .blog-heart:hover {
+    background-image: url("/static/content/HTML/heart.svg"); }
 
-/* line 84, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .heart-count {
   vertical-align: middle;
   padding: 0;
@@ -269,7 +284,6 @@ nav {
   top: 22%;
   font-size: 17px; }
 
-/* line 97, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 #comment-bar {
   font-family: Arvo;
   color: #d9d9d9;
@@ -279,11 +293,9 @@ nav {
   margin: 0px;
   margin-top: 30px; }
 
-/* line 107, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .comment-container:first-child {
   border-top: none; }
 
-/* line 111, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 #comment-title {
   padding: 10px;
   margin: 0px;
@@ -292,7 +304,6 @@ nav {
   color: #2d2d2d;
   display: inline-block; }
 
-/* line 120, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 #add-new-comment {
   float: right;
   margin-right: 0px;
@@ -301,18 +312,20 @@ nav {
   padding-bottom: 14px;
   font-size: 18px;
   border-left: solid #d9d9d9 1px; }
-  /* line 129, /Users/eric_varela/Desktop/HTML/post-v2.scss */
   #add-new-comment:hover {
     background-color: #d9d9d9;
     color: #2d2d2d; }
 
-/* line 139, /Users/eric_varela/Desktop/HTML/post-v2.scss */
+.comments-section a {
+  color: #7cedfc; }
+  .comments-section a:hover {
+    color: #d9d9d9; }
+
 .comment-container {
   margin-bottom: 10px;
   white-space: nowrap;
-  border-top: solid #89f0c8 1px; }
+  border-top: solid #7cedfc 1px; }
 
-/* line 146, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .comment-info {
   margin: 0;
   width: 15%;
@@ -322,28 +335,23 @@ nav {
   vertical-align: top;
   font-family: Arvo;
   font-size: 18px;
-  color: #89f0c8; }
+  color: #7cedfc; }
 
-/* line 158, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .comment-author {
   display: block; }
 
-/* line 162, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .comment-date {
   display: inline-block;
   font-size: 21px; }
 
-/* line 167, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .comment-time {
   display: inline-block;
   font-size: 14px; }
 
-/* line 172, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .author-comment {
-  background-color: #89f0c8;
+  background-color: #7cedfc;
   color: #2d2d2d; }
 
-/* line 178, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .comment-text {
   display: inline-block;
   padding: 10px;
@@ -352,26 +360,33 @@ nav {
   width: 65%;
   margin-left: 8px;
   padding-top: 0; }
-  /* line 187, /Users/eric_varela/Desktop/HTML/post-v2.scss */
   .comment-text p {
     white-space: normal;
     width: 90%;
     margin: 10px auto;
     text-align: justify; }
 
-/* line 196, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .comment-tools {
   font-family: Arvo;
   display: inline-block;
   vertical-align: top;
-  padding: 5px;
   color: #2d2d2d;
-  background-color: #89f0c8; }
-  /* line 203, /Users/eric_varela/Desktop/HTML/post-v2.scss */
+  background-color: #7cedfc; }
   .comment-tools span {
     padding: 2px; }
 
-/* line 210, /Users/eric_varela/Desktop/HTML/post-v2.scss */
+.comment-edit {
+  padding: 5px;
+  display: inline-block; }
+  .comment-edit:hover {
+    background-color: #d9d9d9; }
+
+.comment-del {
+  padding: 5px;
+  display: inline-block; }
+  .comment-del:hover {
+    background-color: #d9d9d9; }
+
 .entry-container {
   width: 65%;
   padding: 10px;
@@ -379,13 +394,11 @@ nav {
   text-align: center;
   white-space: normal; }
 
-/* line 218, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .name {
   font-family: Arvo;
-  color: #89f0c8;
+  color: #7cedfc;
   margin: 7px; }
 
-/* line 224, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .new-comment-author {
   width: 150px;
   padding: 5px;
@@ -396,7 +409,6 @@ nav {
   font-family: Arvo;
   text-align: center; }
 
-/* line 235, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 #new-comment {
   width: 85%;
   height: 75px;
@@ -408,11 +420,10 @@ nav {
   resize: vertical;
   outline: none;
   padding: 15px;
-  border: solid #89f0c8 2px; }
+  border: solid #7cedfc 2px; }
 
-/* line 250, /Users/eric_varela/Desktop/HTML/post-v2.scss */
 .comment-post {
-  background-color: #89f0c8;
+  background-color: #7cedfc;
   width: 150px;
   padding: 5px;
   text-align: center;

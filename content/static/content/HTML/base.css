@@ -1,17 +1,14 @@
-@import 'https://fonts.googleapis.com/css?family=Abel|Arvo|Inconsolata|Josefin+Sans|Old+Standard+TT';
-/* line 26, /Users/eric_varela/Desktop/HTML/base.scss */
+@import "https://fonts.googleapis.com/css?family=Abel|Arvo|Inconsolata|Josefin+Sans|Old+Standard+TT";
 body {
   margin: 0;
   background-color: #2d2d2d;
   font-family: Abel;
   color: #b6cee6; }
 
-/* line 34, /Users/eric_varela/Desktop/HTML/base.scss */
 #site-header {
   text-align: center;
-  background-color: #89f0c8; }
+  background-color: #ffb847; }
 
-/* line 40, /Users/eric_varela/Desktop/HTML/base.scss */
 #main-title {
   margin: auto;
   padding-top: 50px;
@@ -19,7 +16,6 @@ body {
   color: #2d2d2d;
   font-family: Josefin Sans; }
 
-/* line 48, /Users/eric_varela/Desktop/HTML/base.scss */
 .sub-title {
   font-family: Inconsolata;
   font-size: 20px;
@@ -34,79 +30,93 @@ body {
   padding-bottom: 15px;
   overflow: hidden; }
 
-/* line 63, /Users/eric_varela/Desktop/HTML/base.scss */
 nav {
   background-color: #d9d9d9;
   border-top: solid 6px #2d2d2d;
-  border-bottom: solid 6px #89f0c8; }
-  /* line 68, /Users/eric_varela/Desktop/HTML/base.scss */
+  border-bottom: solid 6px #ffb847; }
   nav ul {
     margin: 0;
     padding: 0;
     font-size: 20px;
     display: flex;
     justify-content: space-between; }
-    /* line 76, /Users/eric_varela/Desktop/HTML/base.scss */
     nav ul li {
       display: inline-block; }
-  /* line 81, /Users/eric_varela/Desktop/HTML/base.scss */
   nav a {
     height: 40px;
     width: 100%;
     padding-top: 20px;
-    text-align: center; }
-    /* line 88, /Users/eric_varela/Desktop/HTML/base.scss */
+    text-align: center;
+    color: #2d2d2d; }
     nav a:visited {
       color: #2d2d2d; }
-    /* line 91, /Users/eric_varela/Desktop/HTML/base.scss */
     nav a:hover {
-      background-color: #89f0c8;
+      background-color: #ffb847;
       color: #2d2d2d; }
-    /* line 95, /Users/eric_varela/Desktop/HTML/base.scss */
     nav a:active {
       background-color: #2d2d2d;
-      color: #89f0c8; }
+      color: #ffb847; }
 
-/* line 103, /Users/eric_varela/Desktop/HTML/base.scss */
 #content {
   background-color: #2d2d2d;
   padding-top: 50px; }
 
-/* line 110, /Users/eric_varela/Desktop/HTML/base.scss */
+a {
+  text-decoration: none;
+  color: #d9d9d9; }
+  a:hover {
+    color: #ffb847;
+    cursor: pointer; }
+
 .blog-title {
   font-family: Josefin Sans;
   font-size: 65px;
-  color: #89f0c8;
+  color: #ffb847;
   margin: 0;
   padding: 40px;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  text-decoration: none; }
+  .blog-title:hover {
+    color: #d9d9d9; }
 
-/* line 119, /Users/eric_varela/Desktop/HTML/base.scss */
+.edit, .delete {
+  background-color: #ffb847;
+  color: #2d2d2d;
+  font-family: Arvo;
+  font-size: 18px;
+  display: inline-block;
+  text-align: right;
+  padding: 10px;
+  float: right;
+  margin-top: 37px; }
+  .edit a, .delete a {
+    color: #2d2d2d; }
+  .edit:hover, .delete:hover {
+    background-color: #d9d9d9;
+    cursor: pointer; }
+
 .blog-entry {
   border-bottom: solid #d9d9d9 3px;
   position: relative; }
-  /* line 123, /Users/eric_varela/Desktop/HTML/base.scss */
+  .blog-entry header h2 {
+    display: inline-block; }
   .blog-entry footer {
     width: 16%;
     padding-left: 10px;
     margin-bottom: 50px;
-    border-bottom: 2px solid #89f0c8;
+    border-bottom: 2px solid #ffb847;
     float: right; }
-    /* line 130, /Users/eric_varela/Desktop/HTML/base.scss */
     .blog-entry footer .blog-author {
       font-family: Arvo;
       font-size: 18px;
       color: #d9d9d9; }
 
-/* line 138, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-content {
   position: relative; }
 
-/* line 142, /Users/eric_varela/Desktop/HTML/base.scss */
 .clearfix {
   clear: both; }
 
-/* line 146, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-info {
   padding-top: 10px;
   position: absolute;
@@ -115,65 +125,84 @@ nav {
   bottom: 0;
   width: 16%;
   color: #d9d9d9; }
-  /* line 155, /Users/eric_varela/Desktop/HTML/base.scss */
   .blog-info span {
     display: block;
     text-align: right;
     font-family: Arvo; }
 
-/* line 162, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-stats {
   position: absolute;
-  bottom: 45px;
+  bottom: 10px;
   right: 5px; }
 
-/* line 168, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-date {
   font-size: 21px; }
 
-/* line 172, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-time {
   font-size: 14px; }
 
-/* line 176, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-comments {
   margin-bottom: 6px; }
+  .blog-comments a {
+    padding: 10px 0; }
+  .blog-comments:hover {
+    color: #d9d9d9; }
 
-/* line 180, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-heart {
-  background-image: url("/static/content/HTML/heart.png");
-  height: 32px;
-  width: 32px;
+  background-image: url("/static/content/HTML/heart.svg");
+  height: 38px;
+  width: 38px;
+  background-size: contain;
   text-align: center;
   padding-top: 7px;
   background-repeat: no-repeat;
-  font-size: 12px;
+  font-size: 13px;
   margin: 0;
-  margin-top: 5px;
   float: right;
-  color: #89f0c8; }
+  color: #ffb847; }
+  .blog-heart:hover {
+    color: #d9d9d9;
+    cursor: pointer; }
+  .blog-heart .heart-count {
+    text-align: center;
+    margin-top: 3px; }
 
-/* line 195, /Users/eric_varela/Desktop/HTML/base.scss */
 .blog-text {
   width: 60%;
+  min-height: 200px;
   margin: auto;
-  border-left: solid #89f0c8 2px;
+  border-left: solid #ffb847 2px;
   padding: 30px;
   text-align: justify; }
-  /* line 202, /Users/eric_varela/Desktop/HTML/base.scss */
   .blog-text p {
     padding-bottom: 25px;
     margin: auto;
     line-height: 1.4em; }
-  /* line 208, /Users/eric_varela/Desktop/HTML/base.scss */
-  .blog-text .dropcap {
-    font-size: 30px;
-    font-family: Old Standard TT;
-    margin: 0px;
-    margin-right: 2px;
-    margin-top: 40px; }
+    .blog-text p:first-letter {
+      font-size: 30px;
+      font-family: Old Standard TT;
+      margin: 0px;
+      margin-right: 2px;
+      margin-top: 40px;
+      text-transform: capitalize; }
+  .blog-text h3 {
+    font-size: 24px;
+    margin-bottom: 0px;
+    border-bottom: #ffb847 2px solid; }
+    .blog-text h3:first-child {
+      margin-top: 0; }
+  .blog-text ul {
+    list-style-type: none;
+    margin: 5px 0; }
+  .blog-text li {
+    margin-bottom: 1px; }
+    .blog-text li strike {
+      color: rgba(182, 206, 230, 0.5); }
+  .blog-text li:before {
+    content: "> ";
+    color: #ffb847;
+    margin-right: 1px; }
 
-/* line 218, /Users/eric_varela/Desktop/HTML/base.scss */
 .image-container {
   width: 85%;
   margin: auto;
@@ -181,12 +210,10 @@ nav {
   padding-bottom: 0px;
   margin-bottom: 20px; }
 
-/* line 226, /Users/eric_varela/Desktop/HTML/base.scss */
 .image {
   width: 100%;
   padding: 0; }
 
-/* line 232, /Users/eric_varela/Desktop/HTML/base.scss */
 .caption {
   font-family: Josefin Sans;
   font-size: 90%;
@@ -196,5 +223,13 @@ nav {
   width: 90%;
   padding-top: 5px;
   margin-top: 10px; }
+
+.pagination {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 24px; }
+
+.page-current {
+  margin: 0 100px; }
 
 /*# sourceMappingURL=base.css.map */

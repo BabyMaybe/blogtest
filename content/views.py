@@ -23,15 +23,17 @@ from django.core.mail import send_mail
 # @login_required
 class BlogView(ListView):
     model = Post
-    template_name = 'content/blog_main.html'
+    template_name = 'content/HTML/Reskin/blog_main.html'
+    context_object_name = 'post_list'
     paginate_by = 5
+    queryset = Post.objects.all().filter(active=True)
 
-    def get_context_data(self, **kwargs):
-        context = super (BlogView, self).get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     context = super (BlogView, self).get_context_data(**kwargs)
 
-        context['post_list'] = Post.objects.filter(active=True)
+    #     context['post_list'] = Post.objects.filter(active=True)
 
-        return context
+    #     return context
 
     def get (self, request, *args, **kwargs):
         if (not request.user.is_authenticated()):
@@ -73,7 +75,7 @@ class PostDetail(DetailView, JsonResponse):
     model = Post
     form_class = CommentForm
     initial = {'comment':"Enter comment here!"}
-    template_name = 'content/post.html'
+    template_name = 'content/HTML/Reskin/post-v2.html'
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)

@@ -6,13 +6,13 @@ $body-text-color: #b6cee6; //figure out a better color
 $body-bg-color: #2d2d2d;
 $nav-bg-color: #d9d9d9;
 //$accent-color: #67e25e; //lightgreen; //get array of colors
-//$accent-color: #ff455e; //red
-//$accent-color: #ff7a46; //orange
-//$accent-color: #ffb847; //yellow
-//$accent-color: #9cec67; //green
-$accent-color: #89f0c8; //mint
-//$accent-color: #7cedfc; //blue
-//$accent-color: #c33fe4; //purple - dont like it
+// $accent-color: #ff455e; //red
+// $accent-color: #ff7a46; //orange
+$accent-color: #ffb847; //yellow
+// $accent-color: #9cec67; //green
+// $accent-color: #89f0c8; //mint
+// $accent-color: #7cedfc; //blue
+// $accent-color: #a764ff; //purple - dont like it
 
 //FONT VARS
 $title-font: Josefin Sans;
@@ -24,7 +24,7 @@ $dropcap-font: Old Standard TT;
 
 //PAGE STYLING
 body {
-    margin: 0;   
+    margin: 0;
     background-color: $body-bg-color;
     font-family: $body-font;
     color: $body-text-color;
@@ -64,33 +64,33 @@ nav {
     background-color: $nav-bg-color;
     border-top: solid 6px $body-bg-color;
     border-bottom: solid 6px $accent-color;
-    
-    ul { 
+
+    ul {
         margin: 0;
         padding: 0;
 //        font-family: $body-font;
         font-size: 20px;
         display: flex;
         justify-content: space-between;
-  
+
         li {
             display: inline-block;
         }
     }
-    
+
     a {
         height: 40px;
         width: 100%;
         padding-top: 20px;
         text-align: center;
-        
-        
+        color: $body-bg-color;
+
         &:visited {
             color: $body-bg-color;
         }
         &:hover {
             background-color: $accent-color;
-            color: $body-bg-color;   
+            color: $body-bg-color;
         }
         &:active {
             background-color: $body-bg-color;
@@ -104,7 +104,17 @@ nav {
     background-color: $body-bg-color;
 //    font-family: $body-font;
 //    color: $body-text-color;
-    padding-top: 50px; 
+    padding-top: 50px;
+}
+
+a {
+    text-decoration: none;
+    color: $nav-bg-color;
+
+    &:hover {
+        color: $accent-color;
+        cursor: pointer;
+    }
 }
 
 .blog-title {
@@ -114,19 +124,56 @@ nav {
     margin: 0;
     padding: 40px;
     padding-bottom: 20px;
+    text-decoration: none;
+
+    &:hover {
+        color: $nav-bg-color;
+    }
+
+}
+
+.edit {
+    background-color: $accent-color;
+    color: $body-bg-color;
+    font-family: $accent-font;
+    font-size: 18px;
+    display: inline-block;
+    text-align: right;
+    padding: 10px;
+    float: right;
+    margin-top: 37px;
+
+    a {
+        color: $body-bg-color;
+    }
+
+    &:hover {
+        background-color: $nav-bg-color;
+        cursor: pointer;
+    }
+}
+
+.delete {
+    @extend .edit;
 }
 
 .blog-entry {
     border-bottom: solid $nav-bg-color 3px;
     position: relative;
-    
+
+    header {
+        h2 {
+            display: inline-block;
+        }
+    }
+
     footer {
         width: 16%;
         padding-left: 10px;
         margin-bottom: 50px;
         border-bottom: 2px solid $accent-color;
         float: right;
-        
+
         .blog-author {
             font-family: $accent-font;
             font-size: 18px;
@@ -151,7 +198,7 @@ nav {
     bottom: 0;
     width: 16%;
     color: $nav-bg-color;
-    
+
     span{
         display: block;
         text-align: right;
@@ -161,7 +208,7 @@ nav {
 
 .blog-stats {
     position: absolute;
-    bottom: 45px;
+    bottom: 10px;
     right: 5px;
 }
 
@@ -175,43 +222,113 @@ nav {
 
 .blog-comments {
     margin-bottom: 6px;
+
+    a {
+        // text-decoration: none;
+        padding: 10px 0;
+    }
+
+    &:hover {
+        color: $nav-bg-color;
+    }
 }
 
 .blog-heart {
-    background-image: url("/heart.png");
-    height: 32px;
-    width: 32px;
+    background-image: url("/static/content/HTML/heart.svg");
+    height: 38px;
+    width: 38px;
+    background-size: contain;
     text-align: center;
     padding-top: 7px;
     background-repeat: no-repeat;
-    font-size: 12px;
+    font-size: 13px;
     margin: 0;
-    margin-top: 5px;
+    // margin-top: 5px;
     float: right;
     color: $accent-color;
+    &:hover {
+            color: $nav-bg-color;
+            cursor: pointer;
+        }
+
+    .heart-count {
+        text-align: center;
+        margin-top: 3px;
+
+
+    }
+
 }
 
 
 .blog-text {
     width: 60%;
+    min-height: 200px;
     margin: auto;
     border-left: solid $accent-color 2px;
     padding: 30px;
     text-align: justify;
-    
+
+
     p {
         padding-bottom: 25px;
         margin: auto;
         line-height: 1.4em;
+
+        &:first-letter {
+            font-size: 30px;
+            font-family: $dropcap-font;
+            margin: 0px;
+            margin-right: 2px;
+            margin-top: 40px;
+            text-transform: capitalize;
+         }
+
     }
-    
-    .dropcap {
-        font-size: 30px;
-        font-family: $dropcap-font;
-        margin: 0px;
-        margin-right: 2px;
-        margin-top: 40px;
+
+    h3 {
+        font-size: 24px;
+        margin-bottom: 0px;
+        border-bottom: $accent-color 2px solid;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
     }
+
+    ul{
+        list-style-type: none;
+        margin: 5px 0;
+    }
+
+    li {
+        margin-bottom: 1px;
+
+        strike {
+            color: transparentize($body-text-color, .5);
+        }
+    }
+
+    li:before {
+        content: "> ";
+        color: $accent-color;
+        margin-right: 1px;
+    }
+
+
+    //switched to css selector abvove &:first-letter
+    //NOTE: Will only work for content wrapped in <p> tags
+    //some of the older entries do not recognize this.
+    // .dropcap {
+    //     font-size: 30px;
+    //     font-family: $dropcap-font;
+    //     margin: 0px;
+    //     margin-right: 2px;
+    //     margin-top: 40px;
+    // }
+
+
 }
 
 
@@ -241,4 +358,16 @@ nav {
 //    border-top: solid $body-text-color 1px;
 }
 
+
+//PAGINATION
+.pagination {
+    text-align: center;
+    margin: 40px 0;
+    font-size: 24px;
+
+}
+
+.page-current {
+    margin: 0 100px;
+}
 

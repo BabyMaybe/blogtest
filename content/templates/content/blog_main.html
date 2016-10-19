@@ -62,7 +62,8 @@
                 {{ post.date_published |  date:" d F Y" }}
             </div>
             <div class="comment_link">
-                <a href="/post/{{post.pk}}/{{ post.slug }}"> {{ post.comment_count }} Comments</a>
+                <a href="/post/{{post.pk}}/{{ post.slug }}">
+                    <span class="comment-count">{{ post.comment_count }}</span> Comments</a>
             </div>
         </div>
         <div class="heart">

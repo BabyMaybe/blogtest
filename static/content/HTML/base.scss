@@ -24,7 +24,7 @@ $dropcap-font: Old Standard TT;
 
 //PAGE STYLING
 body {
-    margin: 0;   
+    margin: 0;
     background-color: $body-bg-color;
     font-family: $body-font;
     color: $body-text-color;
@@ -64,33 +64,33 @@ nav {
     background-color: $nav-bg-color;
     border-top: solid 6px $body-bg-color;
     border-bottom: solid 6px $accent-color;
-    
-    ul { 
+
+    ul {
         margin: 0;
         padding: 0;
 //        font-family: $body-font;
         font-size: 20px;
         display: flex;
         justify-content: space-between;
-  
+
         li {
             display: inline-block;
         }
     }
-    
+
     a {
         height: 40px;
         width: 100%;
         padding-top: 20px;
         text-align: center;
-        
-        
+
+
         &:visited {
             color: $body-bg-color;
         }
         &:hover {
             background-color: $accent-color;
-            color: $body-bg-color;   
+            color: $body-bg-color;
         }
         &:active {
             background-color: $body-bg-color;
@@ -104,7 +104,11 @@ nav {
     background-color: $body-bg-color;
 //    font-family: $body-font;
 //    color: $body-text-color;
-    padding-top: 50px; 
+    padding-top: 50px;
+}
+
+a {
+    text-decoration: none;
 }
 
 .blog-title {
@@ -114,19 +118,20 @@ nav {
     margin: 0;
     padding: 40px;
     padding-bottom: 20px;
+    text-decoration: none;
 }
 
 .blog-entry {
     border-bottom: solid $nav-bg-color 3px;
     position: relative;
-    
+
     footer {
         width: 16%;
         padding-left: 10px;
         margin-bottom: 50px;
         border-bottom: 2px solid $accent-color;
         float: right;
-        
+
         .blog-author {
             font-family: $accent-font;
             font-size: 18px;
@@ -151,7 +156,7 @@ nav {
     bottom: 0;
     width: 16%;
     color: $nav-bg-color;
-    
+
     span{
         display: block;
         text-align: right;
@@ -161,7 +166,7 @@ nav {
 
 .blog-stats {
     position: absolute;
-    bottom: 45px;
+    bottom: 10px;
     right: 5px;
 }
 
@@ -175,6 +180,13 @@ nav {
 
 .blog-comments {
     margin-bottom: 6px;
+    a {
+        text-decoration: none;
+        color: inherit;
+        &:visited {
+            color: inherit;
+        }
+    }
 }
 
 .blog-heart {
@@ -194,24 +206,40 @@ nav {
 
 .blog-text {
     width: 60%;
+    min-height: 200px;
     margin: auto;
     border-left: solid $accent-color 2px;
     padding: 30px;
     text-align: justify;
-    
+
+
     p {
         padding-bottom: 25px;
         margin: auto;
         line-height: 1.4em;
+
+        &:first-letter {
+            font-size: 30px;
+            font-family: $dropcap-font;
+            margin: 0px;
+            margin-right: 2px;
+            margin-top: 40px;
+            text-transform: capitalize;
+         }
+
     }
-    
-    .dropcap {
-        font-size: 30px;
-        font-family: $dropcap-font;
-        margin: 0px;
-        margin-right: 2px;
-        margin-top: 40px;
-    }
+    //switched to css selector abvove &:first-letter
+    //NOTE: Will only work for content wrapped in <p> tags
+    //some of the older entries do not recognize this.
+    // .dropcap {
+    //     font-size: 30px;
+    //     font-family: $dropcap-font;
+    //     margin: 0px;
+    //     margin-right: 2px;
+    //     margin-top: 40px;
+    // }
+
+
 }
 
 
