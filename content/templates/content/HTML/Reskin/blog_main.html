@@ -48,7 +48,7 @@
             <span class="blog-time"> {{ post.date_published |  date:"h:i A" }} </span>
 
             <section class="blog-stats">
-                <span class="blog-comments"> <a href="/post/{{post.pk}}/{{ post.slug }}">
+                <span class="blog-comments"> <a href="/post/{{post.pk}}/{{ post.slug }}/#comments-section">
                     {{ post.comment_count }} Comments </a> </span>
                 <div class="blog-heart">
                     <div class="heart-count" data-pk="{{ post.pk }}"> {{ post.like_count }} </div></div>

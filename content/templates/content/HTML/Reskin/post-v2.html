@@ -18,7 +18,7 @@
 
 <nav>
     <ul>
-        <a href=""><li>I^I Home I^I</li></a>
+        <a href="/"><li>I^I Home I^I</li></a>
         <a href="/newpost"><li>++ Add Post ++</li></a>
         <a href=""><li> &lt;&lt; Older Posts</li></a>
         <a href=""><li> Newer Posts &gt;&gt; </li></a>
@@ -61,10 +61,10 @@
 </section>
 <div class="clearfix"></div>
 
-
+<a name="comments-section"></a>
 <div id="comment-bar">
-    <h2 id="comment-title"> { Comments: {{ post.comment_count }} } </h2>
-<span id="add-new-comment">++ Add New Comment ++</span>
+    <h2 id="comment-title"> { Comments: <span id="comment-count">{{ post.comment_count }}</span> } </h2>
+    <a href="#new-comment" id="add-new-comment">++ Add New Comment ++</a>
 </div>
 <!--<div class="clearfix"></div>-->
 
@@ -82,8 +82,8 @@
         </div>
         {% if user == c.author %}
         <div class="comment-tools">
-            <div class="comment-edit">\\\ Edit \\\ </div>
-            <div class="comment-del"> : : Delete : :</div>
+            <div class="comment-edit" data-cid={{c.pk}}>\\\ Edit \\\ </div>
+            <div class="comment-del"  data-cid={{c.pk}}> : : Delete : :</div>
         </div>
         {% endif %}
     </div>
@@ -102,10 +102,11 @@
             <span class="comment-time">10:53 PM</span>
 -->
         </div>
+        <a name="#new-comment"></a>
     <form  method="post" class='entry-container'>
         {% csrf_token %}
         <span class="name"> [ Name ] </span>
-            <input type="text" class="new-comment-author" name="author">
+            <input type="text" id="new-comment-author" name="author">
             <span class="name">[ Name ] </span>
         {{form.content}}
         <input type="submit" value="++ Post ++" class="comment-post"/>
@@ -114,9 +115,9 @@
 <script type="text/javascript">
 
     $(".entry-container").on('submit', newComment);
-    $(".delete").click(deleteComment);
-    $(".edit").click(editComment);
-    $(".heart").click(likePost);
+    $(".comment-del").click(deleteComment);
+    $(".comment-edit").click(editComment);
+    $(".blog-heart").click(likePost);
 
     function likePost(e) {
         $.ajax(
@@ -128,8 +129,7 @@
         },
 
         success : function(json) {
-            // console.log(json['likecount']);
-            $("div .likes").text(json['likecount']);
+            $("div .heart-count").text(json['likecount']);
         },
 
         error : function (xhr, errmsg, err) {
@@ -157,17 +157,16 @@
                 console.log("successful comment post");
                 console.log($("#comment-stack").html());
                 $("#comment-stack").append(makeComment(json["author"],
+                  json["datestamp"],
                   json["timestamp"],
                   json["content"],
                   json["id"],
-                  json["color"],
-                  json["uid"],
-                  json["letter"]));
-                $("#id_author").val("");
-                $("#id_content").val("");
-                $(".delete").click(deleteComment);
-                $(".edit").click(editComment);
-                $("#commentcount").text(json["count"]);
+                  json["uid"]));
+                $("#new-comment-author").val("");
+                $("#new-comment").val("");
+                $(".comment-del").click(deleteComment);
+                $(".comment-edit").click(editComment);
+                $("#comment-count").text(json["count"]);
             },
 
             error : function(xhr, errmsg, err) {
@@ -178,34 +177,22 @@
             }
         });
     }
-    // function makeComment(author,timestamp,comment,id,color,uid,letter) {
-    //     console.log("making comment");
-    //     return '<li><div class="comment" data-cid='
-    //     + id + '><div class="ctitle"><h2><div class="edit_delete"><a data-cid='
-    //     + id + ' class="edit"> Edit </a><span class="divider"> | </span><a data-cid='
-    //     + id + ' class="delete">Delete </a></div><span class="author"> '
-    //     + author + ' </span><span class="divider"> | </span><span class="timestamp"> '
-    //     + timestamp + ' </span></h2></div><div class="c_letterbox" style="background-color:'
-    //     + color + ';"><a href="/'
-    //     + uid + '/profile"><div="c_letter_link"><div class="c_letter">'
-    //     + letter + '</div></div></a><div class="ctext" data-cid='
-    //     + id + '><p>'
-    //     + comment + '</p></div><div class="clearfix"></div></div></li>';
-    // }
 
-    function makeComment(author, timestamp, comment, id, color, uid, letter) {
+    function makeComment(author, datestamp, timestamp, comment, id, uid) {
         return '<div class="comment-container" data-cid='
         + id + '><div class="comment-info"><span class="comment-author"> <a href="/'
         + uid + '/profile">'
-        + author + '</a> </span><span class="comment-date">'
-        + timestamp + '</span><span class="comment-time">'
-        + timestamp +  '</span></div><div class="comment-text"><p>'
-        + comment + '</p></div><div class="comment-tools"><div class="comment-edit">&#92;&#92;&#92; Edit &#92;&#92;&#92; </div><div class="comment-del"> : : Delete : :</div></div></div></div>';
+        + author + '</a> </span><span class="comment-date"> '
+        + datestamp + ' </span> <span class="comment-time"> '
+        + timestamp +  ' </span></div><div class="comment-text"><p>'
+        + comment + '</p></div><div class="comment-tools"><div class="comment-edit data-cid={{c.pk}}">&#92;&#92;&#92; Edit &#92;&#92;&#92; </div><div class="comment-del" data-cid='
+        + id + '> : : Delete : :</div></div></div>';
     }
 
     function editComment(id) {
         cid = $(id.target).data("cid");
-        comment =  $(".ctext[data-cid=" + cid + "]");
+        console.log("editing comment:" + cid);
+        comment =  $(".comment-container[data-cid=" + cid + "]");
         comment.replaceWith("<textarea rows='4' cols='100' id='replacement'>" + comment.text().trim() + "</textarea>");
         $("#replacement").parent().append("<input type=submit value='Update' class='submit' id='update'/>");
         $("#update").css("color", "#000");
@@ -264,8 +251,8 @@
                 console.log("deleted comment");
                 console.log(json["deleted"]);
                 console.log(json["cid"]);
-                $(".comment [data-cid=" + json["cid"] + "]").parentsUntil("li").hide();
-                $("#commentcount").text(json["count"]);
+                $(".comment-container[data-cid=" + json["cid"] + "]").hide();
+                $("#comment-count").text(json["count"]);
             }
         },
 

@@ -83,8 +83,8 @@ nav {
     display: inline-block;
     color: $body-bg-color;
     vertical-align: top;
-    height: 50px;
-    width: 50px;
+    height: 51px;
+    width: 51px;
     background-size:contain;
     background-image: url("/static/content/HTML/heart_dark.svg");
 
@@ -141,6 +141,7 @@ nav {
     &:hover {
         background-color: $nav-bg-color;
         color: $body-bg-color;
+        cursor: pointer;
     }
 }
 
@@ -228,6 +229,7 @@ nav {
     padding: 5px;
     display: inline-block;
     &:hover {
+        cursor: pointer;
         background-color: $nav-bg-color;
     }
 }
@@ -236,6 +238,7 @@ nav {
     padding: 5px;
     display: inline-block;
 &:hover {
+        cursor: pointer;
         background-color: $nav-bg-color;
     }
 }
@@ -256,7 +259,7 @@ nav {
     margin: 7px;
 }
 
-.new-comment-author {
+#new-comment-author {
     width: 150px;
     padding: 5px;
     margin-top: 2px;
@@ -293,4 +296,5 @@ nav {
     display: block;
     font-size: 17px;
     font-family: $accent-font;
+    cursor: pointer;
 }

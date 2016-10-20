@@ -161,7 +161,8 @@ class PostDetail(DetailView, JsonResponse):
             count = post.get_comment_count()
             data = {"author" : author,
                     "content" : content,
-                    "timestamp" : timestamp.strftime("%d %B %Y | %I:%M %p"),
+                    "timestamp" : " " + timestamp.strftime("%I:%M %p") + " ",
+                    "datestamp" : " " + timestamp.strftime("%m/%d/%y ") + " ",
                     "id" : c.pk,
                     "color" : color,
                     "uid" : uid,

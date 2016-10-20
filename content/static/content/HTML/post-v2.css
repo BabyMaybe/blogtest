@@ -279,8 +279,8 @@ nav {
   display: inline-block;
   color: #2d2d2d;
   vertical-align: top;
-  height: 50px;
-  width: 50px;
+  height: 51px;
+  width: 51px;
   background-size: contain;
   background-image: url("/static/content/HTML/heart_dark.svg"); }
   .blog-heart:hover {
@@ -325,7 +325,8 @@ nav {
   border-left: solid #d9d9d9 1px; }
   #add-new-comment:hover {
     background-color: #d9d9d9;
-    color: #2d2d2d; }
+    color: #2d2d2d;
+    cursor: pointer; }
 
 .comments-section a {
   color: #ffb847; }
@@ -391,12 +392,14 @@ nav {
   padding: 5px;
   display: inline-block; }
   .comment-edit:hover {
+    cursor: pointer;
     background-color: #d9d9d9; }
 
 .comment-del {
   padding: 5px;
   display: inline-block; }
   .comment-del:hover {
+    cursor: pointer;
     background-color: #d9d9d9; }
 
 .entry-container {
@@ -412,7 +415,7 @@ nav {
   color: #ffb847;
   margin: 7px; }
 
-.new-comment-author {
+#new-comment-author {
   width: 150px;
   padding: 5px;
   margin-top: 2px;
@@ -445,6 +448,7 @@ nav {
   margin-bottom: 200px;
   display: block;
   font-size: 17px;
-  font-family: Arvo; }
+  font-family: Arvo;
+  cursor: pointer; }
 
 /*# sourceMappingURL=post-v2.css.map */
