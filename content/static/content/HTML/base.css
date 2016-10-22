@@ -7,7 +7,7 @@ body {
 
 #site-header {
   text-align: center;
-  background-color: #ffb847; }
+  background-color: #ff455e; }
 
 #main-title {
   margin: auto;
@@ -33,7 +33,7 @@ body {
 nav {
   background-color: #d9d9d9;
   border-top: solid 6px #2d2d2d;
-  border-bottom: solid 6px #ffb847; }
+  border-bottom: solid 6px #ff455e; }
   nav ul {
     margin: 0;
     padding: 0;
@@ -51,11 +51,11 @@ nav {
     nav a:visited {
       color: #2d2d2d; }
     nav a:hover {
-      background-color: #ffb847;
+      background-color: #ff455e;
       color: #2d2d2d; }
     nav a:active {
       background-color: #2d2d2d;
-      color: #ffb847; }
+      color: #ff455e; }
 
 #content {
   background-color: #2d2d2d;
@@ -65,13 +65,13 @@ a {
   text-decoration: none;
   color: #d9d9d9; }
   a:hover {
-    color: #ffb847;
+    color: #ff455e;
     cursor: pointer; }
 
 .blog-title {
   font-family: Josefin Sans;
   font-size: 65px;
-  color: #ffb847;
+  color: #ff455e;
   margin: 0;
   padding: 40px;
   padding-bottom: 20px;
@@ -80,7 +80,7 @@ a {
     color: #d9d9d9; }
 
 .edit, .delete {
-  background-color: #ffb847;
+  background-color: #ff455e;
   color: #2d2d2d;
   font-family: Arvo;
   font-size: 18px;
@@ -104,7 +104,7 @@ a {
     width: 16%;
     padding-left: 10px;
     margin-bottom: 50px;
-    border-bottom: 2px solid #ffb847;
+    border-bottom: 2px solid #ff455e;
     float: right; }
     .blog-entry footer .blog-author {
       font-family: Arvo;
@@ -159,7 +159,7 @@ a {
   font-size: 13px;
   margin: 0;
   float: right;
-  color: #ffb847; }
+  color: #ff455e; }
   .blog-heart:hover {
     color: #d9d9d9;
     cursor: pointer; }
@@ -171,7 +171,7 @@ a {
   width: 60%;
   min-height: 200px;
   margin: auto;
-  border-left: solid #ffb847 2px;
+  border-left: solid #ff455e 2px;
   padding: 30px;
   text-align: justify; }
   .blog-text p {
@@ -188,7 +188,7 @@ a {
   .blog-text h3 {
     font-size: 24px;
     margin-bottom: 0px;
-    border-bottom: #ffb847 2px solid; }
+    border-bottom: #ff455e 2px solid; }
     .blog-text h3:first-child {
       margin-top: 0; }
   .blog-text ul {
@@ -200,7 +200,7 @@ a {
       color: rgba(182, 206, 230, 0.5); }
   .blog-text li:before {
     content: "> ";
-    color: #ffb847;
+    color: #ff455e;
     margin-right: 1px; }
 
 .image-container {

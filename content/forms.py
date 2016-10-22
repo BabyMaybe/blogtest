@@ -13,11 +13,13 @@ class PostForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ['content']
+        fields = ['display_author', 'content', ]
 
         widgets = {
-        'content' : forms.Textarea(attrs={'id' : 'new-comment',
-                                            'placeholder': 'THIS SOME WILD SHIT'})
+        'content' : forms.Textarea(attrs = {'id' : 'new-comment',
+                                            'placeholder': 'THIS SOME WILD SHIT'}),
+        'display_author' : forms.TextInput(attrs = {'id' : 'new-comment-author',
+                                                    'value' : 'anonymous coward'}),
         }
 
 class SignupForm(ModelForm):

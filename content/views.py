@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from .models import Post, Comment, UserProfile, Xmas, BugReport
 from .forms import PostForm, CommentForm, LoginForm, SignupForm, ProfileForm, BugForm, EmailTestForm
 
@@ -74,7 +74,7 @@ class NewPost(CreateView):
 class PostDetail(DetailView, JsonResponse):
     model = Post
     form_class = CommentForm
-    initial = {'comment':"Enter comment here!"}
+    initial = {'comment':"Enter comment here!", 'display_author' : 'WHY NO SHOW UP'}
     template_name = 'content/HTML/Reskin/post-v2.html'
 
     def get_context_data(self, **kwargs):
@@ -82,7 +82,6 @@ class PostDetail(DetailView, JsonResponse):
 
         context['comments'] = self.get_object().post_comments.all().filter(active=True).order_by('timestamp')
         context['form'] = self.form_class(initial=self.initial)
-
         return context
 
     def get(self, request, *args, **kwargs):
@@ -96,11 +95,11 @@ class PostDetail(DetailView, JsonResponse):
     def post(self, request, *args, **kwargs):
 
         if request.is_ajax():
-
             if request.POST.get('action') == 'like':
                 response = self.like_post(request, *args, **kwargs)
 
             if request.POST.get('action') == 'comment':
+                print("ADDING COMMENT")
                 response = self.add_comment(request, *args, **kwargs)
 
             if request.POST.get('action') == 'delete':
@@ -108,20 +107,26 @@ class PostDetail(DetailView, JsonResponse):
 
             if request.POST.get('action') == 'edit':
                 response = self.edit_comment(request, *args, **kwargs)
+
             return response
 
+#Fallback for non ajax responses
         form = self.form_class(request.POST)
 
         if form.is_valid():
-            print (form.cleaned_data['content'])
-            author = request.user
+
+            if (request.user.is_anonymous()):
+                author = None
+            else:
+                author = request.user
+            display_author = form.cleaned_data['display_author']
             content = form.cleaned_data['content']
             timestamp = datetime.datetime.now()
 
             post = self.get_object()
             post.comment_count += 1
             post.save()
-            c = Comment(author=author, content=content, timestamp=timestamp, parent_post=post)
+            c = Comment(author=author, display_author=display_author, content=content, timestamp=timestamp, parent_post=post)
             c.save()
             return HttpResponseRedirect(request.path)
 
@@ -142,24 +147,39 @@ class PostDetail(DetailView, JsonResponse):
 
     def add_comment(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        valid = form.is_valid()
+
         if request.user.is_authenticated():
-            author = request.user.username
-            display_author = author
+            author = request.user
+            author_username = request.user.username
+            display_author = author_username
             prof = UserProfile.objects.get(user = request.user)
             color = prof.color
             uid = prof.pk
             letter = prof.get_letter()
-        if form.is_valid():
+            is_user = True
+        else:
+            author = None
+            display_author = escape(form.cleaned_data['display_author'])
+            author_username = display_author
+            is_user = False
+            uid = None
+            color = '#000000'
+            letter = '?'
+
+        if valid:
             content = escape(form.cleaned_data['content'])
             timestamp = datetime.datetime.now()
             post = self.get_object()
-            c = Comment(display_author=display_author, author=request.user, content=content, timestamp=timestamp,
+            c = Comment(display_author=display_author, author=author, content=content, timestamp=timestamp,
                         parent_post=post )
             c.save()
             post.comment_count = post.get_comment_count()
             post.save()
             count = post.get_comment_count()
-            data = {"author" : author,
+            data = {"author" : author_username,
+                    "is_user" : is_user,
+                    "display_author" : display_author,
                     "content" : content,
                     "timestamp" : " " + timestamp.strftime("%I:%M %p") + " ",
                     "datestamp" : " " + timestamp.strftime("%m/%d/%y ") + " ",
@@ -170,6 +190,7 @@ class PostDetail(DetailView, JsonResponse):
                     "count" : count
                     }
             return JsonResponse(data)
+
 
     def delete_comment(self, request, *args, **kwargs):
         cid = request.POST.get('id')
@@ -187,13 +208,17 @@ class PostDetail(DetailView, JsonResponse):
         return JsonResponse({"deleted" : deleted, "cid" : cid, "count" : count})
 
     def edit_comment(self, request, *args, **kwargs):
+
         cid = request.POST.get('id')
+        print("editing comment number: " + cid)
         new_content = escape(request.POST.get('newContent'))
         c = Comment.objects.get(pk=cid)
         c.content = new_content
+        c.last_edited = datetime.datetime.now()
+        timestamp = c.last_edited.strftime("%I:%M %p (E)")
         c.save()
 
-        return JsonResponse({"newContent" : new_content, "cid" : cid})
+        return JsonResponse({"newContent" : new_content, "cid" : cid, "timestamp": timestamp})
 
 class ViewProfile(DetailView):
     model = UserProfile

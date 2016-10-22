@@ -72,10 +72,20 @@
 
 {% for c in comments %}
     <div class="comment-container" data-cid={{c.pk}}>
-        <div class="comment-info">
-            <span class="comment-author"> <a href="/{{ c.author.userprofile.pk }}/profile">{{ c.author.username }} </a> </span>
+        <div class="comment-info {% if c.author == post.author %} author-comment {% endif %}">
+            {% if c.author == None%}
+            <span class="anonymous"> (unregistered user) </span>
+            <span class="comment-author-anonymous {% if c.author == post.author %} author-comment {% endif %}"> {{ c.display_author }} </span>
+            {% else %}
+            <span class="comment-author {% if c.author == post.author %} author-comment {% endif %}"> <a href="/{{ c.author.userprofile.pk }}/profile">{{ c.author.username }} </a> </span>
+            {% endif %}
+            {% if c.is_edited %}
+            <span class="comment-date"> {{ c.last_edited |  date:" m/d/y" }} </span>
+            <span class="comment-time"> {{ c.last_edited |  date:"h:i A" }} ( E ) </span>
+            {% else %}
             <span class="comment-date"> {{ c.timestamp |  date:" m/d/y" }} </span>
             <span class="comment-time"> {{ c.timestamp |  date:"h:i A" }}  </span>
+            {% endif %}
         </div>
         <div class="comment-text">
             <p>{{ c.content|safe }}</p>
@@ -105,12 +115,25 @@
         <a name="#new-comment"></a>
     <form  method="post" class='entry-container'>
         {% csrf_token %}
-        <span class="name"> [ Name ] </span>
-            <input type="text" id="new-comment-author" name="author">
+               <span class="name"> [ Name ] </span>
+             {% if user.is_authenticated %}
+            <span class="author-label"> {{ user.username }} </span>
+            <input type="hidden" id="new-comment-author" name="display_author" value ={{user.username}}/>
+            {% else %}
+            <input type="text" id="new-comment-author" maxlength='200' name="display_author">{{user.username}}</input>
+            {% endif %}
+
             <span class="name">[ Name ] </span>
-        {{form.content}}
+
+        {{ form.content }}
+
         <input type="submit" value="++ Post ++" class="comment-post"/>
     </form>
+
+
+
+
+    <div class="spacer"><h1>SPACER</H1></div>
 
 <script type="text/javascript">
 
@@ -142,21 +165,26 @@
     }
 
     function newComment(e) {
-        e.preventDefault()
+        e.preventDefault();
+        console.log("valid ajax wtf");
+        console.log($("#new-comment-author").val())
+
         $.ajax(
         {
             url : window.location.href,
             type : "POST",
             data : { csrfmiddlewaretoken : getCookie('csrftoken'),
                     "action" : "comment",
-                    "author" : $("{{ user.pk }}").val(),
+                    "author" : "{{ user.pk }}",
+                    "display_author" : $("#new-comment-author").val(),
                     "content" : $("#new-comment").val()
                    },
 
             success : function(json) {
                 console.log("successful comment post");
-                console.log($("#comment-stack").html());
                 $("#comment-stack").append(makeComment(json["author"],
+                  json["display_author"],
+                  json["is_user"],
                   json["datestamp"],
                   json["timestamp"],
                   json["content"],
@@ -178,24 +206,39 @@
         });
     }
 
-    function makeComment(author, datestamp, timestamp, comment, id, uid) {
+    function makeComment(author, display_author, is_user, datestamp, timestamp, comment, id, uid) {
+        console.log(is_user);
+        if (is_user) {
+            author = author;
+        } else {
+            author = display_author;
+        }
+
         return '<div class="comment-container" data-cid='
         + id + '><div class="comment-info"><span class="comment-author"> <a href="/'
         + uid + '/profile">'
         + author + '</a> </span><span class="comment-date"> '
         + datestamp + ' </span> <span class="comment-time"> '
         + timestamp +  ' </span></div><div class="comment-text"><p>'
-        + comment + '</p></div><div class="comment-tools"><div class="comment-edit data-cid={{c.pk}}">&#92;&#92;&#92; Edit &#92;&#92;&#92; </div><div class="comment-del" data-cid='
+        + comment + '</p></div><div class="comment-tools"><div class="comment-edit" data-cid='
+        + id + '>&#92;&#92;&#92; Edit &#92;&#92;&#92; </div><div class="comment-del" data-cid='
         + id + '> : : Delete : :</div></div></div>';
     }
 
     function editComment(id) {
         cid = $(id.target).data("cid");
+
+        editing = $("#replacement");
+        if (editing.length) {
+            $("#update").remove();
+            editing.replaceWith("<p>" + editing.html() + "</p>");
+        }
+
         console.log("editing comment:" + cid);
-        comment =  $(".comment-container[data-cid=" + cid + "]");
-        comment.replaceWith("<textarea rows='4' cols='100' id='replacement'>" + comment.text().trim() + "</textarea>");
-        $("#replacement").parent().append("<input type=submit value='Update' class='submit' id='update'/>");
-        $("#update").css("color", "#000");
+        comment =  $(".comment-container[data-cid=" + cid + "] .comment-text");
+        comment.replaceWith("<div class='entry-container'><textarea rows='4' cols='100' id='replacement'>" + comment.text().trim() + "</textarea></div>");
+        $("#replacement").parent().append("<input type=submit value='^^ Update ^^' class='comment-post' id='update'/>");
+
         $("#update").click(updateComment)
     }
 
@@ -207,7 +250,7 @@
             type : "POST",
             data : { csrfmiddlewaretoken : getCookie('csrftoken'),
             "action" : "edit",
-            "id" :  $(id.target).parent().data("cid"),
+            "id" :  $(id.target).parent().parent().data("cid"),
             "newContent" : $("#replacement").val(),
             },
 
@@ -215,19 +258,21 @@
                 console.log("gurl. you edited you some comments.");
                 $("#update").remove();
                 replacement = $("#replacement");
-                replacement.css("background-color","#fd3");
+                // replacement.css("background-color","#fd3");
                 newContent = json["newContent"];
                 console.log(newContent);
-                replacement.replaceWith("<div class='ctext' data-cid=" + json["cid"] + "><p>" + newContent + "</p></div>");
+                replacement.parent().replaceWith("<div class=comment-text><p>" + newContent + "</p></div>");
+                 $(".comment-container[data-cid=" + cid + "]" + " .comment-info .comment-time").text(json["timestamp"]);
 
             },
 
             error : function(xhr, errmsg, err) {
+                console.log("Comments are not posting. something is wrong.");
                 console.log("error");
                 console.log(xhr.status);
-                        // console.log(xhr.responseText);
-                        console.log(errmsg);
-                        console.log(err);
+                console.log(xhr.responseText);
+                console.log(errmsg);
+                console.log(err);
             }
 
         });

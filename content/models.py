@@ -40,7 +40,7 @@ class Post(models.Model):
 #Comment Class
 class Comment(models.Model):
     display_author = models.CharField(max_length=200, default="anonymous coward")
-    author = models.ForeignKey(User, related_name='comment_author')
+    author = models.ForeignKey(User, related_name='comment_author', null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     last_edited = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     content = models.TextField()
@@ -51,6 +51,10 @@ class Comment(models.Model):
 
     def get_like_count(self):
         return self.like_count
+
+    @property
+    def is_edited(self):
+        return self.last_edited.replace(microsecond=0) > self.timestamp.replace(microsecond=0)
 
 #helper funcitons
 def generate_image_path(instance, filename):

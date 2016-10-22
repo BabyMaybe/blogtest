@@ -178,19 +178,36 @@ nav {
     display: block;
 }
 
+.comment-author-anonymous {
+    display: block;
+    color: transparentize($accent-color, .3);
+}
+
+.anonymous {
+    display: block;
+    font-size: 12px;
+    color: transparentize($nav-bg-color, .25);
+}
+
 .comment-date {
     display: inline-block;
     font-size: 21px;
+    color: $nav-bg-color;
 }
 
 .comment-time {
     display: inline-block;
     font-size: 14px;
+    color: $nav-bg-color;
 }
 
 .author-comment {
     background-color: $accent-color;
     color: $body-bg-color;
+a {
+            color: $body-bg-color;
+        }
+
 }
 
 //ACTUAL COMMENTS
@@ -247,16 +264,23 @@ nav {
 .entry-container {
     width: 65%;
     padding: 10px;
-    display: block;
+    display: inline-block;
     margin: auto;
     text-align: center;
     white-space: normal;
+    margin-top: 20px;
 }
 
-.name{
+.name {
     font-family: $accent-font;
     color: $accent-color;
     margin: 7px;
+}
+
+.author-label {
+    color: $accent-color;
+    font-size: 24px;
+    font-family: $accent-font;
 }
 
 #new-comment-author {
@@ -273,7 +297,6 @@ nav {
 #new-comment {
     width: 85%;
     height: 75px;
-    padding: 0;
     background-color: $nav-bg-color;
     color: $body-bg-color;
     font-family: $body-font;
@@ -281,6 +304,7 @@ nav {
     resize: vertical;
     outline: none;
     padding: 15px;
+    margin-top: 5px;
     border: solid $accent-color 2px;
 
 }
@@ -292,9 +316,18 @@ nav {
     text-align: center;
     margin: auto;
     margin-top: 10px;
-    margin-bottom: 200px;
+    // margin-bottom: 200px;
     display: block;
     font-size: 17px;
     font-family: $accent-font;
     cursor: pointer;
+}
+
+#replacement {
+    @extend #new-comment;
+    margin-left: 13px;
+}
+
+.spacer {
+    height: 200px;
 }

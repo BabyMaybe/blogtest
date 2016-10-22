@@ -31,14 +31,14 @@ nav {
 
 
 //POST SECTION
-.blog-text {
-    width: 70%;
-    border-left-width: 2px;
-    border-color: $accent-color;
-}
+// .blog-text {
+//     width: 70%;
+//     border-left-width: 2px;
+//     border-color: $accent-color;
+// }
 
 .blog-entry {
-    border-bottom: none;   
+    border-bottom: none;
 }
 
 
@@ -66,19 +66,31 @@ nav {
     font-family: $accent-font;
     font-size: 18px;
     margin-top: 7px;
+    a {
+        color: $body-bg-color;
+
+        &:hover {
+            color:$nav-bg-color;
+        }
+    }
 }
 
 .blog-heart {
-    margin: 5px;    
+    margin: 5px;
     margin-left: 15px;
     padding: 0;
     float: initial;
     display: inline-block;
     color: $body-bg-color;
     vertical-align: top;
-    height: 50px;
-    width: 50px;
+    height: 51px;
+    width: 51px;
     background-size:contain;
+    background-image: url("/static/content/HTML/heart_dark.svg");
+
+    &:hover {
+        background-image: url("/static/content/HTML/heart.svg");
+    }
 }
 
 .heart-count {
@@ -101,7 +113,7 @@ nav {
     border-top: solid $nav-bg-color 1px;
     border-bottom: solid $nav-bg-color 1px;
     margin: 0px;
-    margin-top: 30px;    
+    margin-top: 30px;
 }
 
 .comment-container:first-child {
@@ -125,15 +137,22 @@ nav {
     padding-bottom: 14px;
     font-size: 18px;
     border-left: solid $nav-bg-color 1px;
-    
+
     &:hover {
         background-color: $nav-bg-color;
         color: $body-bg-color;
+        cursor: pointer;
     }
 }
 
 //COMMENTS
 .comments-section {
+    a {
+        color: $accent-color;
+        &:hover {
+            color: $nav-bg-color;
+        }
+    }
 }
 
 .comment-container {
@@ -172,6 +191,10 @@ nav {
 .author-comment {
     background-color: $accent-color;
     color: $body-bg-color;
+a {
+            color: $body-bg-color;
+        }
+
 }
 
 //ACTUAL COMMENTS
@@ -183,7 +206,7 @@ nav {
     width: 65%;
     margin-left: 8px;
     padding-top: 0;
-    
+
     p {
         white-space: normal;
         width: 90%;
@@ -196,8 +219,9 @@ nav {
 .comment-tools {
     font-family: $accent-font;
     display: inline-block;
+    float: right;
     vertical-align: top;
-    padding: 5px;
+    // padding: 5px;
     color: $body-bg-color;
     background-color: $accent-color;
     span {
@@ -205,23 +229,48 @@ nav {
     }
 }
 
+.comment-edit {
+    padding: 5px;
+    display: inline-block;
+    &:hover {
+        cursor: pointer;
+        background-color: $nav-bg-color;
+    }
+}
+
+.comment-del {
+    padding: 5px;
+    display: inline-block;
+&:hover {
+        cursor: pointer;
+        background-color: $nav-bg-color;
+    }
+}
 
 //NEW COMMENT
 .entry-container {
     width: 65%;
     padding: 10px;
     display: inline-block;
+    margin: auto;
     text-align: center;
     white-space: normal;
+    margin-top: 20px;
 }
 
-.name{
+.name {
     font-family: $accent-font;
     color: $accent-color;
     margin: 7px;
 }
 
-.new-comment-author {
+.author-label {
+    color: $accent-color;
+    font-size: 24px;
+    font-family: $accent-font;
+}
+
+#new-comment-author {
     width: 150px;
     padding: 5px;
     margin-top: 2px;
@@ -235,7 +284,6 @@ nav {
 #new-comment {
     width: 85%;
     height: 75px;
-    padding: 0;
     background-color: $nav-bg-color;
     color: $body-bg-color;
     font-family: $body-font;
@@ -243,6 +291,7 @@ nav {
     resize: vertical;
     outline: none;
     padding: 15px;
+    margin-top: 5px;
     border: solid $accent-color 2px;
 
 }
@@ -254,8 +303,18 @@ nav {
     text-align: center;
     margin: auto;
     margin-top: 10px;
-    margin-bottom: 200px;
+    // margin-bottom: 200px;
     display: block;
     font-size: 17px;
     font-family: $accent-font;
+    cursor: pointer;
+}
+
+#replacement {
+    @extend #new-comment;
+    margin-left: 13px;
+}
+
+.spacer {
+    height: 200px;
 }
