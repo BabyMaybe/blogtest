@@ -1,0 +1,29 @@
+{% extends 'content/HTML/reskin/base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+
+<title>Login</title>
+<link rel="stylesheet" type="text/css" href="{% static 'content/HTML/login.css' %}" />
+
+{%  endblock %}
+
+{%block header%}
+<h2 class="sub-title"> login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login </h2>
+<h1 id="main-title"> LOGIN </h1>
+<h2 class="sub-title"> login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login login </h2>
+
+{% endblock %}
+{% block content %}
+
+
+<form  method="post" class='login-form'>
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Login" class="submit"/>
+</form>
+<br>
+<a href="/signup/" ><h3 id="signup"> signup <h3></a>
+
+
+{%  endblock %}

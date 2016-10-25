@@ -7,25 +7,14 @@
 
 {% endblock %}
 
-{% block content %}
-
-<header id="site-header">
-        <h2 class="sub-title"> :Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn   </h2>
+{% block header %}
+ <h2 class="sub-title"> :Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn   </h2>
     <h1 id="main-title">{{ post.title }}</h1>
     <h2 class="sub-title"> :Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn:Silicon\Unicorn   </h2>
+{% endblock %}
 
-</header>
+{% block content %}
 
-<nav>
-    <ul>
-        <a href="/"><li>I^I Home I^I</li></a>
-        <a href="/newpost"><li>++ Add Post ++</li></a>
-        <a href=""><li> &lt;&lt; Older Posts</li></a>
-        <a href=""><li> Newer Posts &gt;&gt; </li></a>
-        <a href=""><li> * * All Posts * *</li></a>
-        <a href=""><li> % % Logout % %</li></a>
-    </ul>
-</nav>
 
 <section id="content">
 
@@ -79,13 +68,21 @@
             {% else %}
             <span class="comment-author {% if c.author == post.author %} author-comment {% endif %}"> <a href="/{{ c.author.userprofile.pk }}/profile">{{ c.author.username }} </a> </span>
             {% endif %}
-            {% if c.is_edited %}
-            <span class="comment-date"> {{ c.last_edited |  date:" m/d/y" }} </span>
-            <span class="comment-time"> {{ c.last_edited |  date:"h:i A" }} ( E ) </span>
-            {% else %}
-            <span class="comment-date"> {{ c.timestamp |  date:" m/d/y" }} </span>
-            <span class="comment-time"> {{ c.timestamp |  date:"h:i A" }}  </span>
-            {% endif %}
+            <div class="comment-heart">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="comment-heart{% if c.author == post.author %}-author {% endif %}" width="64" height="64" viewBox="0 0 64 64"><path d="M43.4 10c8.1 0 12.8 4.4 12.8 12.5 0 5.1-1.6 8.6-7 14.6L32.2 54 15.1 37.2c-5.4-6.1-7.1-9.6-7.1-14.6 0-8.1 4.8-12.5 13-12.5 3.4 0 7 0.9 11.3 8.3C36.4 11 40 10 43.4 10M43.4 4c-4.4 0-8 1.4-11.2 4.4 -3.2-3-6.9-4.4-11.2-4.4 -11.5 0-19 7.3-19 18.5 0 7.5 3 12.3 8.7 18.6l0.1 0.1 0.1 0.1 17.1 16.8 4.2 4.2 4.2-4.2 17.1-16.8 0.1-0.1 0.1-0.1c6.3-7 8.5-11.9 8.5-18.6C62.2 11.1 55 4 43.4 4L43.4 4z" /></svg>
+                <span class="comment-heart-count">20</span>
+            </div>
+            <div class="datetime">
+                {% if c.is_edited %}
+                <span class="comment-date"> {{ c.last_edited |  date:" m/d/y" }} </span>
+                <span class="comment-time"> {{ c.last_edited |  date:"h:i A" }} ( E ) </span>
+                {% else %}
+                <span class="comment-date"> {{ c.timestamp |  date:" m/d/y" }} </span>
+                <span class="comment-time"> {{ c.timestamp |  date:"h:i A" }}  </span>
+                {% endif %}
+
+            </div>
         </div>
         <div class="comment-text">
             <p>{{ c.content|safe }}</p>
@@ -166,8 +163,7 @@
 
     function newComment(e) {
         e.preventDefault();
-        console.log("valid ajax wtf");
-        console.log($("#new-comment-author").val())
+
 
         $.ajax(
         {
@@ -177,7 +173,7 @@
                     "action" : "comment",
                     "author" : "{{ user.pk }}",
                     "display_author" : $("#new-comment-author").val(),
-                    "content" : $("#new-comment").val()
+                    "content" :  $("#new-comment").val()
                    },
 
             success : function(json) {
@@ -190,7 +186,7 @@
                   json["content"],
                   json["id"],
                   json["uid"]));
-                $("#new-comment-author").val("");
+                // $("#new-comment-author").val("");
                 $("#new-comment").val("");
                 $(".comment-del").click(deleteComment);
                 $(".comment-edit").click(editComment);
@@ -215,7 +211,9 @@
         }
 
         return '<div class="comment-container" data-cid='
-        + id + '><div class="comment-info"><span class="comment-author"> <a href="/'
+        + id + '><div class="comment-info'
+        + {% if user == post.author %} ' author-comment"' {% else %} '"' {% endif %}
+        + '><span class="comment-author"> <a href="/'
         + uid + '/profile">'
         + author + '</a> </span><span class="comment-date"> '
         + datestamp + ' </span> <span class="comment-time"> '

@@ -8,7 +8,11 @@ from .models import Post, Comment, UserProfile, BugReport
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'rich_content']
+        labels  = {
+            'title'   : ': Title ',
+            'rich_content' : ': Post Content '
+        }
 
 class CommentForm(ModelForm):
     class Meta:
@@ -29,6 +33,13 @@ class SignupForm(ModelForm):
         help_texts = {
             'username' : None,
         }
+        labels = {
+            'username'  : ': Username ',
+            'password'  : ': Password ',
+            'email'     : ': Email Address ',
+            'first_name': ': First Name ',
+            'last_name' : ': Last Name ',
+        }
         widgets = {
             'password' : PasswordInput(),
         }
@@ -36,14 +47,16 @@ class SignupForm(ModelForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['age','birthday','addr_street','addr_city','addr_state','addr_zip','color']
+        fields = ['age','birthday','color']
         widgets = {
             'birthday' : DateInput(),
             'age' : NumberInput(),
 
         }
         labels = {
-            'color' : 'Favourite Colour'
+            'color' : ': Favourite Colour ',
+            'birthday' : ': Birthday mm/dd/yy ',
+            'age'      : ': Age ',
         }
 
 class LoginForm(ModelForm):
@@ -51,8 +64,8 @@ class LoginForm(ModelForm):
         model = User
         fields = ['username', 'password']
         labels = {
-            'username' : 'Enter Username',
-            'password' : 'Enter Password'
+            'username' : ': Enter Username ',
+            'password' : ': Enter Password '
         }
         help_texts = {
             'username' : None,

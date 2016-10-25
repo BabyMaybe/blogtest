@@ -14,8 +14,8 @@
 #main-title {
     background-color: $accent-color;
     font-size: 110px;
-    padding-top: 40px;
-    padding-bottom: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     margin-top: 10px;
 }
 
@@ -164,7 +164,7 @@ nav {
 //COMMENT AUTHOR/INFO
 .comment-info {
     margin: 0;
-    width: 15%;
+    width: 210px;
     padding: 5px;
     padding-left: 10px;
     display: inline-block;
@@ -175,7 +175,7 @@ nav {
 }
 
 .comment-author {
-    display: block;
+    display: inline-block;
 }
 
 .comment-author-anonymous {
@@ -208,6 +208,31 @@ a {
             color: $body-bg-color;
         }
 
+}
+
+.comment-heart {
+    width: 20px;
+    height: 20px;
+    fill: $accent-color;
+    // float: right;
+    background-size: contain;
+    // color: $accent-color;
+    display: inline-block;
+
+    &:hover {
+        color: $nav-bg-color;
+        fill: currentColor;
+    }
+}
+
+.comment-heart-author {
+    @extend .comment-heart;
+    fill: $body-bg-color;
+
+}
+
+.comment-heart-count {
+    // float: right;
 }
 
 //ACTUAL COMMENTS

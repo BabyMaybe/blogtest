@@ -1,0 +1,155 @@
+{% extends 'content/HTML/reskin/base.html' %}
+{% load staticfiles %}
+{% block head %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'content/HTML/newpost.css' %}" />
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<!--div id="editable" contenteditable="true">
+    You can edit this content!
+</div>
+
+<h1> New Post </h1-->
+
+<div class="newpost">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <input type="submit" value="submit" class="submit" >  </input>
+    </form>
+</div>
+<hr>
+
+
+{% endblock %}
+
+<!--
+<script type="text/javascript">
+
+    function getCookie(name) {
+       var cookieValue = null;
+       if (document.cookie && document.cookie != '') {
+         var cookies = document.cookie.split(';');
+         for (var i = 0; i < cookies.length; i++) {
+             var cookie = jQuery.trim(cookies[i]);
+             // Does this cookie string begin with the name we want?
+             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                 break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    $(".heart").click(function(e) {
+        like_post(e);
+    });
+
+    $(".edit").click(function(e) {
+        editPost(e);
+    });
+
+    $(".delete").click(function(e) {
+        deletePost(e);
+    });
+
+    function like_post(e) {
+        console.log("clicked the heart");
+        $.ajax({
+            url : window.location.href,
+            type : "POST",
+            data :{csrfmiddlewaretoken : getCookie('csrftoken'),
+                    'pk' : $(e.target).data('pk'),
+                    'action' : 'like'
+                  },
+
+            success : function(json) {
+                $("div .heart[data-pk=" + json['pk'] + "]").text(json['likes']);
+            },
+
+            error : function (xhr, errmsg, err) {
+                console.log(err);
+                console.log(errmsg);
+                console.log(xhr);
+                console.log("you don goofed");
+            }
+        })
+    }
+
+    function editPost(id) {
+        pid = $(id.target).data("pid");
+        post =  $(".post_content[data-pid=" + pid + "]");
+        console.log("Editing post!" + pid );
+        console.log(post.html());
+
+    }
+
+    function updatePost(id) {
+        $.ajax({
+
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                    "action" : "edit",
+                    "id" :  $(id.target).parent().data("pid"),
+                    "newContent" : $("#replacement").val(),
+                    },
+
+            success : function(json) {
+                console.log("gurl. you edited you some posts.");
+                $("#update").remove();
+                replacement = $("#replacement");
+                replacement.css("background-color","#fd3");
+                newContent = json["newContent"];
+                console.log(newContent);
+                replacement.replaceWith("<div class='post'><p>" + newContent + "</p></div>");
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error");
+                console.log(xhr.status);
+                // console.log(xhr.responseText);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+    }
+
+    function deletePost(id) {
+        console.log("deleting post");
+
+        $.ajax({
+            url : window.location.href,
+            type : "POST",
+            data : { csrfmiddlewaretoken : getCookie('csrftoken'),
+                    "action" : "delete",
+                    "id" :  $(id.target).data("pid")
+                    },
+
+            success : function(json) {
+                console.log(json);
+                if (json["deleted"] == true) {
+                    console.log("deleted post");
+                    console.log(json["deleted"]);
+                    console.log(json["pid"]);
+                    $(".post [data-pid=" + json["pid"] + "]").hide();
+                }
+            },
+
+            error : function(xhr, errmsg, err) {
+                console.log("error");
+                console.log(xhr.status);
+                // console.log(xhr.responseText);
+                console.log(errmsg);
+                console.log(err);
+            }
+        });
+    }
+</script>
+-->

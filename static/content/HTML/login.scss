@@ -1,0 +1,74 @@
+@import "base";
+
+#main-title {
+    font-size: 110px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+}
+
+.login-form {
+    margin: auto;
+    width: 33%;
+    text-align: center;
+    margin-top: 20px;
+    // border-left: solid 2px $accent-color;
+    // border-right: solid 2px $accent-color;
+
+    min-width: 300px;
+
+    input {
+        display: block;
+        background-color: $nav-bg-color;
+        text-align: center;
+        margin: auto;
+        width: 250px;
+        height: 25px;
+        font-size: 20px;
+        font-family: $body-font;
+    }
+    input:-webkit-autofill{
+    background-color: $nav-bg-color !important;
+    color: $accent-color;
+}
+
+    label {
+        display: block;
+        color: $accent-color;
+        font-family: $accent-font;
+        font-size: 22px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .submit {
+    display: block;
+    background-color: $accent-color;
+    width: 250px;
+    height: 50px;
+    padding: 0px;
+    border: none;
+    text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    font-size: 25px;
+    font-family: $accent-font;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $nav-bg-color;
+    }
+    }
+}
+
+#signup {
+    text-align: center;
+    font-size: 20px;
+    border-bottom: solid 3px $accent-color;
+    width: 100%;
+    height: 30px;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 20px;
+
+}

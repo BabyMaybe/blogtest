@@ -36,8 +36,8 @@ class BlogView(ListView):
     #     return context
 
     def get (self, request, *args, **kwargs):
-        if (not request.user.is_authenticated()):
-            return redirect('/signup/')
+        # if (not request.user.is_authenticated()):
+        #     return redirect('/signup/')
         return super(BlogView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -58,8 +58,9 @@ class BlogView(ListView):
 
 class NewPost(CreateView):
     model = Post
-    fields = ['title', 'rich_content']
-    template_name = 'content/newpost.html'
+    # fields = ['title', 'rich_content']
+    form_class = PostForm
+    template_name = 'content/HTML/reskin/newpost.html'
 
     def form_valid(self, form):
        f = form.cleaned_data
@@ -67,6 +68,15 @@ class NewPost(CreateView):
        post = f['rich_content']
        timestamp = datetime.datetime.now()
        slug = slugify(title)
+       posts = Post.objects.filter(slug=slug)
+       if len(posts) > 0:
+            slug += "_" + str(timestamp.month) + "_" + str(timestamp.day) + "_" + str(timestamp.year)
+            posts = Post.objects.filter(slug=slug)
+            if len(posts) > 0:
+                slug +=  "_" + str(timestamp.hour) + "_" + str(timestamp.minute)
+
+
+
        p = Post(title=title, content=post, rich_content=post, date_published=timestamp, slug=slug, author=self.request.user)
        p.save()
        return HttpResponseRedirect('/')
@@ -110,7 +120,7 @@ class PostDetail(DetailView, JsonResponse):
 
             return response
 
-#Fallback for non ajax responses
+    #Fallback for non ajax responses
         form = self.form_class(request.POST)
 
         if form.is_valid():
@@ -169,9 +179,13 @@ class PostDetail(DetailView, JsonResponse):
 
         if valid:
             content = escape(form.cleaned_data['content'])
+            formated_content = ''
+            for item in content.split('\n'):
+                formated_content += "<p>" + item + "</p>"
+
             timestamp = datetime.datetime.now()
             post = self.get_object()
-            c = Comment(display_author=display_author, author=author, content=content, timestamp=timestamp,
+            c = Comment(display_author=display_author, author=author, content=formated_content, timestamp=timestamp,
                         parent_post=post )
             c.save()
             post.comment_count = post.get_comment_count()
@@ -180,7 +194,7 @@ class PostDetail(DetailView, JsonResponse):
             data = {"author" : author_username,
                     "is_user" : is_user,
                     "display_author" : display_author,
-                    "content" : content,
+                    "content" : formated_content,
                     "timestamp" : " " + timestamp.strftime("%I:%M %p") + " ",
                     "datestamp" : " " + timestamp.strftime("%m/%d/%y ") + " ",
                     "id" : c.pk,
@@ -232,8 +246,9 @@ class ViewProfile(DetailView):
 
 class MakeProfile(CreateView):
     model = UserProfile
-    fields = ['age','birthday','addr_street','addr_city','addr_state','addr_zip','color']
-    template_name = 'content/signup_details.html'
+    # fields = ['age','birthday','color']
+    form_class = ProfileForm
+    template_name = 'content/HTML/reskin/signup_details.html'
     success_url = '/'
 
 
@@ -278,7 +293,7 @@ class EmailTest(FormView):
 class Signup(FormView):
     model = User
     form_class = SignupForm
-    template_name = 'content/signup.html'
+    template_name = 'content/HTML/reskin/signup.html'
 
 
     def post(self, request, *args, **kwargs):
@@ -306,7 +321,7 @@ class Signup(FormView):
 
 class Login(FormView):
     form_class = LoginForm
-    template_name = 'content/login.html'
+    template_name = 'content/HTML/reskin/login.html'
     success_url = '/'
 
     def post(self, request, *args, **kwargs):

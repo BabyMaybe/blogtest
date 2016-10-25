@@ -5,13 +5,41 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="{% static 'content/HTML/base.css' %}" />
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   {% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'content/HTML/base.css' %}" />
   {%  endblock %}
 </head>
 
 <body>
+
+<header id="site-header">
+{% block header%}
+
+    <h2 class="sub-title">Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and  </h2>
+    <h1 id="main-title">:Silicon: <br> \Unicorn\</h1>
+    <h2 class="sub-title">Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and  </h2>
+
+{% endblock %}
+</header>
+
+<nav>
+    <ul>
+{% block nav %}
+        <a href="/"><li>I^I Home I^I</li></a>
+        <a href="/newpost"><li>++ Add Post ++</li></a>
+        <a href=""><li> &lt;&lt; Older Posts</li></a>
+        <a href=""><li> Newer Posts &gt;&gt; </li></a>
+        <a href=""><li> * * All Posts * *</li></a>
+        {% if user.is_authenticated %}
+        <a href="/logout"><li> % Logout {{ user.username }} %</li></a>
+        {% else %}
+        <a href="/login"><li> % % Login % %</li></a>
+        {% endif %}
+{% endblock %}
+    </ul>
+</nav>
     {# <a href="/bugs" class='bug'>bug report/feature request</a> #}
     {% block content %}
     {% endblock %}

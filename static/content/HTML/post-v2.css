@@ -7,7 +7,7 @@ body {
 
 #site-header {
   text-align: center;
-  background-color: #f053ff; }
+  background-color: #ff455e; }
 
 #main-title {
   margin: auto;
@@ -33,7 +33,7 @@ body {
 nav {
   background-color: #d9d9d9;
   border-top: solid 6px #2d2d2d;
-  border-bottom: solid 6px #f053ff; }
+  border-bottom: solid 6px #ff455e; }
   nav ul {
     margin: 0;
     padding: 0;
@@ -51,11 +51,11 @@ nav {
     nav a:visited {
       color: #2d2d2d; }
     nav a:hover {
-      background-color: #f053ff;
+      background-color: #ff455e;
       color: #2d2d2d; }
     nav a:active {
       background-color: #2d2d2d;
-      color: #f053ff; }
+      color: #ff455e; }
 
 #content {
   background-color: #2d2d2d;
@@ -65,13 +65,13 @@ a {
   text-decoration: none;
   color: #d9d9d9; }
   a:hover {
-    color: #f053ff;
+    color: #ff455e;
     cursor: pointer; }
 
 .blog-title {
   font-family: Josefin Sans;
   font-size: 65px;
-  color: #f053ff;
+  color: #ff455e;
   margin: 0;
   padding: 40px;
   padding-bottom: 20px;
@@ -80,7 +80,7 @@ a {
     color: #d9d9d9; }
 
 .edit, .delete {
-  background-color: #f053ff;
+  background-color: #ff455e;
   color: #2d2d2d;
   font-family: Arvo;
   font-size: 18px;
@@ -104,7 +104,7 @@ a {
     width: 16%;
     padding-left: 10px;
     margin-bottom: 50px;
-    border-bottom: 2px solid #f053ff;
+    border-bottom: 2px solid #ff455e;
     float: right; }
     .blog-entry footer .blog-author {
       font-family: Arvo;
@@ -159,7 +159,7 @@ a {
   font-size: 13px;
   margin: 0;
   float: right;
-  color: #f053ff; }
+  color: #ff455e; }
   .blog-heart:hover {
     color: #d9d9d9;
     cursor: pointer; }
@@ -171,7 +171,7 @@ a {
   width: 60%;
   min-height: 200px;
   margin: auto;
-  border-left: solid #f053ff 2px;
+  border-left: solid #ff455e 2px;
   padding: 30px;
   text-align: justify; }
   .blog-text p {
@@ -188,7 +188,7 @@ a {
   .blog-text h3 {
     font-size: 24px;
     margin-bottom: 0px;
-    border-bottom: #f053ff 2px solid; }
+    border-bottom: #ff455e 2px solid; }
     .blog-text h3:first-child {
       margin-top: 0; }
   .blog-text ul {
@@ -200,7 +200,7 @@ a {
       color: rgba(182, 206, 230, 0.5); }
   .blog-text li:before {
     content: "> ";
-    color: #f053ff;
+    color: #ff455e;
     margin-right: 1px; }
 
 .image-container {
@@ -233,30 +233,30 @@ a {
   margin: 0 100px; }
 
 #site-header {
-  background-color: #f053ff; }
+  background-color: #ff455e; }
 
 #main-title {
-  background-color: #f053ff;
+  background-color: #ff455e;
   font-size: 110px;
-  padding-top: 40px;
-  padding-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   margin-top: 10px; }
 
 .sub-title {
-  background-color: #f053ff; }
+  background-color: #ff455e; }
 
 nav {
-  border-bottom-color: #f053ff; }
+  border-bottom-color: #ff455e; }
 
 .blog-entry {
   border-bottom: none; }
 
 #info-pop {
-  background-color: #f053ff;
+  background-color: #ff455e;
   width: 215px;
   margin: 0;
   margin-top: 40px;
-  border-color: #f053ff;
+  border-color: #ff455e;
   color: #2d2d2d; }
 
 .post-author-date {
@@ -329,14 +329,14 @@ nav {
     cursor: pointer; }
 
 .comments-section a {
-  color: #f053ff; }
+  color: #ff455e; }
   .comments-section a:hover {
     color: #d9d9d9; }
 
 .comment-container {
   margin-bottom: 10px;
   white-space: nowrap;
-  border-top: solid #f053ff 1px; }
+  border-top: solid #ff455e 1px; }
 
 .comment-info {
   margin: 0;
@@ -347,21 +347,32 @@ nav {
   vertical-align: top;
   font-family: Arvo;
   font-size: 18px;
-  color: #f053ff; }
+  color: #ff455e; }
 
 .comment-author {
   display: block; }
 
+.comment-author-anonymous {
+  display: block;
+  color: rgba(255, 69, 94, 0.7); }
+
+.anonymous {
+  display: block;
+  font-size: 12px;
+  color: rgba(217, 217, 217, 0.75); }
+
 .comment-date {
   display: inline-block;
-  font-size: 21px; }
+  font-size: 21px;
+  color: #d9d9d9; }
 
 .comment-time {
   display: inline-block;
-  font-size: 14px; }
+  font-size: 14px;
+  color: #d9d9d9; }
 
 .author-comment {
-  background-color: #f053ff;
+  background-color: #ff455e;
   color: #2d2d2d; }
   .author-comment a {
     color: #2d2d2d; }
@@ -386,7 +397,7 @@ nav {
   float: right;
   vertical-align: top;
   color: #2d2d2d;
-  background-color: #f053ff; }
+  background-color: #ff455e; }
   .comment-tools span {
     padding: 2px; }
 
@@ -415,11 +426,11 @@ nav {
 
 .name {
   font-family: Arvo;
-  color: #f053ff;
+  color: #ff455e;
   margin: 7px; }
 
 .author-label {
-  color: #f053ff;
+  color: #ff455e;
   font-size: 24px;
   font-family: Arvo; }
 
@@ -444,10 +455,10 @@ nav {
   outline: none;
   padding: 15px;
   margin-top: 5px;
-  border: solid #f053ff 2px; }
+  border: solid #ff455e 2px; }
 
 .comment-post {
-  background-color: #f053ff;
+  background-color: #ff455e;
   width: 150px;
   padding: 5px;
   text-align: center;

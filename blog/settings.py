@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1', ]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -113,30 +113,29 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 
 #CKEditor settings
-CKEDITOR_UPLOAD_PATH = "CKEuploads/"
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = True
+CKEDITOR_UPLOAD_PATH = "media/"
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     'toolbar_Eric': {
         'skin': 'moono-dark',
             'toolbar' : [
             {'name': 'document', 'items': ['Source','Preview']},
-            {'name': 'clipboard', 'items': ['Copy', 'Paste', '-', 'Undo', 'Redo']},
-            {'name': 'links', 'items': ['Link', 'Anchor']},
-            {'name': 'insert',
-             'items': ['Image', 'HorizontalRule', '-', 'Smiley', 'SpecialChar']},
-            {'name': 'paragraph',
-             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-',
-                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
-            '/',
-
             {'name': 'basicstyles',
              'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript']},
-            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
-            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Blockquote']},
+            {'name': 'clipboard', 'items': ['Copy', 'Paste']},
+            {'name': 'links', 'items': ['Link', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Imgformat']},
+            {'name': 'styles', 'items': ['Styles']},
+
+
         ],
 
         'tabSpaces': 4,
@@ -157,9 +156,13 @@ CKEDITOR_CONFIGS = {
                 'dialog',
                 'dialogui',
                 'elementspath',
+                'filetools',
+                'stylesheetparser',
                 'uicolor',
                 'uploadimage',
                 'uploadwidget',
+                'timestamp',
+                'imgformat',
             ]),
         },
 

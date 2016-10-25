@@ -4,28 +4,13 @@
 {% block head %}
 
 <title>Blog Mockup</title>
+<link rel="stylesheet" type="text/css" href="{% static 'content/HTML/base.css' %}" />
 {# <link rel="stylesheet" type="text/css" href='{% static 'content/HTML/hex.css' %}' /> #}
 
 {% endblock %}
 
 {% block content %}
 
-<header id="site-header">
-    <h2 class="sub-title">Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and  </h2>
-    <h1 id="main-title">:Silicon: <br> \Unicorn\</h1>
-    <h2 class="sub-title">Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and Dev Blog and Art Gallery and  </h2>
-</header>
-
-<nav>
-    <ul>
-        <a href=""><li>I^I Home I^I</li></a>
-        <a href="/newpost"><li>++ Add Post ++</li></a>
-        <a href=""><li> &lt;&lt; Older Posts</li></a>
-        <a href=""><li> Newer Posts &gt;&gt; </li></a>
-        <a href=""><li> * * All Posts * *</li></a>
-        <a href=""><li> % % Logout % %</li></a>
-    </ul>
-</nav>
 
 <section id="content">
 {% for post in post_list %}

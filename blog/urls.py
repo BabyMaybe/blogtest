@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 from content import views
 
@@ -38,5 +39,5 @@ urlpatterns = [
     url(r'^bugs/', views.BugForm.as_view( success_url="/")),
     url(r'^mockup/post', TemplateView.as_view(template_name="content/HTML/post-v2.html")),
     url(r'^mockup/', TemplateView.as_view(template_name="content/HTML/index.html")),
-    
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

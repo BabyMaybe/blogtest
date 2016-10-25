@@ -1,0 +1,60 @@
+@import "base";
+
+#main-title {
+    font-size: 110px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+}
+
+input {
+    display: block;
+    margin: auto;
+    background-color: $nav-bg-color;
+    width: 250px;
+    height: 25px;
+    padding: 2px;
+    font-size: 18px;
+    font-family: $body-font;
+    text-align: center;
+}
+
+label {
+    display: block;
+    text-align: center;
+            color: $accent-color;
+        font-family: $accent-font;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 5px;
+}
+.submit {
+    display: block;
+    background-color: $accent-color;
+    width: 250px;
+    height: 50px;
+    padding: 0px;
+    border: none;
+    text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    font-size: 25px;
+    font-family: $accent-font;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $nav-bg-color;
+    }
+}
+
+#login {
+    text-align: center;
+    font-size: 20px;
+    border-bottom: solid 3px $accent-color;
+    width: 100%;
+    height: 30px;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 20px;
+
+}
