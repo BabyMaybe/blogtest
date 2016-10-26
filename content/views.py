@@ -93,7 +93,7 @@ class EditPost(UpdateView):
     template_name = 'content/HTML/reskin/newpost.html'
 
     def get_success_url(self):
-        return redirect('/')
+        return '/'
 
 class PostDetail(DetailView, JsonResponse):
     model = Post
