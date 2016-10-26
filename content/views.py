@@ -23,7 +23,7 @@ from django.core.mail import send_mail
 # @login_required
 class BlogView(ListView):
     model = Post
-    template_name = 'content/HTML/Reskin/blog_main.html'
+    template_name = 'content/HTML/reskin/blog_main.html'
     context_object_name = 'post_list'
     paginate_by = 5
     queryset = Post.objects.all().filter(active=True)
@@ -99,7 +99,7 @@ class PostDetail(DetailView, JsonResponse):
     model = Post
     form_class = CommentForm
     initial = {'comment':"Enter comment here!", 'display_author' : 'anonymous'}
-    template_name = 'content/HTML/Reskin/post-v2.html'
+    template_name = 'content/HTML/reskin/post-v2.html'
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
