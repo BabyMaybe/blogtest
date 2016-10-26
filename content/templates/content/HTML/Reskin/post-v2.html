@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block head %}
 
-<title>Post Mockup</title>
+<title>{{ post.title }}</title>
 <link rel="stylesheet" type="text/css" href="{% static 'content/HTML/post-v2.css' %}" />
 
 {% endblock %}
@@ -19,11 +19,13 @@
 <section id="content">
 
 <article class="blog-entry">
+<div class ="bottom-nav">
 
-    <header>
-        <h2 class="blog-title"></h2>
-    </header>
+            <a href="{{ post.get_prev_post_url }}" id="nextpost">  &lt; &lt; &lt; Previous Post </a>
+            <a href="{{ post.get_next_post_url }}" id="prevpost"> Next Post &gt; &gt; &gt; </a>
 
+</div>
+<div class='clearfix'/>
     <section class="blog-content">
 
         <section class="blog-text">
@@ -50,12 +52,16 @@
 </section>
 <div class="clearfix"></div>
 
+
+
+
 <a name="comments-section"></a>
 <div id="comment-bar">
     <h2 id="comment-title"> { Comments: <span id="comment-count">{{ post.comment_count }}</span> } </h2>
     <a href="#new-comment" id="add-new-comment">++ Add New Comment ++</a>
 </div>
 <!--<div class="clearfix"></div>-->
+
 
 <section class="comments-section" id="comment-stack">
 
@@ -64,29 +70,35 @@
         <div class="comment-info {% if c.author == post.author %} author-comment {% endif %}">
             {% if c.author == None%}
             <span class="anonymous"> (unregistered user) </span>
-            <span class="comment-author-anonymous {% if c.author == post.author %} author-comment {% endif %}"> {{ c.display_author }} </span>
+            <span class="comment-author-anonymous {% if c.author == post.author %} author-comment {% endif %}" data-cid={{c.pk}}> {{ c.display_author }} </span>
             {% else %}
-            <span class="comment-author {% if c.author == post.author %} author-comment {% endif %}"> <a href="/{{ c.author.userprofile.pk }}/profile">{{ c.author.username }} </a> </span>
+            <span class="comment-author " data-cid={{c.pk}}> <a href="/{{ c.author.userprofile.pk }}/profile">{{ c.author.username }} </a> </span>
             {% endif %}
-            <div class="comment-heart">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="comment-heart{% if c.author == post.author %}-author {% endif %}" width="64" height="64" viewBox="0 0 64 64"><path d="M43.4 10c8.1 0 12.8 4.4 12.8 12.5 0 5.1-1.6 8.6-7 14.6L32.2 54 15.1 37.2c-5.4-6.1-7.1-9.6-7.1-14.6 0-8.1 4.8-12.5 13-12.5 3.4 0 7 0.9 11.3 8.3C36.4 11 40 10 43.4 10M43.4 4c-4.4 0-8 1.4-11.2 4.4 -3.2-3-6.9-4.4-11.2-4.4 -11.5 0-19 7.3-19 18.5 0 7.5 3 12.3 8.7 18.6l0.1 0.1 0.1 0.1 17.1 16.8 4.2 4.2 4.2-4.2 17.1-16.8 0.1-0.1 0.1-0.1c6.3-7 8.5-11.9 8.5-18.6C62.2 11.1 55 4 43.4 4L43.4 4z" /></svg>
-                <span class="comment-heart-count">20</span>
-            </div>
-            <div class="datetime">
+            <div class="datetime ">
                 {% if c.is_edited %}
-                <span class="comment-date"> {{ c.last_edited |  date:" m/d/y" }} </span>
-                <span class="comment-time"> {{ c.last_edited |  date:"h:i A" }} ( E ) </span>
+                <span class="comment-date"> {{ c.last_edited |  date:" m/d/y" }} ( E ) </span>
+                <span class="comment-time"> {{ c.last_edited |  date:"h:i A" }} </span>
                 {% else %}
                 <span class="comment-date"> {{ c.timestamp |  date:" m/d/y" }} </span>
                 <span class="comment-time"> {{ c.timestamp |  date:"h:i A" }}  </span>
                 {% endif %}
+                <div class="comment-heart-container" data-cid={{c.pk}}>
+                    <span class="comment-heart-count{% if c.author == post.author %} author-color {% endif %}" data-cid={{c.pk}}>{{c.like_count}}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="comment-heart{% if c.author == post.author %}-author {% endif %}" width="64" height="64" viewBox="0 0 64 64" data-cid={{c.pk}}><path d="M43.4 10c8.1 0 12.8 4.4 12.8 12.5 0 5.1-1.6 8.6-7 14.6L32.2 54 15.1 37.2c-5.4-6.1-7.1-9.6-7.1-14.6 0-8.1 4.8-12.5 13-12.5 3.4 0 7 0.9 11.3 8.3C36.4 11 40 10 43.4 10M43.4 4c-4.4 0-8 1.4-11.2 4.4 -3.2-3-6.9-4.4-11.2-4.4 -11.5 0-19 7.3-19 18.5 0 7.5 3 12.3 8.7 18.6l0.1 0.1 0.1 0.1 17.1 16.8 4.2 4.2 4.2-4.2 17.1-16.8 0.1-0.1 0.1-0.1c6.3-7 8.5-11.9 8.5-18.6C62.2 11.1 55 4 43.4 4L43.4 4z" data-cid={{c.pk}}/></svg>
 
+
+                </div>
             </div>
         </div>
+
         <div class="comment-text">
-            <p>{{ c.content|safe }}</p>
+            <div>
+            {{ c.content|safe }}
+            </div>
+
         </div>
+
         {% if user == c.author %}
         <div class="comment-tools">
             <div class="comment-edit" data-cid={{c.pk}}>\\\ Edit \\\ </div>
@@ -138,6 +150,7 @@
     $(".comment-del").click(deleteComment);
     $(".comment-edit").click(editComment);
     $(".blog-heart").click(likePost);
+    $(".comment-heart-container").click(likeComment);
 
     function likePost(e) {
         $.ajax(
@@ -161,9 +174,34 @@
     });
     }
 
+    function likeComment(id) {
+        cid = $(id.target).data("cid");
+        console.log("somebody loves you comment#" + cid + "<3");
+
+        $.ajax(
+        {
+            url : window.location.href,
+            type : "POST",
+            data : {csrfmiddlewaretoken : getCookie('csrftoken'),
+                    'action' : 'likeComment',
+                    'cid' : cid
+            },
+
+            success : function(json) {
+                console.log(json['likecount'] + ' likes');
+                var hearts = $(".comment-heart-count[data-cid=" + cid + "]");
+                hearts.text(json['likecount']);
+            },
+
+            error : function (xhr, errmsg, err) {
+                console.log("comment not liked :( ");
+            }
+
+        });
+    }
+
     function newComment(e) {
         e.preventDefault();
-
 
         $.ajax(
         {
@@ -179,17 +217,18 @@
             success : function(json) {
                 console.log("successful comment post");
                 $("#comment-stack").append(makeComment(json["author"],
-                  json["display_author"],
-                  json["is_user"],
-                  json["datestamp"],
-                  json["timestamp"],
-                  json["content"],
-                  json["id"],
-                  json["uid"]));
-                // $("#new-comment-author").val("");
+                                                       json["display_author"],
+                                                       json["is_user"],
+                                                       json["datestamp"],
+                                                       json["timestamp"],
+                                                       json["content"],
+                                                       json["id"],
+                                                       json["uid"],
+                                                       json["likecount"]));
                 $("#new-comment").val("");
                 $(".comment-del").click(deleteComment);
                 $(".comment-edit").click(editComment);
+                $(".comment-heart-container").click(likeComment);
                 $("#comment-count").text(json["count"]);
             },
 
@@ -202,7 +241,7 @@
         });
     }
 
-    function makeComment(author, display_author, is_user, datestamp, timestamp, comment, id, uid) {
+    function makeComment(author, display_author, is_user, datestamp, timestamp, comment, id, uid, likecount) {
         console.log(is_user);
         if (is_user) {
             author = author;
@@ -212,13 +251,20 @@
 
         return '<div class="comment-container" data-cid='
         + id + '><div class="comment-info'
-        + {% if user == post.author %} ' author-comment"' {% else %} '"' {% endif %}
-        + '><span class="comment-author"> <a href="/'
+        + {% if user == post.author %} ' author-comment"' {% else %} '"' {% endif %} + 'data-cid='
+        + id + '><span class="comment-author"> <a href="/'
         + uid + '/profile">'
-        + author + '</a> </span><span class="comment-date"> '
+        + author + '</a> </span><div class="datetime"><span class="comment-date"> '
         + datestamp + ' </span> <span class="comment-time"> '
-        + timestamp +  ' </span></div><div class="comment-text"><p>'
-        + comment + '</p></div><div class="comment-tools"><div class="comment-edit" data-cid='
+        + timestamp +  ' </span><div class="comment-heart-container" data-cid="'
+        + id + '"><span class="comment-heart-count'
+        + {% if user == post.author %}' author-color "' {% else %} '"' {% endif %} + ' data-cid='
+        + id +'> '
+        + likecount +' </span><svg xmlns="http://www.w3.org/2000/svg" class="comment-heart'
+        + {% if user == post.author %}'-author"' {% else %} '"'  {% endif %} + ' width="64" height="64" viewBox="0 0 64 64" data-cid='
+        + id + '><path d="M43.4 10c8.1 0 12.8 4.4 12.8 12.5 0 5.1-1.6 8.6-7 14.6L32.2 54 15.1 37.2c-5.4-6.1-7.1-9.6-7.1-14.6 0-8.1 4.8-12.5 13-12.5 3.4 0 7 0.9 11.3 8.3C36.4 11 40 10 43.4 10M43.4 4c-4.4 0-8 1.4-11.2 4.4 -3.2-3-6.9-4.4-11.2-4.4 -11.5 0-19 7.3-19 18.5 0 7.5 3 12.3 8.7 18.6l0.1 0.1 0.1 0.1 17.1 16.8 4.2 4.2 4.2-4.2 17.1-16.8 0.1-0.1 0.1-0.1c6.3-7 8.5-11.9 8.5-18.6C62.2 11.1 55 4 43.4 4L43.4 4z" data-cid='
+        + id + '/></svg></div></div></div><div class="comment-text"><div>'
+        + comment + '</div></div><div class="comment-tools"><div class="comment-edit" data-cid='
         + id + '>&#92;&#92;&#92; Edit &#92;&#92;&#92; </div><div class="comment-del" data-cid='
         + id + '> : : Delete : :</div></div></div>';
     }
@@ -256,7 +302,6 @@
                 console.log("gurl. you edited you some comments.");
                 $("#update").remove();
                 replacement = $("#replacement");
-                // replacement.css("background-color","#fd3");
                 newContent = json["newContent"];
                 console.log(newContent);
                 replacement.parent().replaceWith("<div class=comment-text><p>" + newContent + "</p></div>");

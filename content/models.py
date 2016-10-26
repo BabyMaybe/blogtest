@@ -28,8 +28,35 @@ class Post(models.Model):
     class Meta:
         ordering = ["-date_published"]
 
+    def save(self, *args, **kwargs):
+        self.like_count = self.likes.count()
+        self.comment_count = self.post_comments.filter(active=True).count()
+        super(Post, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return "/%s" % self.slug
+
+    @property
+    def get_next_post_url(self):
+        next = self.pk + 1
+        total = Post.objects.all().count()
+        while next < total:
+            p = Post.objects.get(pk=next)
+            if (p.active == True):
+                return '/post/' + str(next) + '/' + p.slug
+            next += 1
+        return '/'
+
+    @property
+    def get_prev_post_url(self):
+        prev = self.pk - 1
+        total = Post.objects.all().count()
+        while prev > 0:
+            p = Post.objects.get(pk=prev)
+            if (p.active == True):
+                return '/post/' + str(prev) + '/' + p.slug
+            prev -= 1
+        return '/'
 
     def get_like_count(self):
         return self.like_count
@@ -49,8 +76,17 @@ class Comment(models.Model):
     likes = models.ManyToManyField(User, related_name='comment_likes', blank=True)
     like_count = models.IntegerField(default=0)
 
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            self.like_count = self.likes.count()
+            print ('comment has ', str(self.like_count) , ' likes ')
+        super(Comment, self).save(*args, **kwargs)
+
     def get_like_count(self):
-        return self.like_count
+        # return self.like_count
+        return self.likes.count()
+
+
 
     @property
     def is_edited(self):

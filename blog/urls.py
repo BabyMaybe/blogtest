@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/login'}),
     url(r'^(?P<user_id>[0-9]+)/signup_details/', views.MakeProfile.as_view(), name='signup_details'),
     url(r'^(?P<pk>[0-9]+)/profile/', views.ViewProfile.as_view(), name='profile'),
+    url(r'^post/(?P<pk>\d+).*/edit', views.EditPost.as_view(), name='edit_post'),
     url(r'^post/(?P<pk>\d+)/', views.PostDetail.as_view()),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^xmas/', views.XmasForm.as_view()),

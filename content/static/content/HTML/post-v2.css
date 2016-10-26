@@ -7,7 +7,7 @@ body {
 
 #site-header {
   text-align: center;
-  background-color: #ffb847; }
+  background-color: #89f0c8; }
 
 #main-title {
   margin: auto;
@@ -33,7 +33,7 @@ body {
 nav {
   background-color: #d9d9d9;
   border-top: solid 6px #2d2d2d;
-  border-bottom: solid 6px #ffb847; }
+  border-bottom: solid 6px #89f0c8; }
   nav ul {
     margin: 0;
     padding: 0;
@@ -51,11 +51,11 @@ nav {
     nav a:visited {
       color: #2d2d2d; }
     nav a:hover {
-      background-color: #ffb847;
+      background-color: #89f0c8;
       color: #2d2d2d; }
     nav a:active {
       background-color: #2d2d2d;
-      color: #ffb847; }
+      color: #89f0c8; }
 
 #content {
   background-color: #2d2d2d;
@@ -65,13 +65,13 @@ a {
   text-decoration: none;
   color: #d9d9d9; }
   a:hover {
-    color: #ffb847;
+    color: #89f0c8;
     cursor: pointer; }
 
 .blog-title {
   font-family: Josefin Sans;
   font-size: 65px;
-  color: #ffb847;
+  color: #89f0c8;
   margin: 0;
   padding: 40px;
   padding-bottom: 20px;
@@ -80,7 +80,7 @@ a {
     color: #d9d9d9; }
 
 .edit, .delete {
-  background-color: #ffb847;
+  background-color: #89f0c8;
   color: #2d2d2d;
   font-family: Arvo;
   font-size: 18px;
@@ -104,7 +104,7 @@ a {
     width: 16%;
     padding-left: 10px;
     margin-bottom: 50px;
-    border-bottom: 2px solid #ffb847;
+    border-bottom: 2px solid #89f0c8;
     float: right; }
     .blog-entry footer .blog-author {
       font-family: Arvo;
@@ -159,7 +159,7 @@ a {
   font-size: 13px;
   margin: 0;
   float: right;
-  color: #ffb847; }
+  color: #89f0c8; }
   .blog-heart:hover {
     color: #d9d9d9;
     cursor: pointer; }
@@ -171,7 +171,7 @@ a {
   width: 60%;
   min-height: 200px;
   margin: auto;
-  border-left: solid #ffb847 2px;
+  border-left: solid #89f0c8 2px;
   padding: 30px;
   text-align: justify; }
   .blog-text p {
@@ -188,7 +188,7 @@ a {
   .blog-text h3 {
     font-size: 24px;
     margin-bottom: 0px;
-    border-bottom: #ffb847 2px solid; }
+    border-bottom: #89f0c8 2px solid; }
     .blog-text h3:first-child {
       margin-top: 0; }
   .blog-text ul {
@@ -200,7 +200,7 @@ a {
       color: rgba(182, 206, 230, 0.5); }
   .blog-text li:before {
     content: "> ";
-    color: #ffb847;
+    color: #89f0c8;
     margin-right: 1px; }
 
 .image-container {
@@ -233,30 +233,30 @@ a {
   margin: 0 100px; }
 
 #site-header {
-  background-color: #ffb847; }
+  background-color: #89f0c8; }
 
 #main-title {
-  background-color: #ffb847;
+  background-color: #89f0c8;
   font-size: 110px;
   padding-top: 30px;
   padding-bottom: 30px;
   margin-top: 10px; }
 
 .sub-title {
-  background-color: #ffb847; }
+  background-color: #89f0c8; }
 
 nav {
-  border-bottom-color: #ffb847; }
+  border-bottom-color: #89f0c8; }
 
 .blog-entry {
   border-bottom: none; }
 
 #info-pop {
-  background-color: #ffb847;
+  background-color: #89f0c8;
   width: 215px;
   margin: 0;
   margin-top: 40px;
-  border-color: #ffb847;
+  border-color: #89f0c8;
   color: #2d2d2d; }
 
 .post-author-date {
@@ -328,15 +328,27 @@ nav {
     color: #2d2d2d;
     cursor: pointer; }
 
+.bottom-nav {
+  font-size: 18px;
+  margin-bottom: 20px; }
+  .bottom-nav a {
+    margin: 10px 20px; }
+
+#nextpost {
+  float: left; }
+
+#prevpost {
+  float: right; }
+
 .comments-section a {
-  color: #ffb847; }
+  color: #89f0c8; }
   .comments-section a:hover {
     color: #d9d9d9; }
 
 .comment-container {
   margin-bottom: 10px;
   white-space: nowrap;
-  border-top: solid #ffb847 1px; }
+  border-top: solid #89f0c8 1px; }
 
 .comment-info {
   margin: 0;
@@ -347,48 +359,62 @@ nav {
   vertical-align: top;
   font-family: Arvo;
   font-size: 18px;
-  color: #ffb847; }
+  color: #d9d9d9; }
 
 .comment-author {
-  display: inline-block; }
+  display: inline-block;
+  white-space: normal; }
 
 .comment-author-anonymous {
   display: block;
-  color: rgba(255, 184, 71, 0.7); }
+  color: rgba(137, 240, 200, 0.7);
+  white-space: normal; }
 
 .anonymous {
   display: block;
   font-size: 12px;
   color: rgba(217, 217, 217, 0.75); }
 
-.comment-date {
-  display: inline-block;
-  font-size: 21px;
-  color: #d9d9d9; }
-
 .comment-time {
   display: inline-block;
-  font-size: 14px;
-  color: #d9d9d9; }
+  font-size: 21px; }
+
+.comment-date {
+  display: block;
+  font-size: 14px; }
 
 .author-comment {
-  background-color: #ffb847;
+  background-color: #89f0c8;
   color: #2d2d2d; }
   .author-comment a {
     color: #2d2d2d; }
 
+.author-color {
+  color: #2d2d2d !important; }
+
+.comment-heart-container {
+  display: inline-block;
+  color: #89f0c8;
+  float: right; }
+  .comment-heart-container:hover {
+    color: #d9d9d9;
+    cursor: pointer; }
+
 .comment-heart, .comment-heart-author {
   width: 20px;
   height: 20px;
-  fill: #ffb847;
-  background-size: contain;
-  display: inline-block; }
-  .comment-heart:hover, .comment-heart-author:hover {
-    color: #d9d9d9;
-    fill: currentColor; }
+  fill: currentColor;
+  background-size: contain; }
 
 .comment-heart-author {
   fill: #2d2d2d; }
+  .comment-heart-author:hover {
+    fill: #d9d9d9; }
+
+.comment-heart-count {
+  color: #d9d9d9;
+  font-size: 19px;
+  vertical-align: top; }
 
 .comment-text {
   display: inline-block;
@@ -398,7 +424,7 @@ nav {
   width: 65%;
   margin-left: 8px;
   padding-top: 0; }
-  .comment-text p {
+  .comment-text div {
     white-space: normal;
     width: 90%;
     margin: 10px auto;
@@ -410,7 +436,7 @@ nav {
   float: right;
   vertical-align: top;
   color: #2d2d2d;
-  background-color: #ffb847; }
+  background-color: #89f0c8; }
   .comment-tools span {
     padding: 2px; }
 
@@ -439,11 +465,11 @@ nav {
 
 .name {
   font-family: Arvo;
-  color: #ffb847;
+  color: #89f0c8;
   margin: 7px; }
 
 .author-label {
-  color: #ffb847;
+  color: #89f0c8;
   font-size: 24px;
   font-family: Arvo; }
 
@@ -468,10 +494,10 @@ nav {
   outline: none;
   padding: 15px;
   margin-top: 5px;
-  border: solid #ffb847 2px; }
+  border: solid #89f0c8 2px; }
 
 .comment-post {
-  background-color: #ffb847;
+  background-color: #89f0c8;
   width: 150px;
   padding: 5px;
   text-align: center;

@@ -51,16 +51,22 @@ class BlogView(ListView):
                         post.likes.remove(request.user)
                     else:
                         post.likes.add(request.user)
-                    post.like_count = post.likes.count()
+                    # post.like_count = post.likes.count()
                     post.save()
             data = {"likes" : post.like_count, "pk" : post_pk}
             return JsonResponse(data)
+
 
 class NewPost(CreateView):
     model = Post
     # fields = ['title', 'rich_content']
     form_class = PostForm
     template_name = 'content/HTML/reskin/newpost.html'
+
+    def get (self, request, *args, **kwargs):
+        if (not request.user.is_authenticated()):
+            return redirect('/signup/')
+        return super(NewPost, self).get(request, *args, **kwargs)
 
     def form_valid(self, form):
        f = form.cleaned_data
@@ -75,16 +81,24 @@ class NewPost(CreateView):
             if len(posts) > 0:
                 slug +=  "_" + str(timestamp.hour) + "_" + str(timestamp.minute)
 
-
-
        p = Post(title=title, content=post, rich_content=post, date_published=timestamp, slug=slug, author=self.request.user)
        p.save()
+       p.likes.add(request.user)
+       p.save()
        return HttpResponseRedirect('/')
+
+class EditPost(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'content/HTML/reskin/newpost.html'
+
+    def get_success_url(self):
+        return redirect('/')
 
 class PostDetail(DetailView, JsonResponse):
     model = Post
     form_class = CommentForm
-    initial = {'comment':"Enter comment here!", 'display_author' : 'WHY NO SHOW UP'}
+    initial = {'comment':"Enter comment here!", 'display_author' : 'anonymous'}
     template_name = 'content/HTML/Reskin/post-v2.html'
 
     def get_context_data(self, **kwargs):
@@ -97,6 +111,7 @@ class PostDetail(DetailView, JsonResponse):
     def get(self, request, *args, **kwargs):
 
         super(PostDetail, self).get(request, *args, **kwargs)
+
         form = self.form_class(initial=self.initial)
         context = self.get_context_data()
 
@@ -109,7 +124,6 @@ class PostDetail(DetailView, JsonResponse):
                 response = self.like_post(request, *args, **kwargs)
 
             if request.POST.get('action') == 'comment':
-                print("ADDING COMMENT")
                 response = self.add_comment(request, *args, **kwargs)
 
             if request.POST.get('action') == 'delete':
@@ -117,6 +131,9 @@ class PostDetail(DetailView, JsonResponse):
 
             if request.POST.get('action') == 'edit':
                 response = self.edit_comment(request, *args, **kwargs)
+
+            if request.POST.get('action') == 'likeComment':
+                response = self.like_comment(request, *args, **kwargs)
 
             return response
 
@@ -147,12 +164,34 @@ class PostDetail(DetailView, JsonResponse):
                 post.likes.remove(request.user)
             else:
                 post.likes.add(request.user)
-            post.like_count = post.likes.count()
+            # post.like_count = post.likes.count()
             post.save()
         data = {"likecount" : post.like_count, "error" : ""}
 
         if request.user.is_anonymous():
+            data["error"] = "please log in to like posts"
+        return JsonResponse(data)
+
+    def like_comment(self, request, *args, **kwargs):
+        print('\n\n\nThe requested comment is....')
+        cid = request.POST.get("cid")
+        print(cid)
+        comment = Comment.objects.get(pk=cid)
+        print(comment)
+        if not request.user.is_anonymous():
+            if (request.user in comment.likes.all()):
+                comment.likes.remove(request.user)
+            else:
+                comment.likes.add(request.user)
+            # comment.like_count = comment.likes.count()
+            comment.save()
+
+        data = {"likecount" : comment.like_count, "error" : ""}
+
+        if request.user.is_anonymous():
             data["error"] = "please log in to comment"
+        if request.user == comment.author:
+            data["error"] = "you cannot like your own comments"
         return JsonResponse(data)
 
     def add_comment(self, request, *args, **kwargs):
@@ -188,9 +227,13 @@ class PostDetail(DetailView, JsonResponse):
             c = Comment(display_author=display_author, author=author, content=formated_content, timestamp=timestamp,
                         parent_post=post )
             c.save()
-            post.comment_count = post.get_comment_count()
+            if request.user.is_authenticated():
+                c.likes.add(request.user)
+            c.save()
+            # post.comment_count = post.get_comment_count()
+            # c.like_count = c.get_like_count()
             post.save()
-            count = post.get_comment_count()
+
             data = {"author" : author_username,
                     "is_user" : is_user,
                     "display_author" : display_author,
@@ -201,7 +244,8 @@ class PostDetail(DetailView, JsonResponse):
                     "color" : color,
                     "uid" : uid,
                     "letter" : letter,
-                    "count" : count
+                    "count" : post.get_comment_count(),
+                    "likecount" : c.like_count,
                     }
             return JsonResponse(data)
 
