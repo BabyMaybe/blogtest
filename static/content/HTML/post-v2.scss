@@ -145,6 +145,28 @@ nav {
     }
 }
 
+.bottom-nav {
+    font-size: 18px;
+    // text-align: center;
+
+    a {
+
+        margin: 10px 20px;
+    }
+
+    margin-bottom: 20px;
+}
+
+    #nextpost {
+        float: left;
+
+
+    }
+
+    #prevpost {
+        float: right;
+    }
+
 //COMMENTS
 .comments-section {
     a {
@@ -164,23 +186,25 @@ nav {
 //COMMENT AUTHOR/INFO
 .comment-info {
     margin: 0;
-    width: 15%;
+    width: 210px;
     padding: 5px;
     padding-left: 10px;
     display: inline-block;
     vertical-align: top;
     font-family: $accent-font;
     font-size: 18px;
-    color: $accent-color;
+    color: $nav-bg-color;
 }
 
 .comment-author {
-    display: block;
+    display: inline-block;
+    white-space: normal;
 }
 
 .comment-author-anonymous {
     display: block;
     color: transparentize($accent-color, .3);
+    white-space: normal;
 }
 
 .anonymous {
@@ -189,16 +213,16 @@ nav {
     color: transparentize($nav-bg-color, .25);
 }
 
-.comment-date {
-    display: inline-block;
-    font-size: 21px;
-    color: $nav-bg-color;
-}
-
 .comment-time {
     display: inline-block;
+    font-size: 21px;
+    // color: $nav-bg-color;
+}
+
+.comment-date {
+    display: block;
     font-size: 14px;
-    color: $nav-bg-color;
+    // color: $nav-bg-color;
 }
 
 .author-comment {
@@ -207,6 +231,46 @@ nav {
 a {
             color: $body-bg-color;
         }
+}
+
+.author-color {
+    color: $body-bg-color !important;
+}
+
+.comment-heart-container {
+    display:inline-block;
+
+    color: $accent-color;
+    float: right;
+        &:hover {
+
+        color: $nav-bg-color;
+        cursor: pointer;
+    }
+}
+
+.comment-heart {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    background-size: contain;
+}
+
+.comment-heart-author {
+    @extend .comment-heart;
+    fill: $body-bg-color;
+
+    &:hover {
+        fill: $nav-bg-color;
+    }
+
+}
+
+.comment-heart-count {
+    // display: block;
+    color: $nav-bg-color;
+    font-size:19px;
+    vertical-align: top;
 
 }
 
@@ -220,7 +284,7 @@ a {
     margin-left: 8px;
     padding-top: 0;
 
-    p {
+    div {
         white-space: normal;
         width: 90%;
         margin: 10px auto;

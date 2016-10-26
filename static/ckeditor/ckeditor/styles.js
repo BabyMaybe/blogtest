@@ -21,7 +21,8 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	{ name: 'Title',
 	  element: 'h3',
-	  attributes: {
+	  attributes:
+	  {
 	  	'class' : 'Go-Big'
 	  }
 	},
@@ -30,9 +31,17 @@ CKEDITOR.stylesSet.add( 'default', [
 	  element: 'figcaption',
 	  attributes:
 	  {
-	  		'class': 'caption'
+  		'class': 'caption'
 	  }
-	}
+	},
+
+	{ name: 'Figure',
+	 element: 'figure',
+	 attributes:
+	 {
+	 	'class' : 'image-container'
+	 }
+	},
 
 
 ] );
