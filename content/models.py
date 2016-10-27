@@ -29,9 +29,10 @@ class Post(models.Model):
         ordering = ["-date_published"]
 
     def save(self, *args, **kwargs):
-        self.like_count = self.likes.count()
-        self.comment_count = self.post_comments.filter(active=True).count()
-        self.content = self.rich_content
+        if self.pk is not None:
+            self.like_count = self.likes.count()
+            self.comment_count = self.post_comments.filter(active=True).count()
+            self.content = self.rich_content
         super(Post, self).save(*args, **kwargs)
 
     def get_absolute_url(self):

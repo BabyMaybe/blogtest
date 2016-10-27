@@ -83,7 +83,7 @@ class NewPost(CreateView):
 
        p = Post(title=title, content=post, rich_content=post, date_published=timestamp, slug=slug, author=self.request.user)
        p.save()
-       p.likes.add(request.user)
+       p.likes.add(self.request.user)
        p.save()
        return HttpResponseRedirect('/')
 
